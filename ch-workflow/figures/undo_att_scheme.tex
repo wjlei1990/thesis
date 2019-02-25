@@ -1,0 +1,85 @@
+%\documentclass[11pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+%\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+%\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+%\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+%\usepackage{amssymb}
+
+% PGF/TIKZ images
+%\usepackage{tikz}
+%\usetikzlibrary{shapes,arrows,decorations.pathreplacing}
+
+%\title{Brief Article}
+%\author{The Author}
+%\date{}							% Activate to display a given date or no date
+
+%\begin{document}
+%\maketitle
+%\section{}
+%\subsection{}
+
+\begin{tikzpicture}[scale=0.8]
+
+% forward bar
+\shade [top color = black, bottom color = black!15!white] (0,0) rectangle +(0.5,10);
+
+% adjoint - forward bar
+\shade [top color = black!50!white, bottom color = black!10!white] ((10,9) rectangle +(0.5,1);
+\shade [top color = black!65!white, bottom color = black!20!white] ((10,8) rectangle +(0.5,1);
+%\shade [top color = black, bottom color = black!15!white] ((10,7) rectangle +(0.5,1);
+\draw [dashed] (10,3) rectangle +(0.5,5);
+\shade [top color = black!70!white, bottom color = black!30!white] ((10,2) rectangle +(0.5,1);
+\shade [top color = black!85!white, bottom color = black!45!white] ((10,1) rectangle +(0.5,1);
+\shade [top color = black, bottom color = black!50!white] ((10,0) rectangle +(0.5,1);
+
+% adjoint - adjoint bar
+\shade [top color = black!15!white, bottom color = black] (12,0) rectangle +(0.5,10);
+
+% snapshots
+ \fill [color = black!40!white] (5,10) circle [x radius=8mm, y radius=4mm];
+ \fill [color = black!40!white] (5,9) circle [x radius=8mm, y radius=4mm];
+ \fill [color = black!40!white] (5,8) circle [x radius=8mm, y radius=4mm];
+ %...
+ \fill [color = black!40!white] (5,2) circle [x radius=8mm, y radius=4mm];
+  \fill [color = black!40!white] (5,1) circle [x radius=8mm, y radius=4mm];
+
+% forward to snapshots
+ \draw [->, thick, densely dotted, > = triangle 45] (0.5,10) --(4.2,10);
+ \draw [->, thick, densely dotted, > = triangle 45] (0.5,9) --(4.2,9);
+ \draw [->, thick, densely dotted, > = triangle 45] (0.5,8) --(4.2,8);
+%...
+ \draw [->, thick, densely dotted, > = triangle 45] (0.5,2) --(4.2,2);
+ \draw [->, thick, densely dotted, > = triangle 45] (0.5,1) --(4.2,1);
+
+% snapshots to adjoint - forward
+ \draw [->, thick, densely dotted, > = triangle 45] (5.8,1) --(10,10);
+ \draw [->, thick, densely dotted, > = triangle 45] (5.8,2) --(10,9);
+%...
+ \draw [->, thick, densely dotted, > = triangle 45] (5.8,8) --(10,3);
+ \draw [->, thick, densely dotted, > = triangle 45] (5.8,9) --(10,2);
+ \draw [->, thick, densely dotted, > = triangle 45] (5.8,10) --(10,1);
+
+% forward timeline
+\draw [->, thick, > = triangle 45] (-0.2,10) -- (-0.2,0);
+% adjoint timeline
+ \draw [->, thick, > = triangle 45] (10.7,10) -- (10.7,9.1) -- (11.8,10) --(11.8, 9) -- (10.7, 8.9) 
+ 						-- (10.7,8.1) -- (11.8, 8.9) -- (11.8, 8);
+ \draw [->, thick, > = triangle 45] (10.7,3) -- (10.7,2.1) -- (11.8,3) --(11.8, 2) -- (10.7, 1.9)
+ 						-- (10.7,1.1) -- (11.8, 1.9) -- (11.8, 1) -- (10.7, 0.9) -- (10.7, 0.1)
+						-- (11.8, 0.9) -- (11.8, 0);
+
+% Legend
+\node [align=center,below] at (5,-0.1) {Snapshots};
+\node [align=center,below] at (10.25,-0.1) {Forward};
+\node [align=center,below] at (12.25,-0.1) {Adjoint};
+
+\draw [decorate,decoration={brace,amplitude=10,mirror},yshift=0]
+(9.5,-0.6) -- (13,-0.6) node [black,midway,xshift=0, yshift=-17] {Gradient simulation};
+\draw [decorate,decoration={brace,amplitude=10,mirror},yshift=0]
+(-0.5,-0.6) -- (1,-0.6) node [black,midway,xshift=0, yshift=-17] {Forward simulation};
+\end{tikzpicture}
+
+
+%\end{document}  

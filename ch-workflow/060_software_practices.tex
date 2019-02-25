@@ -1,0 +1,135 @@
+
+\section{Software Practices}
+\label{sec:software_practices}
+
+The number and complexity of the software packages that we have developed, in order to be able
+to perform exascale seismic inversions, have required us to adopt more rigorous
+software practices.
+
+Compared to professional software development teams, scientific software
+developers face particular issues.
+First, they are often a group of independent researchers that are in different
+physical locations.
+Second, there is often a large range in the level of programming
+experience.
+To address these issues, we implemented a simple
+collaborative workflow based on modern software development techniques, such as
+Agile
+development and Continuous Integration/Continuous Development.
+
+The two main goals of this workflow are to facilitate communication between
+the developers, and to ensure that new software developments meet some agreed
+upon quality criteria before being added to the common code base.
+In practice, we have implemented this workflow using the tools provided by the
+GitHub platform, and the automatic testing frameworks Buildbot, Jenkins and Travis CI.
+
+As illustrated in Figure \ref{fig:ReposBranches_all}, our collaborative
+software development practice
+is organized around three Git repositories.
+\begin{description}
+\item[The central repository:] where the code is shared among developers, and
+where users can download releases of the code.
+\item[Forks of the central repository:] where each developer can post their
+changes to
+be tested by Buildbot, before being committed into the central
+repository.
+\item[Local clones:] where each developer builds his/her changes.
+\end{description}
+The first two repositories are hosted on the Computational Infrastructure for
+Geodynamics (CIG) GitHub organization. The third repository is on the
+developers desktop or laptop.
+
+%\begin{figure}[tbh!]
+%\centering
+%\resizebox{5in}{!}{\input{figures/ReposBranches_all.pdf_t}}
+%\caption{There are three types of Git repositories: the central repository on
+%  GitHub, the developer's fork on GitHub, and the developer's clone on their own
+%  machine. The only way for developers to commit their changes to the central
+%  repository is through a pull-request, which the code maintainers must accept.
+%  Short tests are run before the maintainers accept the changes. Longer, more
+%  extensive, tests are run on daily and weekly bases, as well as when new
+%  developments are transferred from the \texttt{devel} to the \texttt{master}
+%  branches of the central repository. \label{fig:ReposBranches_all}}
+%\end{figure}
+
+
+An essential part of our workflow is the differentiation between production and
+development code: the production code is in a Git branch called
+\texttt{master}, and the
+development code is in a branch called \texttt{devel}.
+The code in the \texttt{master} branch is intended for users that are only
+interested in
+running the code, while the \texttt{devel} branch is intended for code
+developers. The changes to the code are first committed to the \texttt{devel}
+branch.
+Development code is transferred to the \texttt{master} branch only after
+extensive
+testing.
+
+A fundamental rule of our workflow is that code changes can only be
+committed to the \texttt{devel} branch of the central repository through a
+pull-request. This provides us with two important features: first it allows us
+to test the changes before they are committed to the central
+repository, and, second, it sends an e-mail notification to the group of
+developers. The notification to the developers is important because  it lets
+them  review the changes before they are committed to the shared repository.
+
+We have two distinct roles within our developer's community: \emph{code
+maintainer}
+and \emph{code developer}. The code maintainer role consists of accepting the
+code changes proposed by the developers. The code maintainers have push/pull
+(or read/write) permissions to the central repository, while the developers
+only
+have pull (or read only) permissions. In addition, code maintainers cannot
+accept their
+own source code changes.
+
+Assuming that a developer already has a clone of the central repository on
+his/her local machine, a typical workflow for committing new code developments
+to the central repository is as follows (see Figure
+\ref{fig:ReposBranches_all}).
+\begin{enumerate}
+\item The developer pushes his/her changes to his/her fork on GitHub.
+\item He/she opens a pull-request.
+\item Opening a pull-request triggers automatic testing of the changes.
+\item The maintainers and developers are notified of the results of the tests.
+If the changes failed the tests, then the developer needs to fix the problems
+and follow the steps 1 through 4, if they pass the test, go to step 5.
+\item Before they can be committed in the central repository, the code needs to
+be
+reviewed by other developers.
+\item The maintainers accept the changes and the new code is committed to the
+  \texttt{devel} branch of the central repository.
+\end{enumerate}
+
+For this workflow to be successful, it is crucial to have a carefully designed
+test suite. We use three types of tests for our codes.
+\begin{description}
+\item[Compilation tests:] they consist in looping through all the available
+compiling options (e.g. OpenMP, MPI, CUDA) and using different compilers
+(GCC and Intel compilers).
+\item[Unit tests:] they tests individual functions by checking the output for
+some
+  predefined set of input parameters.
+\item[Functional tests:] in our case, functional testing refers to the testing
+of
+  the a set of features of the code. Concretely, we run full examples for which
+we
+  compare the computed seismograms with some precomputed reference seismograms.
+\end{description}
+
+The compilation, unit, and some functional tests can be all done within 15~min
+of opening the pull-request. These quick tests are the only ones that are done
+before a pull-request is accepted. Other tests, that take longer to execute, are
+run on daily and weekly bases. If these tests fail, then some changes need to be
+reverted, but at least the changes are recent and there are few of them, so it is
+easy to find what needs to to be fixed; we failed but we failed early.
+
+In conclusion, our experience over the past three years has shown this
+software development workflow to balance simplicity and effectiveness. Its
+simplicity has made it easy to adopt for both experienced and new developers,
+without hindering new developments. Its effectiveness at detecting problems
+early has ensured the stability of our central repository.
+In addition, by making the changes to the code more visible, this workflow
+has improved the communication within our developer's community and enabled the
+release of increasingly more sophisticated software.

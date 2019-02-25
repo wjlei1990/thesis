@@ -1,0 +1,91 @@
+\section{Solver: \texttt{SPECFEM3D\_GLOBE}}
+\label{sec:solver}
+
+\subsection{Overview and programming approach}
+%\red{Matthieu}
+
+Our seismic inversion workflow includes many parts, each of them
+implemented based on a different software package. The most computationally expensive
+part involves the solver \texttt{SPECFEM3D\_GLOBE}, a spectral-element code capable of
+modeling seismic wave propagation using fully unstructured hexahedral meshes of 3D
+Earth models of essentially arbitrary complexity. Capabilities for its application
+in adjoint tomography are extensively illustrated in~\cite{Peter2011}.
+Table~\ref{tab:comp_storage_req_17s} outlines the importance of the solver
+relatively to other parts of the workflow for a shortest period of 17\,s. As the
+number of earthquakes grows, the importance of having a computationally
+efficient solver to perform both forward and adjoint simulations becomes clear.
+
+\begin{table}
+\begin{center}
+\tabletitle{Summary of computational requirements for a maximum resolution of 17~seconds,
+using 180~minutes seismograms on OLCF infrastructure.}
+\begin{tabular}{lccc}
+%\toprule
+       &   \tch{1 earthquake} & \tch{253 earthquakes}  & \tch{6,000 earthquakes}  \\
+Shortest period: 17~s     &                      & \tch{1 iteration}      & \tch{1 iteration}       \\
+Duration: 180~m &                      &                        &                   \\
+\midrule%[\heavyrulewidth]
+Solver (core hours) &  $\sim 11,520$   & $\sim 2,764,560$ & $\sim 69,120,000$ \\
+(forward+adjoint)   & & & \\
+%\midrule
+Pre-processing    & $\sim 15$  & $\sim 3,795$     & $\sim 90,000$ \\
+(core hours)      & & & \\
+%\midrule
+Post-processing  & $\sim 5,760$  & $\sim 5,760$     & $\sim 5,760$ \\
+(core hours)     & & & \\
+%\cmidrule(r){1-1}
+%\bottomrule
+\end{tabular}
+%\captionsetup{singlelinecheck=off}
+\label{tab:comp_storage_req_17s}
+\end{center}
+\end{table}
+
+%\subsection{Programming approach}
+At the top level, \texttt{SPECFEM3D\_GLOBE} is parallelized using MPI. The
+parallelization extensively relies on the analytical decomposition of a
+cubed-sphere mesh, splitting the mesh into partitions with close-to perfect load
+balancing and assigning a single partition to a single MPI process. This coarse
+domain decomposition parallelism may even include a finer level of parallelism
+inside each domain.
+
+To take advantage of architectures of modern processors, in particular multicore
+CPUs and hardware accelerators such as GPUs, a finer level of parallelization is
+added to each MPI process. For computations on multicore CPU clusters, partial
+OpenMP support and vectorization has recently been added by Tsuboi et
+al.~\cite{Tsuboi28022016}.
+
+The \texttt{SPECFEM} software suite has been running on CUDA-enabled
+GPUs since 2009~\cite{KoMiEr09}. It has continuously been adapted to take
+advantage of advances in NVIDIA
+GPUs~\cite{Komatitsch20107692, Rietmann2012}.
+
+With the advent of heterogeneous supercomputers, our code base ---as for many
+other applications--- has become increasingly complex. Due to a relatively large
+user base and the variety of targeted systems, several code paths have to be
+maintained. The most important issue is to ensure that similar capabilities are
+available, regardless of the system. Another matter is to provide the user with
+optimized software.
+
+Our solution has been to use the BOAST~\cite{Cronsioe2013} transpiler to
+generate both CUDA and OpenCL kernels. The performance of these BOAST-generated
+kernels is very close to those implemented directly in CUDA, and provides code
+optimized for various NVIDIA GPU generations.
+
+On the one hand, because \texttt{SPECFEM3D\_GLOBE} strives to be a tool capable of solving
+unexplored geophysical problems, most of it is written by geophysicists. On the
+other hand, BOAST provides the programmer with a Ruby-based domain specific
+language (DSL), an unfamiliar language for most of our developers. This implies
+that while BOAST is equally capable of generating Fortran or C code, we maintain
+the original Fortran code as the reference source for CPU execution.
+
+In the future, and in particular for the next generation heterogeneous
+supercomputers, it will be interesting to investigate
+directive-based approaches. This is increasingly true with accelerator support
+becoming more mature in OpenMP\,4. If performance is close to hand written code,
+it will certainly be the solution of choice toward a portable, geophysicist-friendly code base.
+
+
+%\subsubsection{Portability}
+
+%\subsubsection{External Libraries}

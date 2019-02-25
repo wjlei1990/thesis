@@ -1,0 +1,123 @@
+\section{Demonstrations and Use Cases}
+
+The proposed ASDF format can be used in a number of different branches in
+seismology and its success will revolve around its adoption by the
+seismological community. This section shows some practical applications and
+benefits of the format.
+
+
+\subsection{Dataset Building}
+
+A dataset is the collection of all data necessary for a particular purpose.
+Examples include waveform data for a number of stations for a particular
+earthquake, all waveforms from a single array, or data from an active source
+study. A complete dataset also includes information about seismic receivers and
+sources and therefore contains everything that is needed for a certain task.
+All of this can be stored in a single ASDF file. Thus, one no longer needs to
+deal with complicated and custom directory structures. Tools and scripts
+written to work on larger datasets can work on a defined structure and be
+exchanged and adapted to new uses more easily.
+
+Aside from facilitating data management this greatly decreases the number of
+files one has to deal with. Transfer and copy times can be prohibitive when
+dealing with a large number of small files. One million waveform files can
+easily take an hour to transfer from a cluster to a personal workstation.
+Storing all these waveform in about 50 ASDF files reduces the total transfer
+time to about a minute. Additionally, many clusters and operating systems
+impose hard file count limits.
+
+HDF5 furthermore grants access to a number of different losless compression
+algorithms reducing the size of ASDF files.
+Figure~\ref{fig:compression_efficiency} shows the efficiency and computational
+cost of these for a number of typical seismological datasets.
+
+
+\subsection{Storage, Exchange, and Archival of Processed or Synthetic Waveforms}
+
+Synthetic seismograms can be very expensive to compute, especially in
+three-dimensional media with realistic rheologies. The same is true for some
+processing chains to, for example instrument correction, and filtering of data, and it
+is thus oftentimes worthwhile to preserve these pieces of data.
+
+Their proper long-term storage, exchange, and archival is only possible if all
+processes that went into their creation are documented and stored alongside the
+data. This includes, for example, the precise version of the used software, and
+details about all processing steps. For synthetic data it includes the used
+Earth and source model as well as the waveform solver's settings. ASDF, in
+combination with SEIS-PROV, preserves all this information.
+
+
+\subsection{(Parallel) Large Scale Data Processing}
+
+Data volumes are constantly growing, and the community has access to the
+computing power needed to process and work with it. However, we are at a point
+where I/O itself, i.e., reading and writing from and to disk, is one of the
+most expensive parts of many operations. This is especially true for a very
+large number of typically small files, as previously pointed out.  ASDF, with
+the help of HDF5, supports efficient, parallel I/O on full data sets. Our
+implementations shown in the previous section make use of this and facility the
+construction of fully parallel workflows.
+
+Applications for this operational approach are numerous and in the following we
+illustrate ASDF on an example occurring in large scale full waveform inversions
+using adjoint techniques \cite{Tromp2005, Fichtner2006, Tape2010}, but the
+general concepts translate to other types of workflows using large
+amounts of data. This iterative procedure requires routine comparison of
+millions of waveform traces. We replaced an implementation based on the SAC
+package and file format \cite{HelffrichWookeyBastow201311} with an ASDF
+centered implementation. The SPECFEM3D\_GLOBE waveform solver
+\cite{KoTr02a, KoTr02b}
+directly produces ASDF files which are then tied into a single
+cohesive workflow relying on the ObsPy \cite{obspy2010} package.  All
+components integrate with each other and stream data from one unit to the next.
+I/O only happens at the very beginning and the end.
+
+These changes empower us to increase the scale of our inversions ---in terms of
+frequency content, number of earthquakes, and number of stations--- and fully
+exploit modern computational platforms. Additionally, they reduce the
+complexity of operations and thus stabilize them. Last but not least,
+provenance information is kept to increase reproducibility and for future
+reference.
+
+
+\subsection{Active Source Industry Dataset}
+
+Industry datasets are not the primary focus of the ASDF format, but it is
+worthwhile proposing how we could adapt the format to that particular case in
+an effort to bring the active and passive communities closer together. Active
+source data is more structured and array-like, both in sources and receivers.
+As the industry currently lacks standards to describe these, we utilized the
+QuakeML and StationXML formats with some extensions to for example share the
+array configuration and source time functions. Waveforms are grouped by
+recording instrument --- one network corresponds to one receiver layout.
+
+We believe the industry would benefit from adopting ASDF, since the format
+offers improved data organization, simple but efficient parallel processing,
+and provenance capabilities all wrapped up in a modern format.
+Please refer to section \ref{subsec:segy} for some concrete suggestions and
+requirements.
+
+
+\subsection{Further Uses}
+
+The extraction of information from recordings of ambient seismic noise is a
+prime candidate for fully utilizing ASDF as the required data volumes are
+amongst the biggest in our science. ASDF enables the storage of arbitrarily
+long waveform traces in a single file with fine grained access.  One example is
+storing a station's data for several years in one file and only accessing a
+portion of the data whenever it is needed.
+
+Many more use cases of the ASDF format can be envisioned, and we hope different
+subgroups within the seismological community will adapt it for their own
+purposes. Aside from seismological waveforms, ASDF's ability to save auxiliary
+data, including full provenance, enables it to store a lot of different pieces
+of data.
+
+Examples include storing time dependent power spectral densities and combining
+them into probabilistic power spectral densities on the fly
+\cite{McNamara2004} or building a database of historical earthquake
+data.  Even non-seismological data, such as GPS time series and magnetotelluric
+data, is not out of the question and would benefit from the provenance
+description and the advanced processing tools developed around ASDF. Some of
+these examples are already being attempted, and we intend to maintain a
+collection of use cases on our website.

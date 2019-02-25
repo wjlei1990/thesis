@@ -1,0 +1,234 @@
+\section{Optimizing I/O for computational data}
+\label{sec:computational_data}
+%\red{Matthieu}
+
+The workflow sketched in the previous sections deals with two main types of
+data, namely, seismic and computational data. In this section, we focus on computational
+data.
+
+Computational data are, in general, characterized by discretization and
+representation of the scientific problem. In our case, these are mesh and model
+files, and data sensitivity kernels, which are the output of SPECFEM3D and
+\texttt{SPECFEM3D\_GLOBE} used in the post-processing stage. They are shown in blue and
+green in the workflow chart in Figure~\ref{fig:seismic_data_workflow}. The size
+of these files depends on the spatial and temporal resolutions.
+For instance, a transversely isotropic global adjoint simulation ($100$~minutes
+long seismograms at a resolution going down to 27\,s with 1300 receivers) reads
+49~GB of computational data and writes out 8~GB of data for adjoint data
+sensitivity kernels. When increasing the resolution of the simulations by going
+down to a shortest period of 9\,s, all these numbers should be multiplied by
+$3^3$, yielding about 1.3\,TB of computational data. In practice, the number of
+events drastically reduces the simulation size we are able to reach, even on the
+latest supercomputers.
+This problem becomes even more prevailing when more realistic physics is used.
+To compute anelastic sensitivity kernels with full attenuation, a parsimonious
+disk storage technique is introduced~\cite{KoXiBoPeSaLiTr16}.
+It avoids instabilities that occur when time-reversing dissipative wave
+propagation simulations. In practice, this leads to a dramatic increase for
+I/O, as outlined in Figure~\ref{fig:undo_att_scheme}.
+
+\begin{figure}[ht]
+  \begin{center}
+    \input{ch-workflow/figures/undo_att_scheme.tex}
+    \caption{I/O pattern with full attenuation. The forward simulation (left bar) produces
+snapshots at regular intervals. During the kernel simulation (right bars) these
+snapshots are read in reverse order to piece-wise reconstruct the forward
+wavefield for a number of time steps. The interaction of this reconstructed
+wavefield with the adjoint wavefield yields to the so-called event kernels,
+the sum of which is the misfit gradient. Solid arrows depict computation order, dashed arrows represent I/O.
+Bars shade from black to light gray jointly with forward time.}
+    \label{fig:undo_att_scheme}
+  \end{center}
+\end{figure}
+
+
+
+\subsection{Parallel file formats and I/O libraries for scientific computing}
+
+Although I/O libraries and file systems must be considered together to improve
+I/O techniques, only I/O libraries are exposed to the scientific programmer. In
+what follows, we try to focus our efforts on a more library-oriented approach.
+
+The POSIX standard defines an I/O interface designed for sequential processing.
+Its single \emph{stream of bytes} approach is well known to poorly scale on
+distributed memory machines. Extensive studies tried to extend this
+standard~\cite{Vilayannur2008}, most of the time in combination with research on
+parallel file systems.%~\cite{Carns2000}.
+
+When considering parallel software, developer choices have a great impact on how
+I/O calls perform. There are two simple ways to use the POSIX I/O interface in
+such parallel software:
+\begin{itemize}
+\item The most straightforward method is having separate files for each task.
+Eventually, subsequent processing can be applied on subsets of files to gather data.
+For a large number of tasks, this approach leads to a large number of files,
+potentially causing contention on the file system metadata servers.
+\item Each process sends its data to a set of master MPI tasks in charge of
+writing data to disk. Conversely, data can be read from disk by a subset of MPI
+tasks and then distributed among all MPI tasks. This approach has a few
+drawbacks. In particular, nodes running master tasks might run out of memory if
+the number of scattered/gathered data is high. Moreover, network traffic is
+likely to reach high levels, slowing down the execution.
+\end{itemize}
+
+Over the past decades, a number of techniques has been developed and
+incorporated into libraries  to ease writing ---sometimes large amounts of data---
+to disk.
+%\subsection{Parallel I/Os}
+Our goal is not to provide a full description of parallel I/O techniques and
+libraries evolution. Fur this purpose, the reader may consult Schikuta and
+Vanek~\cite{Schikuta2001} or Liu et al.~\cite{Liu2013}. However, we do believe
+that understanding where the need for simple and generic APIs comes from helps
+determine a solution satisfying our needs. In what follows, we consider
+distributed memory systems and software programmed using MPI, to date the most
+common paradigm to address large scientific simulations on modern HPC systems.
+
+The first version of MPI did not define a dedicated I/O API. Parallel I/O
+libraries were often developed to match particular architectural or applicative
+requirements. For instance, ChemIo~\cite{Nieplocha1998} was developed as an
+interface for chemistry applications and SOLAR~\cite{Toledo1996} to accelerate
+writing dense out-of-core matrices. Thakur et al.\ developed ADIO
+(Abstract-Device interface for parallel I/O)~\cite{Thakur1996}
+to fill the gap between various parallel filesystems and parallel I/O libraries.
+This work ultimately lead to ROMIO~\cite{Thakur1999}, one of the most popular
+MPI-IO libraries that was later integrated as a component into the well-known
+MPICH2 library. While MPI-2 introduced support for parallel I/O with the MPI-I/O
+approach, using it in large scientific code is not always straightforward. As a
+matter of fact, it is a low level API writing raw data to files and demands a
+concerted effort from the scientific programmer.
+
+%\subsubsection{Metadata file formats}
+
+Scientific software can benefit from libraries wrapping complexity into a higher
+level function set. Hence, libraries accommodating metadata were designed to
+ease further exploitation of produced data. Two of the most popular parallel I-O
+libraries embedding metadata are netCDF~\cite{Li2003} and
+HDF5~\cite{Howison2010}. Both of them provide a parallel interface. While netCDF
+is principally oriented toward the storage of arrays ---the most common
+scientific data structure--- HDF5 is more versatile and based on user-defined data
+structures. The distinction between these two libraries became blurrier as
+netCDF, starting from version 4, is implemented through HDF5. Metadata allow
+further analysis on potentially large datasets in providing the necessary
+information to fetch values of interest. A significant number of well
+established tools are based on this format, showing their durability.
+
+%Although these libraries help designing better data file structures and ease the life of the  programmer, their primary intent was not to scale on large numbers of processing nodes, and a lot of optimization is required.
+
+%\subsubsection{The ADIOS library}
+
+An alternative is the ADIOS library~\cite{Liu2013}
+%\cite{Lofstead2008, Liu2013}
+released by ORNL. Compared to netCDF and HDF5, it works on simpler data
+structures since its main focus is parallel performance. Besides metadata
+availability similar to the other formats previously mentioned, it also lets
+users change the transport method to target the most efficient I/O method for a
+particular system or platform. A set of optimizations is embedded in so called
+\emph{transport methods}. I/O experts have the option to develop new transport
+methods while scientific developers have to pick one matching the platform,
+their software and their simulation case. In particular, transport methods
+describe the file pattern, that is to say, if a number of MPI tasks write data
+to the same number of files, to a smaller number of files or to a single file.
+The underlying optimizations contain methods such as aggregation, buffering, and
+chunking, and are transparent to the user.
+
+Two APIs are available, one POSIX-like API with a reduced number of functions
+and one XML API which is not as flexible as the regular API but allows one to
+keep I/O separated from the main program.
+
+From a user perspective, reading data is very similar to writing them. It must
+be noted that it is possible to read and write data form a \emph{staging} memory
+area, thus limiting disk access when produced data are consumed right away.
+
+Although the ADIOS library needs to be improved by providing optimizations tuned
+for a larger number of file systems (GPFS for instance), its architecture allows
+domain scientists to focus on the actual problem.
+
+Liu et al.~\cite{Liu2013} demonstrated excellent improvements in terms of I/O
+speed. For instance, both S3D, software simulating reactive turbulent flows, and
+PMCL3D, a finite-difference based software package simulating wave propagation,
+show a 10 fold improvement when switching from MPI-IO to ADIOS. They managed to
+write at a 30\,GB/s rate when using 96K MPI tasks for S3D and 30K MPI tasks for
+PMCL3D.
+
+\subsection{Integrating parallel I/O in adjoint-based seismic workflows}
+
+%\subsubsection{Constraints}
+
+%The previous section described two different types of data. The different purposes of these data imply different constraints.
+
+%The main bottlenecks in the adjoint tomography workflow stem from the number of files to be read and written, which reduces performance significantly and creates problems on filesystems due to heavy I/O traffic. Classical seismic data formats, which describe each seismic trace as a single file, exacerbate this problem. Moreover, since we are considering large seismic simulations on the latest supercomputers, we have a particular concern about parallel performance.
+
+%It is apparent that the classical data formats neither fulfill the computational requirements on HPC systems nor the provenance of computations and analysis for reproducibility of experiments. Furthermore, the lack of a common and flexible data format, both seismic and computational, has been a major problem in the seismological community, restricting the exchange of data and Earth models, and thus collaborative science.
+
+%Geophysical variables might be shared across the scientific community for further reference or study. Thus, such data must keep track of their full history for reproducibility purpose. Further extraction and processing imposed that data are stored in a flexible and convenient format.
+
+
+%\subsubsection{Optimizing computational data}
+
+Computational data, in general, do not require complex metadata since they are
+well structured within numerical solvers. In legacy
+\texttt{SPECFEM3D\_GLOBE}, the way computational data were written to disk was
+not problematic on local clusters for smaller size scientific problems (e.g.,
+regional- or continental-scale wave propagation, small seismic data sets, etc.).
+However, to run simulations more efficiently on HPC systems for more challenging
+problems, such as global adjoint tomography or increased resolution regional-
+and exploration-scale tomography, we needed to revise the way the solver handles
+computational data. In the previous version of the \texttt{SPECFEM3D} packages,
+for each variable or set of closely related variables, a file was created for
+each MPI process. The number of files, for a single seismic event, was
+proportional to the number of MPI processes~$P$.  For a full iteration of the workflow
+the number of files was $\mathcal{O}(P.N_{s})$. Accessing
+these files during large-scale simulations did not only have an impact on
+performance, but also on the filesystem due to heavy I/O traffic. This is because of
+the difficulty for the file system metadata server to handle all requests to
+create the whole set of files. The new implementation uses ADIOS to limit the
+number of files accessed during reading and writing of computational data,
+independent of the number of processes, that is $\mathcal{O}(N_{s})$. Since
+writing a simple file is also a potential bottleneck due to lock contention, we
+are sometimes asked to change the transport method to output a limited number of
+files. This is mostly invisible to the code user as these files are output as
+subfiles that are part of a single file. As an additional benefit, using ADIOS,
+HDF5 or netCDF let us define readers for popular visualization tools, such
+as Paraview and VisIt.
+
+Tests have been run to assess the I/O speed to write models in
+\texttt{SPECFEM3D\_GLOBE} on the Titan supercomputer. The test case has been
+chosen to match the number of processes and to result in the same amount of I/O
+as the complete simulation for our 253 earthquake database. This results in more
+than 6~millions ($6 \times 1007^2$) spectral elements on the Earth's surface,
+processed through $24,576$ MPI tasks. ADIOS experts at ORNL indicated that the
+preferred way to get I/O performance is to use the \texttt{MPI\_AGGREGATE}
+transport method. This method is carefully tuned for large runs on Lustre
+filesystems. Suitable parameters for this transport method were given by ORNL
+ADIOS experts in order to match both OLCF Spider file system characteristics and
+the test case parameters. A single ADIOS writer process was associated with 256
+Object Server Targets (OST), 32 MPI tasks running on 2 Titan nodes. The test was
+later reproduced on the new OLCF Atlas file system. Results in
+Table~\ref{table:adios_perfs} show that switching from Spider to Atlas brings a
+significant improvement in terms of I/O bandwidth. Moreover, in this case, the
+peak bandwidth on the Spider filesystem is 16.9 GB/s, while on the Atlas
+filesystem the peak bandwidth is 51.5 GB/s. This is likely to be beneficial for
+our research, especially when the spatial resolution is increased, yielding
+large data volumes on a high number of nodes.
+%However, for tomographic iterations with limited resolution, the performance level is expected to be lower.
+%The first reason is that each simulation is independent and output relatively small files.
+%The second reason is that ADIOS most efficient transport method (\texttt{MPI\_AGGREGATE}) do not support append mode.
+%Different regions of the globe are computed separately and thus outputted at a different time. As visualization require to gather these different regions in a single file, appending successive regions is mandatory. This limitation is likely to be lifted in future ADIOS versions.
+
+
+\begin{table}%1
+%\noautomaticrules
+\tabletitle{Bandwidth for \texttt{SPECFEM3D\_GLOBE} output using the ADIOS
+\texttt{MPI\_AGGREGATE} transport method for mesh using 24,576 MPI tasks.
+Results are presented both for the old (Spider) and new (Atlas) OLCF
+filesystems. Numbers for different regions outline that large files benefit the
+most from use of the ADIOS library.}
+\begin{tabular}{@{}lccc@{}}
+\tch{Mesh Region}    &\tch{Ouput Size (GB)} &\tch{Spider (GB/s)} &\tch{Atlas (GB/s)}\\[-2pt]
+\midrule
+Crust-Mantle     & $2, 548$             & $14.3$             & $40.6$               \\
+Outer Core        & $317$                & $7.4$               & $8.47$               \\
+Inner Core        & $177$                 & $4.8$              & $7.6$              \\
+\end{tabular}
+\label{table:adios_perfs}
+\end{table}

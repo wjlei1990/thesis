@@ -1,0 +1,41 @@
+\chapter{Introduction\label{ch:intro}}
+
+Construction of global tomographic models of the Earth dates back to the late 1970s
+and early 1980s. However, due to the computational chanllenges, it took more
+than 20 years for the first adjoint-state models to be applied and shown successes
+to regional and continental scale studies. The first generation of global adjoint 
+model, GLAD-M15, was published in 2016 using 253 earthquakes.
+During last 6 years, we have been working on extending the database and carry out
+the second generation of the global model. The new model, GLAD-M25, used 1,480 earthquakes,
+almost 6 fold of data compared last generation and ten quasi-Newton iterations starting
+from GLAD-15. We believe the new model could provide researchers with new insights into
+the interior and dynamics of the Earth.
+
+To carry out iterations with such a large database and high demands for numerical
+computations, there are several technique challeges we solved to achieve our goals.
+Chapter 2 presents the Adaptable Seismic Data Format(ASDF). We discuss the motivation
+to introduce a new modern data format, to host our seismic data. It was designed on
+the purpose to faciliate the efficiency, integrity, and reproducibity
+of seismic data that used in our inversion.
+
+Chapter 3 gives a overview of the technique chanllenges we encounted in the workflow
+of adjoint tomography, and our solution to them.
+Our solver, SPECFEM3D GLOBE, takes the most expensive part of computation stages,
+forward and adjoint simulations. It is accellerated using MPI and GPU, showing the
+improvments by various benchmark tests. We also covered I/O problems, for both
+mesher data and seismic data, by introductin ADIOS and ASDF to store different data.
+The last part is workflow integration and automazition, using workflow management systems.
+
+Chapter 4 discussed the weightings we introduced in the tomography, to balance
+the uneven distribution of earthquakes and seicmic stations. We begun by demonstrating
+a few current used weighting methods and point them drawbacks. We future presented
+our simple-designed and robust weighting strategies. We conclude by conducting a 2D synthetic
+test, showing our weighting strategy can indeed improve the convergence rate of global-scale
+inversion.
+
+
+Chapter 5 presented our second generation model, GLAD-M25. We went through the data and inverison
+strategy over iterations. The model was evaluated by
+various ways, including the misfit reduction and histogram change.
+360 earthquakes were used as held-out data to future assess the quality of our model.
+We conclude by showing case the GLAD-M25 model, along with many regional and global models. The details and improvment on resolutions is unseen in other global models and we belive such improvements could help researchers to get an better understanding of the earth at a global scale.

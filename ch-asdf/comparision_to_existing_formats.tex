@@ -1,0 +1,114 @@
+\section{Comparison to Existing Formats}
+
+Having yet another format induces more complexity and, potentially, noise into
+the community using that type of data and the landscape of software able to
+deal with it. ``Do we really need a new format?'' is thus a natural and
+understandable question. This sections addresses why no single existing data
+format in seismology is able to satisfy our needs and thus justifies the
+introduction of the ASDF format.
+
+We limit ourselves to detailing alternative waveform formats as we directly
+incorporate the StationXML and QuakeML formats and no true alternative to
+storing derived data or provenance is currently in existence.
+A wide variety of different seismological data formats is used by researchers
+world wide. We will discuss the most widely used ones, namely,
+(Mini)SEED, SAC, and SEG Y/PH5.
+Please see \cite{NMSOP-2} and \cite{Havskov} for additional information and
+descriptions of more formats.
+
+
+\subsection{MiniSEED}
+
+The Standard for the Exchange of Earthquake Data (SEED) was developed in the
+late 1980s and at least the data-only part (MiniSEED) continues to be in wide
+use today, and will likely continue to be the dominant data streaming and
+archival format for the foreseeable future. The ASDF format does not attempt to
+replace it. Some of MiniSEED's features, such as the ability to build up large
+data volumes by concatenating small and short pieces, are very well suited for
+their use in data archives, where data is constantly streamed in.  While the
+full SEED format can in theory store waveforms as well as station meta
+information, the complexity of the format hinders that. It furthermore can only
+properly store raw waveform recordings and no event information.  Additionally,
+the dataless part of SEED, e.g., the part with the station information, sees
+declining usage nowadays with that responsibility being taken over by
+StationXML. MiniSEED, on the other hand, is more than capable of storing
+arbitrarily large waveform volumes, but the file then contains no index of
+what is in it, so one must always read the entire file to figure that out,
+making large data volumes fairly impractical.  Additionally, the amount of
+meta information in MiniSEED files is strongly limited, so one always needs
+additional files to work with it.
+
+Summing up, MiniSEED is a good data archival format for data centers,
+streaming, and low-latency applications, but it is not well suited for the
+later research and processing stages, where ASDF has significant
+advantages.
+
+\subsection{SAC}
+
+The Seismic Analysis Code (SAC, \cite{HelffrichWookeyBastow201311})
+introduced a new format named after its parent program, and is still in
+widespread use today. This is likely due to two reasons: the popularity of the
+SAC program itself and the relative simplicity of the format with a
+number of header fields that can be adapted to different purposes.
+
+The SAC format is well suited for many tasks, but ASDF offers
+a number of advantages. The most obvious ones are the ability to store
+multiple components ---including gaps and overlaps--- in a single file without
+awkward workarounds, as well as the potential to create full datasets
+incorporating all necessary meta information. ASDF is, for large
+workflows, also more efficient, facilitates the storage of different data types ---
+integers as well as floats --- and, with the help of HDF5 offers file
+compression and check summing.
+
+The combination of these factors results in ASDF being more suitable and
+convenient for many workflows. Some, for example experiments with millions of
+waveform files, are almost impossible without a more advanced seismological
+data format.
+In fact, part of the motivation for developing ASDF stems from the fact that
+reading and writing SAC files for a large tomographic inversion practically
+brings a huge parallel file system to its knees due to the very large number of
+involved files.
+
+\subsection{SEG Y and PH5}
+
+\label{subsec:segy}
+
+The SEG Y Data Exchange Format~\cite{SEGY} is one of many in the
+family of data formats introduced and defined by the Society of Exploration
+Geophysicists (SEG) Technical Standards Committee. Amongst these, it
+is probably the most widely known and used. The more modern PH5~\cite{PH5}
+format has a data model similar to SEG Y, but stores its
+data in an HDF5 container. This eliminates some limitations of the
+SEG Y format and facilitates more extensive meta information. It has
+been developed as an archiving format for active source seismic experiments.
+Typical workflows extract data from PH5 and save it as SEG Y,
+which is used in the further stages.
+
+Both on- and off-shore active source data is very structured, meaning that all
+receivers generally have the same response and record for the same time span
+with the same sampling rate.  Receivers are placed in lines and geo-referenced
+by relative coordinates.  In contrast, passive source seismology is frequently
+very unstructured, with different receiver types scattered across a
+geographical region, and the meta information is fairly rich and detailed.
+
+SEG Y and PH5 are well suited for active source experiments,
+but it is difficult to adapt these formats for passive source seismologists to
+suit their purposes.  Historically, SEG Y is essentially not used in
+passive source seismology, and there is no reason to expect this will change
+with PH5. The inverse is true as well, in that passive source
+seismology tools are rarely used in active studies. A consequence is that the
+current iteration of the ASDF format is not fully suitable for
+exploration studies as it relies on certain formats and conventions. In the use
+cases section we will show an example of how it can still be done.
+
+The concept of seismic sources and receivers nonetheless holds true in both
+active and passive source seismology. We have the hope that, in the future,
+ASDF will be used as a standard for both. Active source
+seismology currently lacks community accepted standards for sources and
+receivers as is common in passive source seismology with formats like
+QuakeML and StationXML.  Methods, ideas, and techniques are
+frequently exchanged between these communities, and we encourage the
+development of these missing standards.  A common data format would enable
+greater sharing of tools, whole workflows, and most importantly human knowledge
+and skill, greatly benefiting both sides.  The ASDF format is ready to
+incorporate these aforementioned definitions.

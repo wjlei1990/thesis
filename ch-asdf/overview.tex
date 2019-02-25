@@ -1,0 +1,271 @@
+\section{Overview of the Format}
+
+ASDF, at its most basic level, organizes its data in a hierarchical structure
+inside a container --- in a simplified manner a container can be pictured as a
+file system within a file. The contents are roughly arranged in four sections,
+as follows.
+
+\begin{enumerate}
+    \item Details about seismic events of any kind (earthquakes, mine blasts,
+        rock falls, etc.) are stored in a QuakeML document.
+    \item Seismic waveforms are sorted in one group per seismic station
+        together with meta information in the form of a StationXML
+        document. Each waveform is stored as an HDF5 array.
+    \item Arbitrary data that cannot be understood as a seismic waveform is
+        stored in the auxiliary data section.
+    \item Data history (provenance) is kept as a number of SEIS-PROV
+     documents (an extension to W3C PROV).
+\end{enumerate}
+
+Existing and established data formats and conventions are utilized wherever
+possible. This keeps large parts of ASDF conceptually simple, and delegates
+pieces of the development burden to existing efforts. The ASDF structure is
+summarized in Figure~\ref{fig:asdf_container} and is discussed in more detail
+in the following paragraphs. It is worth noting that almost everything is
+optional. The amount of stored information can thus be adapted to any given use
+case.
+
+\subsection{Container}
+
+Large parts of the ASDF definition are independent of the employed container
+format. An advantage of this approach is a certain resilience to technological
+changes as major pieces of ASDF can in theory be adapted to other container
+formats. Nonetheless, the container format has to be fixed to not severely
+affect interoperability and ease of data exchange. We evaluated a number of
+possibilities and chose HDF5 (Hierarchical Data Format version 5) \cite{hdf5}.
+It is used in a wide variety of scientific projects and has a healthy and
+active ecosystem of libraries and tools. NetCDF 4 \cite{netcdf} is implemented
+on top of HDF5 and ASDF does not gain from the additional functionality. While
+not being as fast as ADIOS \cite{liu2014hello} for the most extreme use cases, HDF5
+also fulfills our hard requirement of being capable of efficient parallel I/O
+with MPI (message passing interface) \cite{MPI}. It can be argued that
+seismology does not have to deal with the same amount of data as, for example,
+particle physics or biology, where single datasets can easily attain volumes of
+multiple petabytes \cite{cern_report, big_data_biology}.  At the time of
+writing, the HDF5 libraries work on more platforms and have more users as well
+as available tools, which we believe is well worth the minor loss in maximum
+potential I/O performance. Using HDF5 also grants a number of useful features
+(other formats also offer some or all of them): First, there is no need to
+worry about the endianness of data, which historically has been a big issue in
+seismology. Second, HDF5 has a number of built-in data compression algorithms
+and data corruption tests in the form of check summing.
+
+\subsection{Seismic Event Information}
+
+Information about all kinds of seismic events, including earthquakes, building
+collapses, fluid injections, and so on, are stored in a single QuakeML
+\cite{quakeml_orfeus_newsletter, Schorlemmer2011} file inside the container.
+QuakeML is an XML \cite{xml_spec} representation intended for different types
+of seismological meta information, but is in practice mostly used to describe
+earthquakes.
+
+Note that one QuakeML document can describe an arbitrary number of events in a
+comprehensive manner. It is the de-facto standard for defining seismic events,
+adopted as a standard by the International Federation of Digital Seismograph
+Networks (see \url{https://www.fdsn.org}), and widely available, because it
+is served by web services of data centers around the world. A crucial
+capability is that it can specify a number of different hypocenters and focal
+mechanisms for each individual event, which might be the results from different
+source inversion algorithms. Each of these is identified by a unique id. ASDF
+uses these identifiers to, for example, determine the exact moment tensor and
+event location that was used to simulate an event that resulted in a particular
+waveform.
+
+Shortcomings of the latest QuakeML version at the time of writing include no
+proper possibility for storing either finite fault sources or custom source
+time functions. This might be alleviated in future QuakeML versions, at which
+point ASDF also gains that functionality. As of now, both could either be
+stored in custom elements in a QuakeML document in a separate namespace, or as
+part of the auxiliary data section of ASDF files.
+
+The exploration community employs seismic sources that cannot be appropriately
+described by the QuakeML standard. Nonetheless the concept of having detailed
+descriptions of seismic sources naturally translates to the active source case.
+It is conceivable that a standard for describing these sources might appear in
+the future at which point it can be incorporated into ASDF. In the use cases
+section we demonstrate how that could be achieved.
+
+
+\subsection{Waveforms and Station Meta Information}
+
+At the heart of ASDF is the waveform data. A single file can store any number,
+combination, and length of waveform data. Waveforms are restricted to single
+and double precision floating point and signed integer data and are stored as
+HDF5 native data arrays. These data arrays are logically grouped by using four
+codes: the network code denotes the operator of a seismological network, the
+station code denotes a station within that network, the location code denotes a
+particular instrument at a station, and finally the channel code denotes the
+recording component.  These codes are often called SEED compatible identifiers
+\cite{SEEDManual} and, together with some temporal information, allow the
+unique identification of seismic instruments and are also used in the QuakeML
+and StationXML standards.
+
+ASDF organizes waveforms and associated meta information at a station level
+granularity. Other choices would have been possible, but this provides a
+certain balance between the necessary nesting and the number of elements per
+group (like a directory in HDF5 terms).
+Each station can optionally contain a StationXML document made up of meta
+information for one or more channels of that station. StationXML is the current
+FDSN standard for station information and the successor of the SEED standard.
+Roughly speaking, it contains information about who runs a network and deployed
+the station, about the geographical and geological setting of the station, and
+the impulse response of each recording channel.  This is vital information, and
+storing it alongside the actual waveform data eases many common undertakings. A
+StationXML document can contain as much or as little information as appropriate
+for any given task.  A further benefit is that StationXML can also be used to
+describe non-seismological time series, such as pressure and temperature
+curves.
+
+The waveform data are stored as pieces of continuous, well-behaved time series
+data. Each piece, in the following called a trace, consists of a start time, a
+sampling rate, and a data array representing regularly sampled data.  The
+starting time of each trace is internally represented as a nanosecond precision
+UNIX epoch time. The use of a 64-bit integer grants a temporal range from about
+the year 1680 to 2260, which is sufficient for all envisioned use cases.  Times
+are always in UTC in accordance with most other seismological data and file
+formats.
+
+Every station can contain an arbitrary number of traces consisting of data from
+multiple locations and channels. Each trace is named according to the following
+scheme:
+
+\vspace{2ex}
+
+\texttt{NET.STA.LOC.CHA\_\_STARTTIME\_\_ENDTIME\_\_TAG}
+
+\vspace{2ex}
+
+\texttt{NET}, \texttt{STA}, \texttt{LOC}, and \texttt{CHA} are placeholders for
+the network, station, location, and channel codes. \texttt{STARTTIME} and
+\texttt{ENDTIME} are string representations of the start and end time of the
+trace. The final \texttt{TAG} part serves as another hierarchical layer. The
+need for this layer becomes obvious, for example, when attempting to store data
+from two waveform simulations but with a slightly different Earth model. They
+need to be given different names --- a randomized string would have been
+possible, but human readable tags seem to be a nicer alternative. Unprocessed
+data straight from a digitizer are, by convention, given the tag
+\texttt{raw\_recording}; other tags will always depend on the use case.
+Traces may have any length without inhibiting the ability to work with them.
+Incidentally, HDF5 supports reading portions of an array which enables users to
+read only portions of very long time series within an ASDF file.
+
+Real world data are not perfect, and seismic receivers can fail and thus produce
+gaps or overlaps in data. Many existing file formats have no concept of this
+and thus require workarounds. In ASDF a gap is represented by one trace before
+and another trace after the gap and two overlapping traces denote an overlap.
+This construct has proven itself to work very well in practice and is also
+employed in the MiniSEED format as well as the ObsPy library.
+
+Last but not least, each trace potentially also carries some more meta
+information and relations to other places within an ASDF file. These are
+elaborated upon in a later section.
+
+ASDF's construction is not a perfect fit for active source exploration data,
+which is mainly a consequence of the chosen nesting structure and StationXML
+heavily leaning towards passive source and station based seismology. Most
+branches of seismology, however, work with the concept of sources and
+receivers.  Thus we encourage the exploration community to come up with a
+general definition of their receivers, at which point it can be integrated into
+ASDF with only a minor effort.
+
+\subsection{Auxiliary Data}
+
+Seismologists are used to working with waveform data so they oftentimes exploit
+the same formats for other data. Receiver functions, cross correlations, and
+H/V stacks are all examples of this reuse. Header fields of the format are then
+used to store some limited amount of meta information. This becomes problematic
+if that data should be archived for future generations of researchers or
+exchanged with the wider community. Within the ASDF format this type of data is
+referred to as auxiliary data, and can be anything that is not considered a
+seismic waveform. Conceptually, each piece of auxiliary data is stored in an
+arbitrarily nested path in the auxiliary data group and consists of a data
+array of any dimension and any necessary meta information in a key-value
+representation.
+
+ASDF does not define auxiliary data in more detail on purpose. On the one hand,
+many areas of seismology where the concept of auxiliary data is interesting are
+in a heavy state of flux and are seeing a lot of active research. It is often
+unclear what to store and keep track of and that view constantly evolves. On
+the other hand, we are not experts in all areas of seismology, and it would
+take a long time to agree on what needs to be stored for each type of auxiliary
+data.
+
+Over time, we hope that conventions for certain types of data, such as cross
+correlations, will become established by the wider community. Nonetheless, ASDF
+allows for arbitrary and descriptive meta information for any type of data to
+explain what the data actually is. This becomes particularly powerful when
+combined with the provenance information, which is described next.
+
+\subsection{Provenance}
+
+Reproducibility is frequently discussed and widely recognized as a critical
+requirement of scientific results. In practice, it is so difficult and time
+consuming to achieve that it is frequently just ignored.  Provenance is the
+process of keeping track of and storing all constituents of information that
+were used to arrive at a certain result. This
+information is then used to judge the quality and trustworthiness of the
+results.  While not being identical to reproducibility, the concept of
+provenance is a key ingredient towards this goal.
+
+Each piece of waveform and auxiliary data within ASDF can optionally store
+provenance information in the form of a W3C PROV or SEIS-PROV document. This implies that ASDF can store any piece of observed, processed,
+derived, or synthetic data with full provenance information. Thus, such a file
+can be safely archived and exchanged with others, and information that led to a result is readily available to the user. It is important to note that
+SEIS-PROV only documents the processes that led to a certain piece of data. It
+does not, by default, store the actual data at each intermediate step, altough
+this could also be achieved within the ASDF format.
+
+W3C PROV is a data model to describe provenance, and SEIS-PROV is a
+domain-specific extension for using W3C PROV in the context of seismological
+data processing and generation. We quickly introduce SEIS-PROV as it is a
+critical component of ASDF; the motivation and reasoning behind it will be
+detailed in a separate publication.
+
+Provenance can be described from different points of view. SEIS-PROV employs a
+process-centered provenance description that aims to capture all actions taken
+to arrive at a result. This is a natural fit for seismological
+data processing. In a nutshell, it works by describing things or entities which
+(in the context of seismology) might be waveform traces or cross correlation
+stacks at different stages in a processing chain. These representations are
+then connected by so called activities that can use existing entities and
+create new ones. A simple example of an activity is a filter in signal
+processing that takes an existing waveform trace and produces a new, filtered
+one.  Additionally, all entities and actions can be assigned to agents that are
+responsible for it.  Agents are usually persons or software programs.
+Figure~\ref{fig:simple_provenance_example} illustrates these concepts with a
+simplistic example.
+
+The goal of the provenance descriptions in ASDF is that scientists looking at
+data described by provenance should be able to tell what steps were taken to generate
+the result.
+
+ASDF only takes cares of the storage of the provenance information. In
+practice, provenance will only be generated and used if it is captured and
+stored in a fully automatic fashion and is thus strongly dependent on the
+software used to generate and process data.
+
+\subsection{Data Relations}
+
+Data always needs to be regarded and interpreted in a wider context. This
+ranges from information about the origin of the data, which is dealt with in
+the previous section, to relations to other pieces of data. Classical relations
+in seismology are waveform data and information about the recording site and
+instrument, as well as the sources of the recorded wavefield.
+
+Any time different pieces of data are required that are stored in varying
+places, formats, and files, the required bookkeeping to make workflows run can
+be substantial. ASDF greatly eases that pain by storing everything in a
+well-defined place within the same file. The need to find and assemble the
+different pieces can thus be performed by software, thereby requiring less
+mental work from scientists.
+ASDF, as shown in the previous sections, can store waveforms, events, station
+meta information, provenance, and auxiliary data all in the same file.
+Additionally, it permits relations between these items. For example, each
+waveform trace can be associated with a certain event, or a certain event
+origin or focal mechanism.  Relations for each block of data to its provenance
+record are also retained.
+
+All in all this allows for fully self-explanatory, complete datasets preserving
+complex internal relations. This is something that is required in
+scientific and data driven applications. Today, people usually use project-specific directory structures that cannot be exchanged nor
+properly archived, and ASDF clearly improves that system on all fronts.

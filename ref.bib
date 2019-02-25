@@ -1,0 +1,2069 @@
+@PREAMBLE{
+      "\def \agu{Am.~Geophys.~Un.} "
+    # "\def \aapgb{Am.~Assoc. Petroleum~Geol.~Bull.} "
+    # "\def \acha{Applied Comput. Harmonic Anal.} "
+    # "\def \amsci{Am.~Sci.} "
+    # "\def \angeo{Annals.~Geophy.} "
+    # "\def \apj{Astrophys.~J.} "
+    # "\def \areps{Annu.~Rev. Earth Planet.~Sci.} "
+    # "\def \aa{Astron.~Astophys.} "
+    # "\def \ag{Astron.~Geophys.} "
+    # "\def \aj{Astrophys.~J.} "
+    # "\def \araa{Annu.~Rev. Astron.~Astrophys.} "
+    # "\def \bssa{Bull.~Seismol.~Soc.~Am.} "
+    # "\def \beri{Bull.~Earthq. Re.~Inst.} "
+    # "\def \cse{Comp.~Sci.~Eng.} "
+    # "\def \dao{Dynamics~Atmos.~Oceans} "
+    # "\def \eps{Earth~Planets~Space} "
+    # "\def \esr{Earth-Sci.~Rev.} "
+    # "\def \epsl{Earth~Planet. Sci.~Lett.} "
+    # "\def \eos{EOS~Trans. Am.~Geophys.~Union} "
+    # "\def \geol{Geology} "
+    # "\def \gsa{Geol.~Soc.~Am.} "
+    # "\def \gsab{Geol.~Soc.~Am. Bull.} "
+    # "\def \geop{Geophysics} "
+    # "\def \ggg{Geochem.~Geophy.~Geosyst.} "
+    # "\def \gji{Geophys.~J.~Int.} "
+    # "\def \grl{Geophys.~Res.~Lett.} "
+    # "\def \gjras{Geophys.~J. R.~Astron.~Soc.} "
+    # "\def \gml{Geo-Marine~Lett.} "
+    # "\def \gms{Geophys.~Monogr.~Series} "
+    # "\def \gp{Geophys.~Prosp.} "
+    # "\def \ia{Island~Arc} "
+    # "\def \ieee{IEEE~Trans.~Vis.~Comp.~Graphics} "
+    # "\def \igr{International Geology Review} "
+    # "\def \jaes{J.~Asian Earth~Sci.} "
+    # "\def \jasa{J.~Acoust.~Soc.~Am.} "
+    # "\def \jastp{J.~Atmos. Solar-Terr.~Phys.} "
+    # "\def \jcp{J.~Comp.~Phys.} "
+    # "\def \jgr{J.~Geophys.~Res.} "
+    # "\def \jg{J.~Geodynam.} "
+    # "\def \jgeop{J.~Geophys.} "
+    # "\def \jmp{J.~Math.~Phys.} "
+    # "\def \jota{J.~Optim. Th.~App.} "
+    # "\def \jrssb{J.~R.~Statist.~Soc.~B} "
+    # "\def \mg{Marine~Geology} "
+    # "\def \mi{Math.~Intelligencer} "
+    # "\def \mnras{Mon.~Not. R.~Astron.~Soc.} "
+    # "\def \mwr{Monthly Weather Review} "
+    # "\def \nat{Nature} "
+    # "\def \nathaz{Natural~Hazards} "
+    # "\def \nzjgg{New.~Zealand J.~Geol.~Geophys.} "
+    # "\def \numa{Num.~Algor.} "
+    # "\def \pt{Phys.~Today} "
+    # "\def \pepi{Phys.~Earth Planet.~Inter.} "
+    # "\def \ptrsl{Phil.~Trans. R.~Soc.~Lond.} "
+    # "\def \ptrsA{Phil.~Trans. R.~Soc.~A.} "
+    # "\def \pag{Pure~App.~Geophys.} "
+    # "\def \qjrms{Q.~J.~R.~Meteorol.~Soc.} "
+    # "\def \rpp{Rep.~Prog.~Phys.} "
+    # "\def \rgsp{Rev.~Geophys.~Space.~Phys.} "
+    # "\def \rgp{Rev.~Geophys.} "
+    # "\def \rmp{Rev.~Mod.~Phys.} "
+    # "\def \sa{Sci.~Am.} "
+    # "\def \sci{Science} "
+    # "\def \scipro{Science~Progress} "
+    # "\def \srl{Seis.~Res.~Lett.} "
+    # "\def \sp{Sol.~Phys.} "
+    # "\def \sirev{SIAM~Rev.} "
+    # "\def \sjna{SIAM~J.~Num.~Anal.} "
+    # "\def \sjsc{SIAM~J.~Sci.~Comp.} "
+    # "\def \tec{Tectonics} "
+    # "\def \ternov{Terra~Nova} "
+    # "\def \tecphy{Tectonophysics} "
+    # "\def \usgs{U.S.~Geol.~Surv.} "
+}
+
+@String { bssa       = {Bull. Seism. Soc. Am.} }
+@String { cmame      = {Comput. Methods Appl. Mech. Eng.} }
+@String { cmes       = {Comput. Model. Eng. Sci.} }
+@String { eesd       = {Earthquake Eng. Struct. Dynam.} }
+@String { eos        = {Eos Trans. AGU} }
+@String { epsl       = {Earth Planet. Sci. Lett.} }
+@String { srl       = {Seism. Res. Lett.} }
+@String { geophysics = {Geophysics} }
+@String { gji        = {Geophys. J. Int.} }
+@String { gjras      = {Geophys. J. Roy. Astron. Soc.} }
+@String { gp         = {Geophys. Prospect.} }
+@String { grl        = {Geophys. Res. Lett.} }
+@String { ieeetuffc  = {IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control} }
+@String { ijnme      = {Int. J. Numer. Methods Eng.} }
+@String { jap        = {J. Appl. Phys.} }
+@String { jasa       = {J. Acoust. Soc. Am.} }
+@String { jca        = {J. Comput. Acoust.} }
+@String { jcp        = {J. Comput. Phys.} }
+@String { jgr        = {J. Geophys. Res.} }
+@String { jpdc       = {Journal of Parallel and Distributed Computing} }
+@String { lncs       = {Lecture Notes in Computer Science} }
+@String { pageoph    = {Pure Appl. Geophys.} }
+@String { pepi       = {Phys. Earth Planet. Inter.} }
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{wright1999numerical,
+  title={Numerical optimization},
+  author={Wright, Stephen and Nocedal, Jorge},
+  journal={Springer Science},
+  volume={35},
+  number={67-68},
+  pages={7},
+  year={1999}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Source Inversion
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ekstrom GlobalCMT
+@article{ekstrom2012global,
+  title={{The global CMT project 2004--2010: Centroid-moment tensors for 13,017 earthquakes}},
+  author={Ekstr{\"o}m, G{\"o}ran and Nettles, Meredith and Dziewo{\'n}ski, A.M.},
+  journal=pepi,
+  volume={200},
+  pages={1--9},
+  year={2012},
+  publisher={Elsevier}
+}
+
+% Vala CMT
+@article{hjorleifsdottir2010effects,
+  title={Effects of three-dimensional Earth structure on {CMT} earthquake parameters},
+  author={Hj{\"o}rleifsd{\'o}ttir, Vala and Ekstr{\"o}m, G{\"o}ran},
+  journal=pepi,
+  volume={179},
+  number={3-4},
+  pages={178--190},
+  year={2010},
+  publisher={Elsevier}
+}
+
+% Qinya source
+@article{liu2004spectral,
+  title={Spectral-element moment tensor inversions for earthquakes in southern {C}alifornia},
+  author={Liu, Qinya and Polet, Jascha and Komatitsch, Dimitri and Tromp, Jeroen},
+  journal=bssa,
+  volume={94},
+  number={5},
+  pages={1748--1761},
+  year={2004},
+  publisher={Seismological Society of America}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Parametrization
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@book{babuska1991seismic,
+  title={Seismic anisotropy in the Earth},
+  author={Babuska, Vladislav and Cara, Michel},
+  volume={10},
+  year={1991},
+  publisher={Springer Science \& Business Media}
+}
+
+@book{Love27,
+     TITLE = {A Treatise on the Mathematical Theory of Elasticity},
+     AUTHOR = {A. E. H. Love},
+     PUBLISHER = {Cambridge~U. Press},
+     ADDRESS = {Cambridge},
+     EDITION = {4},
+     YEAR = {1927}
+}
+
+@Article{Plessix_2006_RAS,
+  Title                    = {A review of the adjoint-state method for computing the gradient of a functional with geophysical applications},
+  Author                   = {R. E. Plessix},
+journal = gji,
+  Year                     = {2006},
+  Number                   = {2},
+  Pages                    = {495-503},
+  Volume                   = {167}
+}
+
+@article{montagner1989petrological,
+  title={Petrological constraints on seismic anisotropy},
+  author={Montagner, Jean-Paul and Anderson, Don L},
+  journal=pepi,
+  volume={54},
+  number={1-2},
+  pages={82--105},
+  year={1989},
+  publisher={Elsevier}
+}
+
+@article{montagner1991,
+  title={Global upper mantle tomography of seismic velocities and anisotropies},
+  author={Montagner, Jean-Paul and Tanimoto, T.},
+  journal=jgr,
+  volume={96},
+  number={B12},
+  pages={20,337--20,351},
+  year={1991}
+}
+
+@article{WW86,
+     AUTHOR = {J. H. Woodhouse and Y. K. Wong},
+     JOURNAL = {\gjras},
+     PAGES = {753--773},
+     TITLE = {{Amplitude, phase and path anomalies of mantle waves}},
+     VOLUME = {87},
+     YEAR = {1986}
+}
+
+@article{TDI,
+     AUTHOR = {J. Tromp and F. A. Dahlen},
+     JOURNAL = {\gji},
+     PAGES = {581--598},
+     TITLE = {{Variational principles for surface wave propagation on a laterally heterogeneous Earth---I. Time-domain JWKB theory}},
+     VOLUME = {109},
+     YEAR = {1992}
+}
+
+@article{TDII,
+     AUTHOR = {J. Tromp and F. A. Dahlen},
+     JOURNAL = {\gji},
+     PAGES = {599--619},
+     TITLE = {{Variational principles for surface wave propagation on a laterally heterogeneous Earth---II. Frequency-domain JWKB theory}},
+     VOLUME = {109},
+     YEAR = {1992}
+}
+
+@ARTICLE{reidetal2001,
+  author = {F. J. L. Reid and J. H. Woodhouse and H. J. Van Heijst},
+  title = {Upper mantle attenuation and velocity structure from measurements
+	of differential S phases},
+  journal = gji,
+  year = {2001},
+  volume = {145},
+  pages = {615--630}
+}
+
+@ARTICLE{DaEkDz08,
+  author = {C. A. Dalton and G. Ekstr\"{o}m and A. M. Dziewo\'nski},
+  title = {The global attenuation structure of the upper mantle},
+  journal = jgr,
+  year = {2008},
+  volume = {113},
+  pages = {B05317},
+  doi = {10.1029/2006JB004394}
+}
+
+@ARTICLE{romanowicz1998,
+  author = {B. Romanowicz},
+  title = {Attenuation tomography of the {E}arth's mantle: a review of current
+	status},
+  journal = pageoph,
+  year = {1998},
+  volume = {153},
+  pages = {257--272}
+}
+
+@ARTICLE{valentine2010,
+  author = {Andrew P. Valentine  and John H. Woodhouse},
+  title = {Reducing errors in seismic tomography: combined inversion for sources and structure},
+  journal = gji,
+  year = {2010},
+  volume = {180},
+  pages = {847--857}
+}
+
+@article{Zhuetal2013,
+      AUTHOR = {H. Zhu and E. Bozda\u{g} and T. Duffy and J. Tromp},
+      TITLE = {{Seismic attenuation beneath Europe and the North Atlantic: Implications for water in the mantle}},
+      JOURNAL = {Earth and Planetary Science Letters},
+      VOLUME = {381},
+      pages ={1--11},
+      doi = {doi: 10.1016/j.epsl.2013.08.030},
+      YEAR = {2013}
+ }
+
+
+@article{ZhuTromp2013,
+      AUTHOR = {H. Zhu and J. Tromp},
+      TITLE = {{Mapping tectonic deformation in the crust and upper mantle beneath Europe and the North Atlantic Ocean}},
+      JOURNAL = {Science},
+      VOLUME = {341},
+      PAGES = {871--875},      
+      YEAR = {2013},
+      doi = {10.1126/science.1241335}}
+ }
+
+@article{Ruanetal2018,
+  title={Balancing Unevenly Distributed Data in Seismic Tomography: {A} Global Adjoint Tomography Example},
+  author={Ruan, Youyi and Lei, Wenjie, and Modrak, Ryan, and \"{O}rsvuran, Ridvan, and Bozda\u{g}, Ebru, and Tromp, Jeroen},
+  journal=gji,
+  year={2019},
+  note={Submitted}
+}
+
+@article{fukao1992,
+  title={Subducting slabs stagnant in the mantle transition zone},
+  author={Y. Fukao and M.  Obayashi and H. Inoue and M. Nenbai},
+  journal=jgr,
+  year={1992},
+  volume={97},
+  pages={4809--4822}
+}
+
+@article{ringwood1988,
+  title={Subducting slabs stagnant in the mantle transition zone},
+  author={A.E. Ringwood and T. Irifune},
+  journal={Nature},
+  year={1988},
+  volume={331},
+  pages={131--136}
+}
+
+
+@article{krischer2016adaptable,
+  title={An Adaptable Seismic Data Format},
+  author={Krischer, Lion and Smith, James and Lei, Wenjie and Lefebvre, Matthieu and Ruan, Youyi and de Andrade, Elliott Sales and Podhorszki, Norbert and Bozda{\u{g}}, Ebru and Tromp, Jeroen},
+  journal=gji,
+  volume={207},
+  number={2},
+  pages={1003--1011},
+  year={2016},
+  publisher={The Royal Astronomical Society}
+}
+
+% FLEXWIN
+@article{maggi2009automated,
+  title={An automated time-window selection algorithm for seismic tomography},
+  author={Maggi, Alessia and Tape, Carl and Chen, Min and Chao, Daniel and Tromp, Jeroen},
+  journal=gji,
+  volume={178},
+  number={1},
+  pages={257--281},
+  year={2009},
+  publisher={Blackwell Publishing Ltd Oxford, UK}
+}
+
+% ADIOS
+@article{liu2014hello,
+  title={{Hello ADIOS: the challenges and lessons of developing leadership class I/O frameworks}},
+  author={Liu, Qing and Logan, Jeremy and Tian, Yuan and Abbasi, Hasan and Podhorszki, Norbert and Choi, Jong Youl and Klasky, Scott and Tchoua, Roselyne and Lofstead, Jay and Oldfield, Ron and others},
+  journal={Concurrency and Computation: Practice and Experience},
+  volume={26},
+  number={7},
+  pages={1453--1473},
+  year={2014},
+  publisher={Wiley Online Library}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SPECFEM, Sensitivity Kernel and Inversion Theory
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Carl Tape California
+@article{tape2009adjoint,
+  title={{Adjoint tomography of the southern California crust}},
+  author={Tape, Carl and Liu, Qinya and Maggi, Alessia and Tromp, Jeroen},
+  journal={Science},
+  volume={325},
+  number={5943},
+  pages={988--992},
+  year={2009},
+  publisher={American Association for the Advancement of Science}
+}
+
+% Carl Tape
+@article{tape2007finite,
+  title={Finite-frequency tomography using adjoint methods—Methodology and examples using membrane surface waves},
+  author={Tape, Carl and Liu, Qinya and Tromp, Jeroen},
+  journal=gji,
+  volume={168},
+  number={3},
+  pages={1105--1129},
+  year={2007},
+  publisher={Blackwell Publishing Ltd Oxford, UK}
+}
+
+% Luo Yang
+@article{luo2013strategies,
+  title={Strategies in adjoint tomography},
+  author={Luo, Yang and Modrak, Ryan and Tromp, Jeroen},
+  journal={Handbook of Geomathematics},
+  pages={1--52},
+  year={2013},
+  publisher={Springer}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Regional Model
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Min's Asian model
+
+@article{chen2015multiparameter,
+  title={{Multiparameter adjoint tomography of the crust and upper mantle beneath East Asia: 1. Model construction and comparisons}},
+  author={Chen, Min and Niu, Fenglin and Liu, Qinya and Tromp, Jeroen and Zheng, Xiufen},
+  journal=jgr,
+  volume={120},
+  number={3},
+  pages={1762--1786},
+  year={2015},
+  publisher={Wiley Online Library}
+}
+
+@article{schaeffer2014imaging,
+  title={{Imaging the North American continent using waveform inversion of global and USArray data}},
+  author={Schaeffer, AJ and Lebedev, S},
+  journal=epsl,
+  volume={402},
+  pages={26--41},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@ARTICLE{SchaefferLebedev13,
+  author = {A. J. Schaeffer and S. Lebedev},
+  title = {{Global shear speed structure of the upper mantle and transition zone}},
+  journal = gji,
+  year = {2013},
+  volume = {194},
+  pages = {417-449},
+}
+
+@article{lebedev2003upper,
+  title={Upper mantle beneath Southeast Asia from S velocity tomography},
+  author={Lebedev, Sergei and Nolet, Guust},
+  journal=jgr,
+  volume={108},
+  number={B1},
+  year={2003}
+}
+
+@Article{KoXiBoPeSaLiTr16,
+  Title  = {Anelastic sensitivity kernels with parsimonious storage for adjoint tomography and full waveform inversion},
+  Author = {Komatitsch, Dimitri and Xie, Zhinan and Bozda{\u{g}}, Ebru and Sales de Andrade, Elliott and Peter, Daniel and Liu, Qinya and Tromp, Jeroen},
+  Journal = gji,
+  Year    = {2016},
+  Number  = {3},
+  Pages   = {1467-1478},
+  Volume  = {206},
+  Doi     = {10.1093/gji/ggw224}
+}
+
+@Article{chen2017,
+  Title  = {Automated time-window selection based on machine
+learning for full-waveform inversion},
+  Author = {Chen, Y., and  Hill, J., and Lei, W., and  Lefebvre, M.,
+and Tromp, J., and Bozda{\u g}, E., and Komatitsch, D},
+  Journal = {SEG Technical Program Expanded Abstracts},
+  Year    = {2017},
+  Pages   = {1,604--1,609}
+}
+
+@book{DT98,
+     ADDRESS = {New Jersey},
+     AUTHOR = {F. A. Dahlen and J. Tromp},
+     PUBLISHER = {Princeton U. Press},
+     TITLE = {Theoretical Global Seismology},
+     YEAR = {1998}
+}
+
+@article{PREM,
+     AUTHOR = {A. Dziewo{\'n}ski and D. Anderson},
+     JOURNAL = {\pepi},
+     PAGES = {297--356},
+     TITLE = {{Preliminary reference Earth model}},
+     VOLUME = {25},
+     YEAR = {1981}
+}
+
+@ARTICLE{Tromp2005,
+  author={J. Tromp and C. Tape and Q. Y. Liu},
+  year=2005,
+  title={Seismic tomography, adjoint methods, time reversal and banana-doughnut kernels},
+  journal = gji,
+  volume=160,
+  pages={195--216},
+}
+
+% Hejun Europe Nature
+@article{zhu2012structure,
+  title={Structure of the {E}uropean upper mantle revealed by adjoint tomography},
+  author={Zhu, Hejun and Bozda{\u{g}}, Ebru and Peter, Daniel and Tromp, Jeroen},
+  journal={Nature Geoscience},
+  volume={5},
+  number={7},
+  pages={493},
+  year={2012},
+  publisher={Nature Publishing Group}
+}
+
+% Hejun Europe GJI
+@article{zhu2015seismic,
+  title={Seismic structure of the {E}uropean upper mantle based on adjoint tomography},
+  author={Zhu, Hejun and Bozda{\u{g}}, Ebru and Tromp, Jeroen},
+  journal=gji,
+  volume={201},
+  number={1},
+  pages={18--52},
+  year={2015},
+  publisher={Oxford University Press}
+}
+
+% Hejun NorthAmerica GJI
+@article{zhu2017radial,
+  title={Radial anisotropy of the {North American} upper mantle based on adjoint tomography with {USArray}},
+  author={Zhu, Hejun and Komatitsch, Dimitri and Tromp, Jeroen},
+  journal=gji,
+  volume={211},
+  number={1},
+  pages={349--377},
+  year={2017},
+  publisher={Oxford University Press}
+}
+
+@Article{KoTr99,
+  Title                    = {Introduction to the spectral-element method for 3-{D} seismic wave propagation},
+  Author                   = {D. Komatitsch and J. Tromp},
+journal = gji,
+  Year                     = {1999},
+  Number                   = {3},
+  Pages                    = {806-822},
+  Volume                   = {139},
+
+  Doi                      = {10.1046/j.1365-246x.1999.00967.x}
+}
+
+@Article{KoTr02a,
+  Title                    = {Spectral-element simulations of global seismic wave propagation{-I. V}alidation},
+  Author                   = {D. Komatitsch and J. Tromp},
+  journal = gji,
+  Year                     = {2002},
+  Number                   = {2},
+  Pages                    = {390-412},
+  Volume                   = {149},
+
+  Doi                      = {10.1046/j.1365-246X.2002.01653.x}
+}
+
+@Article{KoTr02b,
+  Title                    = {Spectral-element simulations of global seismic wave propagation{-II. 3-D} models, oceans, rotation, and self-gravitation},
+  Author                   = {D. Komatitsch and J. Tromp},
+  journal = gji,
+  Year                     = {2002},
+  Number                   = {1},
+  Pages                    = {303-318},
+  Volume                   = {150},
+
+  Doi                      = {10.1046/j.1365-246X.2002.01716.x}
+}
+
+@Article{PeKoLuMaLeCaLeMaLiBlNiBaTr11,
+  Title = {Forward and adjoint simulations of seismic wave propagation on fully unstructured hexahedral meshes},
+  Author = {Daniel Peter and Dimitri Komatitsch and Yang Luo and Roland Martin and Nicolas {Le Goff} and Emanuele Casarotti and Pieyre {Le Loher} and Federica Magnoni and Qinya Liu and C\'eline Blitz and Tarje Nissen-Meyer and Piero Basini and Jeroen Tromp},
+  journal = gji,
+  Year    = {2011},
+  Number  = {2},
+  Pages   = {721-739},
+  Volume  = {186},
+  Doi     = {10.1111/j.1365-246X.2011.05044.x}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Global Model
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CRUST 2.0
+@article{bassin2000current,
+  title={The current limits of resolution for surface wave tomography in {North America}},
+  author={Bassin, C and Laske, G and Masters, G},
+  journal={{EOS}},
+  volume={81},
+  year={2000}
+}
+
+% Bozdag GLAD-M15
+@article{bozdaug2016global,
+  title={Global adjoint tomography: first-generation model},
+  author={Bozda{\u{g}}, Ebru and Peter, Daniel and Lefebvre, Matthieu and Komatitsch, Dimitri and Tromp, Jeroen and Hill, Judith and Podhorszki, Norbert and Pugmire, David},
+  journal=gji,
+  volume={207},
+  number={3},
+  pages={1739--1766},
+  year={2016},
+  publisher={Oxford University Press}
+}
+
+@ARTICLE{ritzwollerlavely1995,
+  author = {M. H. Ritzwoller and E. M. Lavely},
+  title = {Three-dimensional models of the {E}arth's mantle},
+  journal = {Reviews of Geophysics},
+  year = {1995},
+  volume = {33},
+  pages = {1-66}
+}
+
+@article{TW01,
+     AUTHOR = {J. Trampert and J. H. Woodhouse},
+journal = gji,
+     PAGES = {165--174},
+     TITLE = {{Assessment of global phase velocity models}},
+     VOLUME = {144},
+     YEAR = {2001}
+}
+
+@ARTICLE{beckerboschi2002,
+  author = {T. W. Becker and L. Boschi},
+  title = {A comparison of tomographic and geodynamic mantle models},
+  journal = {\ggg},
+  year = {2002},
+  volume = {3},
+  pages = {1003},
+  number = {1},
+  doi = {10.1029/2001GC000168}
+}
+
+% Barbara SEMUCB-WM1 Nature
+@article{french2015broad,
+  title={Broad plumes rooted at the base of the {E}arth's mantle beneath major hotspots},
+  author={French, Scott W and Romanowicz, Barbara},
+  journal={Nature},
+  volume={525},
+  number={7567},
+  pages={95},
+  year={2015},
+  publisher={Nature Publishing Group}
+}
+
+% Barbara SEMUCB-WM1 GJI
+@article{french2014whole,
+  title={Whole-mantle radially anisotropic shear velocity structure from spectral-element waveform tomography},
+  author={French, SW and Romanowicz, BA},
+  journal=gji,
+  volume={199},
+  number={3},
+  pages={1303--1327},
+  year={2014},
+  publisher={Oxford University Press}
+}
+
+% GAP-P4
+@article{fukao2013subducted,
+  title={Subducted slabs stagnant above, penetrating through, and trapped below the 660 km discontinuity},
+  author={Fukao, Yoshio and Obayashi, Masayuki},
+  journal=jgr,
+  volume={118},
+  number={11},
+  pages={5920--5938},
+  year={2013},
+  publisher={Wiley Online Library}
+}
+
+@article{van2018atlas,
+  title={Atlas of the underworld: {S}lab remnants in the mantle, their sinking history, and a new outlook on lower mantle viscosity},
+  author={Van der Meer, Douwe G. and Van Hinsbergen, Douwe J.J. and Spakman, Wim},
+  journal={Tectonophysics},
+  volume={723},
+  pages={309--448},
+  year={2018},
+  publisher={Elsevier}
+}
+
+@article{obspy2010,
+  title={{ObsPy: A Python toolbox for seismology}},
+  author={M. Beyreuther and R. Barsch and L. Krischer and T. Megies and Y. Behr and J. Wassermann},
+  journal=srl,
+  volume={81},
+  pages={530--533},
+  year={2010},
+}
+
+% Ekstrom S362ANI JGR
+@article{kustowski2008anisotropic,
+  title={{Anisotropic shear-wave velocity structure of the Earth's mantle: A global model}},
+  author={Kustowski, B and Ekstr{\"o}m, G and Dziewo{\'n}ski, AM},
+  journal=jgr,
+  volume={113},
+  number={B6},
+  year={2008},
+  publisher={Wiley Online Library}
+}
+
+% Montelli plumes
+@article{montelli2006catalogue,
+  title={A catalogue of deep mantle plumes: {N}ew results from finite-frequency tomography},
+  author={Montelli, Raffaella and Nolet, Guust and Dahlen, FA and Masters, G},
+  journal={\ggg},
+  volume={7},
+  number={11},
+  year={2006},
+  publisher={Wiley Online Library}
+}
+
+% Ekstrom S362ANI+M GGG
+@article{moulik2014anisotropic,
+  title={An anisotropic shear velocity model of the {E}arth's mantle using normal modes, body waves, surface waves and long-period waveforms},
+  author={Moulik, P and Ekstr{\"o}m, G},
+  journal=gji,
+  volume={199},
+  number={3},
+  pages={1713--1738},
+  year={2014},
+  publisher={Oxford University Press}
+}
+
+% TX2015
+@article{TX2015,
+  title={The effect of subducting slabs in global shear wave tomography},
+  author={C. Lu and S.P. Grand},
+  journal=gji,
+  volume={205},
+  pages={1,074--1,085},
+  year={2016},
+  publisher={Oxford University Press}
+}
+
+@incollection{Chavent1974,
+  author={G. Chavent},
+  year=1974,
+  title={Identification of function parameters in partial differential equations},
+  booktitle={R.E. Goodson and Polis, eds., Identification of parameter distributed systems},
+  publisher={New York, American Society Of Mechanical Engineers 1974},
+}
+
+@incollection{Lefebvre2018,
+  author={M. Lefebvre and Y. Chen and W. Lei and D. Luet and Y. Ruan and E. Bozda{\u{g}} and J. Hill and D. Komatitsch and L. Krisher and D. Peter and N. Podhorszki and J. Smith and J. Tromp},
+  year=2018,
+  title={Data and workflow management for exascale global adjoint tomography},
+  booktitle={{Exascale Scientific Applications --- Scalability and Performance Portability}},
+  editor = {T.P. Straatsma and K.B. Antypas and T.J. Williams},
+  publisher={CRC Press},
+}
+
+@ARTICLE{Tar84,
+  author = {A. Tarantola},
+  title = {Inversion of seismic reflection data in the acoustic approximation},
+  journal = {Geophysics},
+  year = {1984},
+  volume = {49},
+  pages = {1259-1266}
+}
+
+@incollection{Lailly1983,
+  author={P. Lailly},
+  year=1983,
+  title={The seismic inverse problem as a sequence of before stack migration},
+  booktitle={J. Bednar, ed., Conference on Inverse Scattering: Theory and Application},
+  publisher={Society for Industrial and Applied Mathematics},
+  pages={206-220}
+}
+
+@Article{BaChLa77,
+  Title                    = {Une application de la th\'eorie du contr\^ole \`a un probl\`eme inverse sismique},
+  Author                   = {Bamberger, A. and Chavent, G. and Lailly, P.},
+  Journal                  = {Ann. Geophys.},
+  Year                     = {1977},
+  Pages                    = {183-200},
+  Volume                   = {33}
+}
+
+@article{Aki77,
+  AUTHOR = {K. Aki and A. Christoffersson and E. S. Husebye},
+  JOURNAL = {\jgr},
+  PAGES = {277--296},
+  TITLE = {{Determination of the three-dimensional seismic structure of the lithosphere}},
+  VOLUME = {82},
+  YEAR = {1977}
+}
+
+@article{Dziewonski77,
+  AUTHOR = {A. M. Dziewo\'{n}ski and B. H. Hager and R. J. O'Connell},
+  JOURNAL = {\jgr},
+  PAGES = {239--255},
+  TITLE = {{Large-scale heterogeneities in the lower mantle}},
+  VOLUME = {82},
+  YEAR = {1977}
+}
+@ARTICLE{SenTok77,
+  author = {M. Sengupta and N. Toks\"oz},
+  title = {{Three-dimensional model of seismic velocity variation in the Earth's mantle}},
+  journal = {\grl},
+  year = {1977},
+  volume = {3},
+  pages = {84-86},
+}
+
+@article{WD84,
+     AUTHOR = {J. H. Woodhouse and A. M. Dziewo\'{n}ski},
+     JOURNAL = {\jgr},
+     PAGES = {5953--5986},
+     TITLE = {{Mapping the upper mantle: Three-dimensional modeling of Earth structure by inversion of seismic waveforms}},
+     VOLUME = {89},
+     YEAR = {1984}
+}
+
+@article{Fichtner09,
+     AUTHOR = {A. Fichtner  and B. L. N. Kennett and H. Igel and H.-P. Bunge},
+journal = gji,
+     PAGES = {1703--1725},
+     TITLE = {{Full seismic waveform tomography for upper-mantle structure in the Australasian region using adjoint methods}},
+     VOLUME = {179},
+     YEAR = {2009}
+}
+
+@ARTICLE{Nataf1984,
+  author = {H.-C. Nataf and I. Nakanishi and D. L. Anderson},
+  title = {{Anisotropy and shear velocity heterogeneities in the upper mantle}},
+  journal = {\grl},
+  year = {1984},
+  volume = {11},
+  pages = {109--112}
+}
+
+@article{tromp2010a,
+     TITLE = {Near real-time simulations of global {CMT} earthquakes},
+     AUTHOR = {J. Tromp and D. Komatitsch and V. Hj\"{o}rleifsd\'{o}ttir and Q. Liu and H. Zhu and D. Peter
+     and E. Bozda\u{g} and D. McRitchie and P. Friberg and C. Trabant and A. Hutko},
+journal = gji,
+  year = {2010},
+  volume = {183},
+  pages = {381--389}}
+
+@article{s362ani,
+  AUTHOR = {B. Kustowski and G. Ekstr\"{o}m and A. M. Dziewo\'nski},
+  TITLE = {{Anisotropic shear-wave velocity structure of the Earth's mantle: A global model}},
+  JOURNAL = {\jgr},
+  VOLUME = {113},
+  PAGES = {B06306, doi:10.1029/2007JB005169},
+  YEAR = {2008}
+}
+
+@InProceedings{RoMo93,
+  Title                    = {Implementation of the free surface boundary condition in 2-{D} and 3-{D} elastic cases},
+  Author                   = {D. Rodrigues and P. Mora},
+  Booktitle                = {Expanded abstracts of the Soc. Expl. Geophys.},
+  Year                     = {1993},
+  Note                     = {63rd international meeting of the SEG},
+  Pages                    = {215--217}
+}
+
+@article{EnTK2017,
+  title={Harnessing the Power of Many: {E}xtensible {T}oolkit
+for Scalable Ensemble Applications},
+  author={V. Balasubramanian and M. Turilli and W. Huy and M. Lefebvre and W. Lei and G. Cervone and J. Tromp and S. Jha},
+  Year                     = {2017},
+  note                     = {\textit{Int. Parallel and Distributed Processing Symp.}}
+}
+
+@article{Li1996,
+author = {Li, Xiang-Dong and Romanowicz, Barbara},
+title = {Global mantle shear velocity model developed using nonlinear asymptotic coupling theory},
+journal = jgr,
+volume = {101},
+number = {B10},
+year={1996},
+pages = {22245-22272},
+doi = {10.1029/96JB01306}
+}
+
+
+% Ritsema S40RTS
+@article{ritsema2011s40rts,
+  title={{S40RTS}: a degree-40 shear-velocity model for the mantle from new {R}ayleigh wave dispersion, teleseismic traveltime and normal-mode splitting function measurements},
+  author={Ritsema, J and Deuss, A. and Van Heijst, H.J. and Woodhouse, J.H.},
+  journal=gji,
+  volume={184},
+  number={3},
+  pages={1223--1236},
+  year={2011},
+  publisher={Blackwell Publishing Ltd Oxford, UK}
+}
+
+% LLNL
+@article{simmons2012llnl,
+  title={{LLNL-G3Dv3: Global P wave tomography model for improved regional and teleseismic travel time prediction}},
+  author={Simmons, Nathan A and Myers, Steve C and Johannesson, Gardar and Matzel, Eric},
+  journal=jgr,
+  volume={117},
+  number={B10},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+
+@article{muller2008,
+  title={Age, spreading rates, and spreading asymmetry of the world's ocean crust},
+  author={M{\"u}ller, R Dietmar and Sdrolias, Maria and Gaina, Carmen and Roest, Walter R},
+  journal={Geochemistry, Geophysics, Geosystems},
+  volume={9},
+  number={4},
+  year={2008},
+  publisher={Wiley Online Library}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Resolution Test
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Fichtner PSF
+@article{fichtner2011resolution,
+  title={Resolution analysis in full waveform inversion},
+  author={Fichtner, Andreas and Trampert, Jeannot},
+  journal=gji,
+  volume={187},
+  number={3},
+  pages={1604--1624},
+  year={2011},
+  publisher={Blackwell Publishing Ltd Oxford, UK}
+}
+
+@misc{krischer2015,
+  author       = {Lion Krischer and
+                  Emanuele Casarotti},
+  title        = {Pyflex: 0.1.4},
+  month        = sep,
+  year         = 2015,
+  doi          = {10.5281/zenodo.31607},
+  url          = {https://doi.org/10.5281/zenodo.31607}
+}
+
+
+% North America
+@article{grand1984upper,
+  title={{Upper mantle shear structure of North America}},
+  author={S. P. Grand and D. V. Helmberger},
+  journal=gji,
+  volume={76},
+  number={2},
+  pages={399--438},
+  year={1984},
+  publisher={Blackwell Publishing Ltd Oxford, UK}
+}
+
+@article{grand1994,
+  title={Mantle shear structure beneath the {A}mericas and surrounding oceans},
+  author={S. P. Grand},
+  journal=jgr,
+  volume={99},
+  pages={11,591--11,621},
+  year={1994}
+}
+
+@article{hilst1991,
+  title={{Tomographic imaging of subducted lithosphere below the northwest Pacific island arcs}},
+  author={Van der Hilst, R. D., and R. Engdahl and W. Spakman and G. Nolet},
+  journal={Nature},
+  volume={353},
+  pages={37--43},
+  year={1991}
+}
+
+@article{hilst1997,
+  title={{Evidence for deep mantle circulation from global tomography}},
+  author={Van der Hilst, R. D., and S. Widiyantoro and R. Engdahl},
+  journal={Nature},
+  volume={386},
+  pages={578--584},
+  year={1997}
+}
+
+@article{masters1996shear,
+  title={A shear-velocity model of the mantle},
+  author={Masters, Thomas Guy and Johnson, Stuart and Laske, Gabi and Bolton, Harold},
+  journal={Phil. Trans. R. Soc. Lond. A},
+  volume={354},
+  number={1711},
+  pages={1385--1411},
+  year={1996},
+  publisher={The Royal Society}
+}
+
+@article{grand1997high,
+  title={High resolution global tomography: a snapshot of convection in the Earth},
+  author={Grand, Stephen P and Van der Hilst, Rob D and Widiyantoro, Sri},
+  journal={Geological Society of America Today},
+  volume={7},
+  number={4},
+  year={1997},
+  publisher={Geological Society of America}
+}
+
+@article{megnin2000three,
+  title={The three-dimensional shear velocity structure of the mantle from the inversion of body, surface and higher-mode waveforms},
+  author={M{\'e}gnin, Charles and Romanowicz, Barbara},
+  journal=gji,
+  volume={143},
+  number={3},
+  pages={709--728},
+  year={2000},
+  publisher={Blackwell Publishing Ltd Oxford, UK}
+}
+
+@article{gu2001models,
+  title={Models of the mantle shear velocity and discontinuities in the pattern of lateral heterogeneities},
+  author={Gu, Yu J and Dziewo{\'n}ski, Adam M and Su, Weijia and Ekstr{\"o}m, G{\"o}ran},
+  journal=jgr,
+  volume={106},
+  number={B6},
+  pages={11169--11199},
+  year={2001},
+  publisher={Wiley Online Library}
+}
+
+@article{chalmers2001development,
+  title={Development of the continental margins of the Labrador Sea: a review},
+  author={Chalmers, James A and Pulvertaft, TCR},
+  journal={Geological Society, London, Special Publications},
+  volume={187},
+  number={1},
+  pages={77--105},
+  year={2001},
+  publisher={Geological Society of London}
+}
+
+@article{whitmeyer2007tectonic,
+  title={Tectonic model for the Proterozoic growth of North America},
+  author={Whitmeyer, Steven J and Karlstrom, Karl E},
+  journal={Geosphere},
+  volume={3},
+  number={4},
+  pages={220--259},
+  year={2007},
+  publisher={Geological Society of America}
+}
+
+% Europe
+@article{zielhuis1994deep,
+  title={Deep seismic expression of an ancient plate boundary in Europe},
+  author={Zielhuis, Alet and Nolet, Guust},
+  journal={Science},
+  volume={265},
+  number={5168},
+  pages={79--81},
+  year={1994},
+  publisher={American Association for the Advancement of Science}
+}
+
+@article{ziegler1992european,
+  title={European Cenozoic rift system},
+  author={Ziegler, Peter A},
+  journal={Tectonophysics},
+  volume={208},
+  number={1-3},
+  pages={91--111},
+  year={1992},
+  publisher={Elsevier}
+}
+
+@article{goes1999lower,
+  title={A lower mantle source for central European volcanism},
+  author={Goes, Saskia and Spakman, Wim and Bijwaard, Harmen},
+  journal={Science},
+  volume={286},
+  number={5446},
+  pages={1928--1931},
+  year={1999},
+  publisher={American Association for the Advancement of Science}
+}
+
+@article{wortel2000subduction,
+  title={Subduction and slab detachment in the Mediterranean-Carpathian region},
+  author={Wortel, MJR and Spakman, Wim},
+  journal={Science},
+  volume={290},
+  number={5498},
+  pages={1910--1917},
+  year={2000},
+  publisher={American Association for the Advancement of Science}
+}
+
+@article{dewey1989kinematics,
+  title={Kinematics of the western Mediterranean},
+  author={Dewey, JF and Helman, ML and Knott, SD and Turco, E and Hutton, DHW},
+  journal={Geological Society, London, Special Publications},
+  volume={45},
+  number={1},
+  pages={265--283},
+  year={1989},
+  publisher={Geological Society of London}
+}
+
+@article{yin2000geologic,
+  title={Geologic evolution of the Himalayan-Tibetan orogen},
+  author={Yin, An and Harrison, T Mark},
+  journal={Annual Review of Earth and Planetary Sciences},
+  volume={28},
+  number={1},
+  pages={211--280},
+  year={2000},
+  publisher={Annual Reviews 4139 El Camino Way, PO Box 10139, Palo Alto, CA 94303-0139, USA}
+}
+
+@article{Chang14,
+     AUTHOR = {S. J. Chang and A. M. G. Ferreira and J. Ritsema and H. J. Van Heijst and J. H. Woodhouse},
+     TITLE = {{Global radially anisotropic mantle structure from multiple datasets: A review, current challenges, and outlook}},
+     JOURNAL = {Tectonophysics},
+     PAGES = {1-19},
+     VOLUME = {617},
+     YEAR = {2014}
+}
+
+@ARTICLE{Ferreira10,
+  author = {A. M. G. Ferreira and J. H. Woodhouse and K. Visser and J. Trampert},
+  title = {{On the robustness of global radially anisotropic surface wave tomography}},
+  journal = {\jgr},
+  year = {2010},
+  volume = {115(B4)},
+  pages = {1-16}
+}
+
+@ARTICLE{BozdagTrampert2008,
+  author = {E. Bozda\u{g} and J. Trampert},
+  title = {On crustal corrections in surface wave tomography},
+  journal = {\gji},
+  pages = {1066-1082},
+  year = {2008},
+  note = {doi: 10.1111/j.1365-246X.2007.03690.x}
+}
+
+@ARTICLE{PaLeRo10,
+  author = {M. P. Panning and V. Leki\'c and B. Romanowicz},
+  title = {Importance of crustal corrections in the development of a new global model of radial anisotropy},
+  journal = {\jgr},
+  year = {2010},
+  volume = {115},
+  pages = {B12325},
+  notes = {doi:10.1029/2010JB007520}
+}
+
+@ARTICLE{Nolet19,
+  author = {G. Nolet and Y. Hello and Van der Lee, S.,  and S. Bonnieux and M. C. Ruiz and N. A. Pazmino and A. Deschamps and M. M. Regnier and Y. Font and Y. J. Chen and F. J. Simons},
+  title = {Imaging the {G}al\'{a}pagos mantle plume with an unconventional application of floating seismometers},
+  journal = {Scientific Reports},
+  year = {2019},
+  volume = {9},
+  pages = {1326},
+  notes = {doi:10.1038/s41598-018-36835-w}
+}
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ASDF chapter
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Peter2011,
+  author = {Peter, Daniel and Komatitsch, Dimitri and Luo, Yang and Martin, Roland and {Le Goff}, Nicolas and Casarotti, Emanuele and {Le Loher}, Pieyre and Magnoni, Federica and Liu, Qinya and Blitz, C\'{e}line and Nissen-Meyer, Tarje and Basini, Piero and Tromp, Jeroen},
+  doi = {10.1111/j.1365-246X.2011.05044.x},
+  journal = {Geophysical Journal International},
+  month = aug,
+  number = {2},
+  pages = {721--739},
+  title = {{Forward and adjoint simulations of seismic wave propagation on fully unstructured hexahedral meshes}},
+  url = {http://gji.oxfordjournals.org/cgi/doi/10.1111/j.1365-246X.2011.05044.x},
+  volume = {186},
+  year = {2011}
+}
+
+%@article{Komatitsch2002a,
+	author={D. Komatitsch and J. Tromp},
+	year=2002,
+	title={Spectral-element simulations of global seismic wave propagation -- {I}. {V}alidation},
+	journal=gji,
+	volume=149,
+	pages={390--412}
+}
+
+%@article{Komatitsch2002b,
+	author={D. Komatitsch and J. Tromp},
+	year=2002,
+	title={Spectral-element simulations of global seismic wave propagation-{II}. {T}hree-dimensional models, oceans, rotation and self-gravitation},
+	journal=gji,
+	volume=150,
+	pages={308--318}
+}
+
+
+%@article{Tromp2010,
+	author={J. Tromp and D. Komatitsch and V. Hj\"orleifsd\'ottir and Q. Liu and H. Zhu and D. Peter and E. Bozda\u{g} and D. McRitchie and P. Friberg and C. Trabant and A. Hutko},
+	year=2010,
+	title={Near real-time simulations of global {CMT} earthquakes},
+    doi={10.1111/j.1365-246X.2010.04734.x},
+	journal=gji,
+	volume=183,
+	pages={381-389},
+}
+
+@article{Megies2011,
+    author = {Megies, Tobias and Beyreuther, Moritz and Barsch, Robert and Krischer, Lion and Wassermann, Joachim},
+    journal = {Annals Of Geophysics},
+    number = {1},
+    pages = {47--58},
+    title = {{ObsPy -- What can it do for data centers and observatories?}},
+    doi = {10.4401/ag-4838},
+    volume = {54},
+    year = {2011}
+}
+
+
+@article{Krischer2015,
+    author = {Krischer, Lion and Megies, Tobias and Barsch, Robert and Beyreuther, Moritz and Lecocq, Thomas and Caudron, Corentin and Wassermann, Joachim},
+    doi = {10.1088/1749-4699/8/1/014003},
+    journal = {Computational Science \& Discovery},
+    number = {1},
+    pages = {14003-14020},
+    publisher = {IOP Publishing},
+    title = {{ObsPy: a bridge for seismology into the scientific Python ecosystem}},
+    volume = {8},
+    year = {2015}
+}
+
+
+@misc{quakeml_orfeus_newsletter,
+   author = {Schorlemmer, Danijel and Wyss, Adrian and Maraini, Silvio and Wiemer, Stefan and Baer, Manfred},
+   title = {{Orfeus Newsletter 6(2): QuakeML - An XML schema for seismology}},
+   year = {2004},
+   note = {accessed 7-October-2015, \url{http://www.orfeus-eu.org/organization/Organization/Newsletter/vol6no2/quakeml.shtml}}
+}
+
+
+@misc{xml_spec,
+   author = {Bray, Tim and Paoli, Jean and Sperberg-McQueen, C.M. and Maler, Eve and Yergeau, François},
+   title = {{Extensible Markup Language (XML) 1.0 (Fifth Edition)}},
+   year = {2008},
+   note = {accessed 7-October-2015, \url{https://www.w3.org/TR/2008/REC-xml-20081126/}}
+}
+
+
+@article{Schorlemmer2011,
+    author = {Schorlemmer, Danijel and Euchner, Fabian and K\"{a}stli, Philipp and Saul, Joachim and Group, QuakeML Working},
+    doi = {10.4401/ag-4874},
+    journal = {Annals of Geophysics},
+    number = {1},
+    pages = {59--65},
+    title = {{QuakeML: Status of the XML-based seismological data exchange format}},
+    volume = {54},
+    year = {2011}
+}
+
+
+@misc{hdf5,
+    author = {{The HDF Group}},
+    title = "{Hierarchical Data Format, version 5}",
+    year = {1997--2015},
+    note = {\url{https://www.hdfgroup.org/HDF5/}}
+}
+
+@article{netcdf,
+    author={Rew, R. and Davis, G.},
+    journal={Computer Graphics and Applications, IEEE},
+    title={{NetCDF: an interface for scientific data access}},
+    year={1990},
+    volume={10},
+    number={4},
+    pages={76-82},
+    doi={10.1109/38.56302},
+    ISSN={0272-1716},
+    month={July},}
+
+
+@techreport{cern_report,
+    author = {Ian Bird and Predrag Buncic and Federico Carminati and Marco Cattaneo and Peter Clarke and Ian Fisk and Maria Girone and John Harvey and Borut Kersevan and Pere Mato and Richard Mount and Bernd Panzer-Steindel},
+    title = {{Update of the Computing Models of the WLCG and the LHC Experiments}},
+    institution={CERN, Geneva},
+    number={CERN-LHCC-2014-014 / LCG-TDR-002},
+    year={2014}
+}
+
+
+@article{big_data_biology,
+    author = {Stephens, Zachary D. AND Lee, Skylar Y. AND Faghri, Faraz AND Campbell, Roy H. AND Zhai, Chengxiang AND Efron, Miles J. AND Iyer, Ravishankar AND Schatz, Michael C. AND Sinha, Saurabh AND Robinson, Gene E.},
+    journal = {PLoS Biol},
+    publisher = {Public Library of Science},
+    title = {Big Data: Astronomical or Genomical?},
+    year = {2015},
+    month = {07},
+    volume = {13},
+    pages = {e1002195},
+    number = {7},
+    doi = {10.1371/journal.pbio.1002195}
+}
+
+
+@misc{MPI,
+    author = {{MPI Forum}},
+    title = {{Message Passing Interface (MPI) Forum Home Page}},
+    year = {2009},
+    month={12},
+    howpublished = {{\tt http://www.mpi-forum.org/}}
+}
+
+
+@manual{SEEDManual,
+    author = {\mbox{Incorporated Research Institutions for Seismology (IRIS)}},
+    title = {{SEED Reference Manual - Standard for the Exchange of Earthquake Data}},
+    note = {\url{https://www.fdsn.org/seed_manual/SEEDManual_V2.4.pdf}},
+    year = {2012},
+    month = {August}
+}
+
+@manual{SEGY,
+    author = {{SEG Technical Standards Committee}},
+    title = {SEG Y rev 1 Data Exchange format},
+    organization = {Society of Exploration Geophysicists},
+    year = {2002}
+}
+
+@manual{PH5,
+    author = {{IRIS/PASSCAL Data Group}},
+    title = {Introduction to Active Source Data Archiving Utilizing PH5 as the Archive Format},
+    organization = {IRIS/PASSCAL Instrument Center},
+    year = {2012},
+    note = {Version: 2012336}
+}
+
+@manual{NMSOP-2,
+    title={{New Manual of Seismological Observatory Practice (NMSOP-2)}},
+    author={Bormann, P.},
+    year={2012},
+    doi={10.2312/GFZ.NMSOP-2},
+    note={\url{http://nmsop.gfz-potsdam.de/}},
+    organization={IASPEI},
+    address={GFZ German Research Centre for Geosciences, Potsdam}
+}
+
+@book{Havskov,
+ author = {Havskov, J},
+ title = {Routine data processing in earthquake seismology with sample data, exercises and software},
+ publisher = {Springer},
+ note = {{ISBN: 978-90-481-8696-9}},
+ year = {2010},
+ address = {Dordrecht New York}
+ }
+
+@misc{hadoop,
+  author = {{Apache Software Foundation}},
+  title = {Hadoop},
+  note = {\url{https://hadoop.apache.org}},
+  year = 2016
+}
+
+@misc{spark,
+  author = {{Apache Software Foundation}},
+  title = {Spark},
+  note = {\url{https://spark.apache.org}},
+  year = 2016
+}
+
+@article{McNamara2004,
+    author = {McNamara, Daniel E and Buland, Raymond P},
+    doi = {10.1785/012003001},
+    journal = {Bulletin of the Seismological Society of America},
+    number = {4},
+    pages = {1517--1527},
+    title = {{Ambient Noise Levels in the Continental United States}},
+    volume = {94},
+    year = {2004}
+}
+
+
+    author = {Liu, Qinya and Gu, Y.J.},
+    doi = {10.1016/j.tecto.2012.07.006},
+    issn = {00401951},
+    journal = {Tectonophysics},
+    month = {sep},
+    pages = {31--66},
+    title = {{Seismic imaging: From classical to adjoint tomography}},
+    volume = {566-567},
+    year = {2012}
+}
+
+
+@article{Fichtner2006,
+    author = {Fichtner, Andreas and Bunge, Hans-Peter and Igel, Heiner},
+    doi = {10.1016/j.pepi.2006.03.016},
+    journal = {Physics of the Earth and Planetary Interiors},
+    month = {aug},
+    number = {1-2},
+    pages = {86--104},
+    title = {{The adjoint method in seismology I. -- Theory}},
+    volume = {157},
+    year = {2006}
+}
+
+@article{Tape2010,
+    author = {Tape, Carl and Liu, Qinya and Maggi, Alessia and Tromp, Jeroen},
+    doi = {10.1111/j.1365-246X.2009.04429.x},
+    journal = {Geophysical Journal International},
+    month = {jan},
+    number = {1},
+    pages = {433--462},
+    title = {{Seismic tomography of the southern California crust based on spectral-element and adjoint methods}},
+    volume = {180},
+    year = {2010}
+}
+
+
+@article{Colli2013,
+    author = {Colli, Lorenzo and Fichtner, Andreas and Bunge, Hans-Peter},
+    doi = {10.1016/j.tecto.2013.06.015},
+    journal = {Tectonophysics},
+    month = {sep},
+    pages = {26--40},
+    publisher = {Elsevier B.V.},
+    title = {{Full waveform tomography of the upper mantle in the South Atlantic region: Imaging a westward fluxing shallow asthenosphere?}},
+    volume = {604},
+    year = {2013}
+}
+
+
+@book{HelffrichWookeyBastow201311,
+    title={The Seismic Analysis Code: A Primer and User's Guide},
+    author={George Helffrich and James Wookey and Ian Bastow},
+    publisher={Cambridge University Press},
+    year={2013},
+    month={11},
+    edition={1},
+    totalpages={183}
+}
+
+@article{Thompson2000,
+    author = {Thompson, D. A. and Best, J. S.},
+    doi = {10.1147/rd.443.0311},
+    journal = {IBM Journal of Research and Development},
+    number = {3},
+    pages = {311--322},
+    title = {{The future of magnetic data storage techology}},
+    volume = {44},
+    year = {2000}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% weighting paper
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{Shepard1968,
+ author = {Shepard, Donald},
+ title = {A Two-dimensional Interpolation Function for Irregularly-spaced Data},
+ booktitle = {Proceedings of the 1968 23rd ACM National Conference},
+ series = {ACM '68},
+ year = {1968},
+ pages = {517--524},
+ numpages = {8},
+ doi = {10.1145/800186.810616},
+ acmid = {810616},
+ publisher = {ACM},
+ address = {New York, NY, USA}
+}
+
+@article{Li1995,
+  title={Comparison of global waveform inversions with and without considering cross-branch modal coupling},
+  author={Li, Xiang Dong and Romanowicz, Barbara},
+  journal=gjras,
+  volume={121},
+  number={3},
+  pages={695-709},
+  year={1995}
+}
+
+@article{Antolik2003,
+  title={{J362D28: A new joint model of compressional and shear velocity in the Earth's mantle}},
+  author={Antolik, Michael and Gu, Yu J. and Ekstr\"om, G\"oran and Dziewo\'{n}<84>ski, Adam M.},
+  journal=gjras,
+  volume={153},
+  number={2},
+  pages={443-466},
+  year={2003}
+}
+
+@article{Simmons2010,
+  title={{GyPSuM: A joint tomographic model of mantle density and seismic wave speeds}},
+  author={Simmons, Nathan A. and Forte, Alessandro M. and Boschi, Lapo and Grand, Stephen P.},
+  journal=jgr,
+  volume={115},
+  number={B12},
+  pages={-},
+  year={2010}
+}
+
+@article {Masters1996,
+  author = {Guy Masters and Stuart Johnson and Gabi Laske and Harold Bolton and J. H. Davies},
+  title = {A shear-velocity model of the mantle},
+  volume = {354},
+  number = {1711},
+  pages = {1385--1411},
+  year = {1996},
+  doi = {10.1098/rsta.1996.0054},
+  publisher = {The Royal Society},
+  issn = {1364-503X},
+  journal = {Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences}
+}
+
+@article{Moulik2016,
+  author = {Moulik, P. and Ekstr\"{o}m, G.},
+  title = {The relationships between large-scale variations in shear velocity, density, and compressional velocity in the {E}arth's mantle},
+  journal = jgr,
+  year = {2016},
+  volume = {121},
+  number = {4},
+  pages = {2737-2771},
+  keywords = {thermochemical inferences on mantle structure, global seismic tomography},
+  doi = {10.1002/2015JB012679}
+}
+
+@article{Boschi1999,
+author = {Boschi, Lapo and Dziewo\'{n}ski, Adam M.},
+title = {{High- and low-resolution images of the Earth's mantle: Implications of different approaches to tomographic modeling}},
+journal = jgr,
+volume = {104},
+number = {B11},
+year={1999},
+pages = {25567-25594},
+doi = {10.1029/1999JB900166}
+}
+
+@article{Du1999,
+  title={Centroidal Voronoi tessellations: Applications and algorithms},
+  author={Du, Qiang and Faber, Vance and Gunzburger, Max},
+  journal={SIAM review},
+  volume={41},
+  number={4},
+  pages={637--676},
+  year={1999},
+  publisher={SIAM}
+}
+
+@article{Lei2018,
+    author = {Lei, Wenjie and Ruan, Youyi and Bozda\u{g}, Ebru and Peter, Daniel and Lefebvre, Matthieu and Komatitsch, Dimitri and Tromp, Jeroen and Hill, Judith and Podhorszki, Norbert and Pugmire, David},
+    title = {{Global adjoint tomography -- Model GLAD-M25}},
+    journal = gji,
+    volume = {submitted},
+    number = {},
+    pages = {},
+    year = {2019}
+}
+
+
+@article{Trampert2003,
+  author = {Trampert, Jeannot and Woodhouse, John H.},
+  title = {Global anisotropic phase velocity maps for fundamental mode surface waves between 40 and 150 s},
+  journal = gji,
+  volume = {154},
+  number = {1},
+  year = {2003},
+  pages = {154-165},
+  keywords = {azimuthal anisotropy, inverse theory, phase velocity, surface waves, tomography},
+  doi = {10.1046/j.1365-246X.2003.01952.x}
+}
+
+@article{Modrak2016,
+  author = {Modrak, Ryan and Tromp, Jeroen},
+  title = {Seismic waveform inversion best practices: regional, global and exploration test cases},
+  journal = gji,
+  volume = {206},
+  number = {3},
+  pages = {1864-1889},
+  year = {2016},
+  doi = {10.1093/gji/ggw202}
+}
+
+@article{Yuan2016,
+author = {Yuan, Yanhua O. and Simons, Frederik J. and Tromp, Jeroen},
+title = {Double-difference adjoint seismic tomography},
+journal = gji,
+volume = {206},
+number = {3},
+pages = {1599-1618},
+year = {2016},
+doi = {10.1093/gji/ggw233}
+}
+
+@article{Modrak2018,
+title = {SeisFlows -- Flexible waveform inversion software},
+journal = {Computers \& Geosciences},
+volume = {115},
+pages = {88 - 95},
+year = {2018},
+issn = {0098-3004},
+doi = {10.1016/j.cageo.2018.02.004},
+author = {Ryan T. Modrak and Dmitry Borisov and Matthieu Lefebvre and Jeroen Tromp}
+}
+
+@article{Orsvuran2019,
+author = {\"{O}rsvuran,Ridvan and Bozda\u{g}, Ebru and Modrak, Ryan and Lei, Wenjie and Ruan, Youyi},
+title = {Towards Double-Difference Global Adjoint Tomography},
+journal = gji,
+note = {submitted},
+year = {2019}
+}
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Workflow
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Book{Dante1320,
+  title  = {Divine Comedy (Italian: Divina Commedia)},
+  year   = {1320},
+  author = {Dante},
+}
+
+@Book{Vernes1864,
+  title     = {The Journey to the Center of the Earth (French: Voyage au centre de la Terre)},
+  publisher = {Pierre-Jules Hetzel},
+  year      = {1864},
+  author    = {Jules Vernes},
+}
+
+@Article{Fichtner2006,
+  author   = {A. Fichtner and H.-P. Bunge and H. Igel},
+  title    = {The adjoint method in seismology: I. Theory},
+  journal  = {Physics of the Earth and Planetary Interiors},
+  year     = {2006},
+  volume   = {157},
+  number   = {1–2},
+  pages    = {86 - 104},
+  doi      = {http://dx.doi.org/10.1016/j.pepi.2006.03.016},
+  issn     = {0031-9201},
+  keywords = {Inversion, Fréchet derivative, Waveform analysis, Sensitivity }, 
+  url      = {http://www.sciencedirect.com/science/article/pii/S0031920106001051},
+}
+
+@article{Zhu2009,
+author = {Zhu, Hejun and Luo, Yang and Nissen-Meyer, Tarje and Morency, Christina and Tromp, Jeroen}, 
+doi = {10.1190/1.3261747},
+issn = {00168033},
+journal = {Geophysics}, 
+number = {6},
+pages = {WCA167},
+publisher = {SOC EXPLORATION GEOPHYSICISTS},
+title = {{Elastic imaging and time-lapse migration based on adjoint methods}},
+url = {http://link.aip.org/link/GPYSA7/v74/i6/pWCA167/s1\&Agg=doi},
+volume = {74},
+year = {2009}
+}
+
+@article{Luo2013,
+author = {Luo, Y and Tromp, J and Denel, B and Calandra, H},
+doi = {10.1190/geo2012-0462.1},
+journal = {GEOPHYSICS},
+number = {4},
+pages = {S193--S202},
+title = {{3D coupled acoustic-elastic migration with topography and bathymetry based on spectral-element and adjoint methods}},
+url = {http://library.seg.org/doi/abs/10.1190/geo2012-0462.1},
+volume = {78},
+year = {2013}
+}
+
+@inproceedings{Rietmann2012,
+address = {Los Alamitos, CA, USA},
+author = {Rietmann, Max and Messmer, Peter and Nissen-Meyer, Tarje and Peter, Daniel and Basini, Piero and Komatitsch, Dimitri and Schenk, Olaf and Tromp, Jeroen and Boschi, Lapo and Giardini, Domenico},
+booktitle = {Proceedings of the International Conference on High Performance Computing, Networking, Storage and Analysis},
+isbn = {978-1-4673-0804-5},
+pages = {38:1----38:11},
+publisher = {IEEE Computer Society Press},
+series = {SC '12},
+title = {{Forward and adjoint simulations of seismic wave propagation on emerging large-scale GPU architectures}},
+url = {http://dl.acm.org/citation.cfm?id=2388996.2389048},
+year = {2012}
+}
+
+@article{Nocedal1980,
+author = {Nocedal, J},
+doi = {10.2307/2006193},
+issn = {00255718},
+journal = {Mathematics of Computation},
+number = {151},
+pages = {773--782},
+publisher = {American Mathematical Society},
+title = {{Updating Quasi-Newton Matrices with Limited Storage}},
+url = {http://www.jstor.org/stable/2006193?origin=crossref},
+volume = {35},
+year = {1980}
+}
+
+@Article{Tsuboi28022016,
+  author   = {Tsuboi, Seiji and Ando, Kazuto and Miyoshi, Takayuki and Peter, Daniel and Komatitsch, Dimitri and Tromp, Jeroen},
+  title    = {A 1.8 trillion degrees-of-freedom, 1.24 petaflops global seismic wave simulation on the K computer},
+  journal  = {International Journal of High Performance Computing Applications},
+  year     = {2016},
+  doi      = {10.1177/1094342016632596},
+  eprint   = {http://hpc.sagepub.com/content/early/2016/02/26/1094342016632596.full.pdf+html},
+  url      = {http://hpc.sagepub.com/content/early/2016/02/26/1094342016632596.abstract},
+}
+
+@Article{KoMiEr09,
+  author  = {Dimitri Komatitsch and David Mich\'ea and Gordon Erlebacher},
+  title   = {{Porting a high-order finite-element earthquake modeling application to NVIDIA graphics cards using CUDA}},
+  journal = {Journal of Parallel and Distributed Computing},
+  year    = {2009}, 
+  volume  = {69},
+  number  = {5},
+  pages   = {451-460},
+  doi     = {10.1016/j.jpdc.2009.01.006},
+}
+
+@Article{Komatitsch20107692,
+  author   = {Dimitri Komatitsch and Gordon Erlebacher and Dominik Göddeke and David Michéa},
+  title    = {{High-order finite-element seismic wave propagation modeling with MPI on a large GPU cluster}},
+  journal  = {Journal of Computational Physics},
+  year     = {2010},
+  volume   = {229},
+  number   = {20},
+  pages    = {7692 - 7714},
+  doi      = {http://dx.doi.org/10.1016/j.jcp.2010.06.024},
+  issn     = {0021-9991},
+  keywords = { GPU computing, Finite elements, Spectral elements, Seismic modeling, CUDA, MPI, Speedup, Cluster },
+  url      = {http://www.sciencedirect.com/science/article/pii/S0021999110003396},
+}
+
+@inproceedings{Rietmann2012,
+  address = {Los Alamitos, CA, USA},
+  author = {Rietmann, Max and Messmer, Peter and Nissen-Meyer, Tarje and Peter, Daniel and Basini, Piero and Komatitsch, Dimitri and Schenk, Olaf and Tromp, Jeroen and Boschi, Lapo and Giardini, Domenico},
+  booktitle = {Proceedings of the International Conference on High Performance Computing, Networking, Storage and Analysis},
+  isbn = {978-1-4673-0804-5},
+  pages = {38:1----38:11},
+  publisher = {IEEE Computer Society Press},
+  series = {SC '12},
+  title = {{Forward and adjoint simulations of seismic wave propagation on emerging large-scale GPU architectures}},
+  url = {http://dl.acm.org/citation.cfm?id=2388996.2389048},
+  year = {2012}
+}
+
+@InProceedings{Cronsioe2013,
+  author    = {J. Cronsioe and B. Videau and V. Marangozova-Martin},
+  title     = {BOAST: Bringing Optimization through Automatic Source-to-Source Transformations},
+  booktitle = {Embedded Multicore Socs (MCSoC), 2013 IEEE 7th International Symposium on},
+  year      = {2013},
+  pages     = {129-134},
+  month     = {Sept},
+  doi       = {10.1109/MCSoC.2013.12},
+  keywords  = {multiprocessing systems;parallel processing;power aware computing;BOAST;BigDFT scientific application;Tibidado high-performance machine;automatic source-to-source transformations;convolution operators;loop structure optimization;loop unrolling;low-energy-consumption machine;multicore platform;performance configuration;performance gain;Benchmark testing;Computer architecture;Convolution;Hardware;Optimization;Program processors;Radiation detectors;Auto-tuning;High performance computing;Optimization;Source to Source transformations},
+}
+
+@InProceedings{Abbasi2009,
+  author    = {Abbasi, H and Lofstead, J and Zheng, Fang Zheng Fang and Schwan, K and Wolf, M and Klasky, S},
+  title     = {{Extending I/O through high performance data services}},
+  booktitle = {2009 IEEE International Conference on Cluster Computing and Workshops},
+  year      = {2009letterpaper},
+  pages     = {1--10},
+  publisher = {Ieee},
+  doi       = {10.1109/CLUSTR.2009.5289167},
+  isbn      = {9781424450114},
+  issn      = {15525244},
+  url       = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=5289167},
+}
+
+@techreport{Vilayannur2008,
+author = {Vilayannur, M. and Lang, S. and Ross, R. and Klundt, R. and Ward, L.},
+institution = {Argonne National Laboratory},
+title = {{Extending the POSIX I/O Interface: A Parallel File System Perspective}},
+url = {http://www.mcs.anl.gov/uploads/cels/papers/TM-302-FINAL.pdf},
+year = {2008}
+}
+
+@article{Schikuta2001,
+author = {Schikuta, Erich and Vanek, Helmut},
+doi = {10.1177/109434200101500208},
+issn = {1094-3420},
+journal = {International Journal of High Performance Computing Applications},
+month = may,
+number = {2},
+pages = {162--168},
+title = {{Parallel I/O}},
+url = {http://hpc.sagepub.com/cgi/content/long/15/2/162},
+volume = {15},
+year = {2001}
+}
+
+@Article{Liu2013,
+  author  = {Liu, Qing and Logan, Jeremy and Tian, Yuan and Abbasi, Hasan and Podhorszki, Norbert and Choi, Jong Youl and Klasky, Scott and Tchoua, Roselyne and Lofstead, Jay and Oldfield, Ron and Parashar, Manish and Samatova, Nagiza and Schwan, Karsten and Shoshani, Arie and Wolf, Matthew and Wu, Kesheng and Yu, Weikuan},
+  title   = {{Hello ADIOS: the challenges and lessons of developing leadership class I/O frameworks}},
+  journal = {Concurrency and Computation: Practice and Experience},
+  year    = {2013},
+  month   = aug,
+  doi     = {10.1002/cpe.3125},
+  issn    = {15320626},
+  url     = {http://doi.wiley.com/10.1002/cpe.3125},
+}
+
+@article{Nieplocha1998,
+author = {Nieplocha, J. and Foster, I. and Kendall, R. A.},
+doi = {10.1177/109434209801200304},
+issn = {1094-3420},
+journal = {International Journal of High Performance Computing Applications},
+month = sep,
+number = {3},
+pages = {345--363},
+title = {{ChemIo: High Performance Parallel I/o for Computational Chemistry Applications}},
+url = {http://hpc.sagepub.com/cgi/content/long/12/3/345}, 
+volume = {12},
+year = {1998}
+}
+
+@InProceedings{Toledo1996,
+  author    = {Toledo, Sivan and Gustavson, Fred G},
+  title     = {{The Design and Implementation of SOLAR, a Portable Library for Scalable Out-of-Core Linear Algebra Computations}},
+  booktitle = {Workshop on I/O in Parallel and Distributed Systems},
+  year      = {1996},
+  pages     = {28--40},
+  publisher = {ACM},
+}
+
+@article{Thakur1996,
+author = {Thakur, R. and Gropp, W. and Lusk, E.},
+doi = {10.1109/FMPC.1996.558080},
+isbn = {0-8186-7551-9},
+issn = {1088-4955},
+journal = {Proceedings of 6th Symposium on the Frontiers of Massively Parallel Computation (Frontiers '96)},
+title = {{An abstract-device interface for implementing portable parallel-I/O interfaces}},
+year = {1996}
+}
+
+@article{Thakur1999,
+author = {Thakur, R. and Gropp, W. and Lusk, E.},
+doi = {10.1109/FMPC.1999.750599},
+isbn = {0-7695-0087-0},
+journal = {Proceedings. Frontiers '99. Seventh Symposium on the Frontiers of Massively Parallel Computation},
+title = {{Data sieving and collective I/O in ROMIO}},
+year = {1999}
+}
+
+@inproceedings{Li2003,
+address = {New York, New York, USA},
+author = {Li, Jianwei and Zingale, Michael and Liao, Wei-keng and Choudhary, Alok and Ross, Robert and Thakur, Rajeev and Gropp, William and Latham, Rob and Siegel, Andrew and Gallagher, Brad},
+booktitle = {Proceedings of the 2003 ACM/IEEE conference on Supercomputing - SC '03},
+doi = {10.1145/1048935.1050189},
+isbn = {1581136951},
+month = nov,
+pages = {39},
+publisher = {ACM Press},
+title = {{Parallel netCDF: A High-Performance Scientific I/O Interface}},
+url = {http://dl.acm.org/citation.cfm?id=1048935.1050189},
+year = {2003}
+}
+
+@inproceedings{Howison2010,
+author = {Howison, Mark and Koziol, Quincey and Knaak, David and Mainzer, John and Shalf, John},
+booktitle = {Proceedings of Workshop on Interfaces and Abstractions for Scientific Data},
+title = {{Tuning HDF5 for Lustre File Systems}},
+url = {http://escholarship.org/uc/item/46r9d86r.pdf},
+year = {2010}
+}
+
+@article{Ludascher2009,
+author = {Ludascher, Bertram and Weske, Mathias and McPhillips, Timothy and Bowers, Shawn},
+doi = {10.1007/978-3-642-03848-8},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/2009{\_}Ludascher{\_}ScientificBusinessWf.pdf:pdf},
+isbn = {978-3-642-03847-1},
+journal = {Business Process Managment},
+pages = {31--47},
+title = {{Scientific Workflows: Business as Usual?}},
+url = {http://www.springerlink.com/index/10.1007/978-3-642-03848-8},
+volume = {5701},
+year = {2009}
+}
+
+@article{Yu2005,
+author = {Yu, Jia and Buyya, Rajkumar},
+doi = {10.1145/1084805.1084814},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/2005{\_}Buyya{\_}Wf{\_}taxonomy.pdf:pdf},
+isbn = {1084805108},
+issn = {01635808},
+journal = {ACM SIGMOD Record},
+keywords = {Grid,Scientific workflows,Taxonomy},
+pages = {44--49},
+title = {{A taxonomy of scientific workflow systems for grid computing}},
+url = {http://dl.acm.org/citation.cfm?doid=1084805.1084814},
+year = {2005}
+}
+
+@article{Hemert2008,
+annote = {General paper.Also talk about business workflows.},
+author = {Hemert, A.B.a.J.v.},
+doi = {10.1145/2213836.2213899},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/2007{\_}Barker{\_}WfSurvey.pdf:pdf},
+isbn = {3-540-68105-1, 978-3-540-68105-2},
+journal = {Parallel Processing and Applied Mathematics},
+keywords = {scientific workflow},
+pages = {746--753},
+title = {{Scientific Workflow: A Survey and Research Directions}},
+year = {2008}
+}
+
+@article{Curcin2008,
+author = {Curcin, V and Ghanem, M},
+doi = {10.1109/CIBEC.2008.4786077},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/2008{\_}Curcin{\_}oneSize.pdf:pdf},
+isbn = {978-1-4244-2694-2},
+issn = {1424426944},
+journal = {2008 Cairo Int. Biomed. Eng. Conf.},
+keywords = {Bioinformatics,Business,Control systems,Data analysis,Data mining,Distributed computing,EBI Web services,Educational institutions,Grid computing,Testing,Web services,bioinformatics,control flow,data flow,distributed databases,remote computational resources,remote distributed scientific data sets,scientific workflow systems,workflow systems},
+pages = {1--9},
+title = {{Scientific workflow systems - can one size fit all?}},
+url = {http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=4786077},
+year = {2008}
+}
+
+@Article{condor-practice,
+  author  = {Douglas Thain and Todd Tannenbaum and Miron Livny},
+  title   = {Distributed computing in practice: the Condor experience.},
+  journal = {Concurrency - Practice and Experience},
+  year    = {2005},
+  volume  = {17},
+  number  = {2-4},
+  pages   = {323-356},
+}
+
+@InProceedings{Altintas2004,
+  author    = {Altintas, Ilkay and Berkley, Chad and Jaeger, Efrat and Jones, Matthew and Ludascher, Bertram and Mock, Steve},
+  title     = {Kepler: An Extensible System for Design and Execution of Scientific Workflows},
+  booktitle = {Proceedings of the 16th International Conference on Scientific and Statistical Database Management},
+  year      = {2004},
+  series    = {SSDBM '04},
+  pages     = {423--},
+  address   = {Washington, DC, USA},
+  publisher = {IEEE Computer Society},
+  acmid     = {1007097},
+  doi       = {10.1109/SSDBM.2004.44},
+  isbn      = {0-7695-2146-0},
+  url       = {http://dx.doi.org/10.1109/SSDBM.2004.44},
+}
+
+@Article{Wolstencroft2013,
+  author    = {Wolstencroft, Katherine and Haines, Robert and Fellows, Donal and Williams, Alan and Withers, David and Owen, Stuart and Soiland-Reyes, Stian and Dunlop, Ian and Nenadic, Aleksandra and Fisher, Paul and Bhagat, Jiten and Belhajjame, Khalid and Bacall, Finn and Hardisty, Alex and Nieva de la Hidalga, Abraham and Balcazar Vargas, Maria P. and Sufi, Shoaib and Goble, Carole},
+  title     = {{The Taverna workflow suite: designing and executing workflows of Web Services on the desktop, web or in the cloud}},
+  journal   = {Nucleic Acids Research},
+  year      = {2013},
+  volume    = {41},
+  number    = {Web Server issue},
+  pages     = {gkt328--W561},
+  month     = may,
+  day       = {2},
+  doi       = {10.1093/nar/gkt328},
+  issn      = {1362-4962},
+  keywords  = {bioinformatics, informatics, myexperiment, taverna, workflow},
+  pmcid     = {PMC3692062},
+  pmid      = {23640334},
+  posted-at = {2013-05-06 09:27:44},
+  publisher = {Oxford University Press},
+  url       = {http://dx.doi.org/10.1093/nar/gkt328},
+}
+
+@InBook{Taylor2007,
+  pages     = {320--339},
+  title     = {The Triana Workflow Environment: Architecture and Applications},
+  publisher = {Springer London},
+  year      = {2007},
+  author    = {Taylor, Ian and Shields, Matthew and Wang, Ian and Harrison, Andrew},
+  editor    = {Taylor, Ian J. and Deelman, Ewa and Gannon, Dennis B. and Shields, Matthew},
+  address   = {London},
+  booktitle = {Workflows for e-Science: Scientific Workflows for Grids},
+  doi       = {10.1007/978-1-84628-757-2_20},
+  isbn      = {978-1-84628-757-2},
+  url       = {http://dx.doi.org/10.1007/978-1-84628-757-2_20},
+}
+
+@article{Deelman201517,
+archivePrefix = {arXiv},
+arxivId = {arXiv:1011.1669v3},
+author = {Deelman, Ewa and Vahi, Karan and Juve, Gideon and Rynge, Mats and Callaghan, Scott and Maechling, Philip J. and Mayani, Rajiv and Chen, Weiwei and {Ferreira da Silva}, Rafael and Livny, Miron and Wenger, Kent},
+doi = {http://dx.doi.org/10.1016/j.future.2014.10.008},
+eprint = {arXiv:1011.1669v3},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/2014{\_}Deelman{\_}Pegasus.pdf:pdf},
+isbn = {9788578110796},
+issn = {0167-739X},
+journal = {Future Generation Computer Systems},
+keywords = {Pegasus,Scientific workflows,Workflow management system,icle},
+pages = {17--35},
+pmid = {25246403},
+title = {{Pegasus, a workflow management system for science automation}},
+url = {http://www.sciencedirect.com/science/article/pii/S0167739X14002015},
+volume = {46},
+year = {2015}
+}
+
+@article{Wilde2009,
+author = {Wilde, Michael and Foster, Ian and Iskra, Kamil and Beckman, Pete and Zhang, Zhao and Espinosa, Allan and Hategan, Mihael and Clifford, Ben and Raicu, Ioan},
+doi = {10.1109/MC.2009.365},
+issn = {00189162},
+journal = {Computer},
+number = {11},
+pages = {50--60},
+publisher = {IEEE Computer Society},
+title = {{Parallel Scripting for Applications at the Petascale and Beyond}},
+url = {http://doi.ieeecomputersociety.org/10.1109/MC.2009.365},
+volume = {42},
+year = {2009}
+}
+
+@Misc{Turilli2016,
+  author = {Turilli, Matteo and Santcroos, Mark and Jha, Shantenu},
+  title  = {{A Comprehensive Perspective on Pilot-Jobs}},
+  year   = {2016},
+  annote = {(under review)\url{http://arxiv.org/abs/1508.04180}},
+}
+
+@inproceedings{Fomel2007,
+author = {Fomel, Sergey and Hennenfent, G.},
+booktitle = {2007 IEEE International Conference on Acoustics, Speech and Signal Processing - ICASSP '07},
+doi = {10.1109/ICASSP.2007.367305},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/wf{\_}geophysics/2007{\_}fomel{\_}scons.pdf:pdf},
+pages = {1520--6149},
+title = {{Reproducible Computational Experiments using Scons}},
+year = {2007}
+}
+
+@article{Fomel2013,
+author = {Fomel, Sergey and Sava, Paul and Vlad, Ioan and Liu, Yang and Bashkardin, Vladimir},
+doi = {http://dx.doi.org/10.5334/jors.ag},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/wf{\_}geophysics/2013{\_}fomel{\_}magadascar.pdf:pdf},
+issn = {2049-9647},
+journal = {Journal of Open Research Software},
+keywords = {data analysis,geophysics,python,reproducibility,seismology},
+number = {1},
+pages = {e8},
+title = {{Madagascar: open-source software project for multidimensional data analysis and reproducible computational experiments}},
+url = {http://openresearchsoftware.metajnl.com/article/view/jors.ag/20},
+volume = {1},
+year = {2013}
+}
+
+@article{Graves2011,
+author = {Graves, Robert and Jordan, Thomas H. and Callaghan, Scott and Deelman, Ewa and Field, Edward and Juve, Gideon and Kesselman, Carl and Maechling, Philip and Mehta, Gaurang and Milner, Kevin and Okaya, David and Small, Patrick and Vahi, Karan},
+doi = {10.1007/s00024-010-0161-6}, 
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/wf{\_}geophysics/2011{\_}Graves{\_}Cybershake.pdf:pdf},
+issn = {00334553},
+journal = {Pure and Applied Geophysics},
+keywords = {3D basin response,Physics-based earthquake simulation,rupture directivity,seismic hazard}, 
+number = {3-4},
+pages = {367--381},
+title = {{CyberShake: A Physics-Based Seismic Hazard Model for Southern California}},
+volume = {168}, 
+year = {2011}
+}
+
+@article{Callaghan2010,
+author = {Callaghan, Scott and Deelman, Ewa and Gunter, Dan and Juve, Gideon and Maechling, Philip and Brooks, Christopher and Vahi, Karan and Milner, Kevin and Graves, Robert and Field, Edward and Okaya, David and Jordan, Thomas},
+doi = {10.1016/j.jcss.2009.11.005},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/wf{\_}geophysics/2010{\_}Callaghan{\_}Cybershake.pdf:pdf}, 
+issn = {00220000}, 
+journal = {Journal of Computer and System Sciences},
+keywords = {Distributed applications,Scientific workflows,Workflow scalability},
+number = {6},
+pages = {428--446},
+publisher = {Elsevier Inc.}, 
+title = {{Scaling up workflow-based applications}},
+url = {http://dx.doi.org/10.1016/j.jcss.2009.11.005},
+volume = {76},
+year = {2010}
+}
+
+@article{Luckow2015,
+archivePrefix = {arXiv},
+arxivId = {arXiv:1501.05041v1},
+author = {Luckow, A and Mantha, P and Jha, S},
+eprint = {arXiv:1501.05041v1},
+file = {:Users/ml15/Google Drive/papers/workflow{\_}management/2015-hpdc{\_}draft.pdf:pdf},
+journal = {arXiv preprint arXiv:1501.05041},
+title = {{Pilot-Abstraction: A Valid Abstraction for Data-Intensive Applications on HPC, Hadoop and Cloud Infrastructures?}},
+url = {http://arxiv.org/abs/1501.05041},
+year = {2015}
+}
+
+@Article{Cappello01112009,
+  author   = {Cappello, Franck and Geist, Al and Gropp, Bill and Kale, Laxmikant and Kramer, Bill and Snir, Marc},
+  title    = {Toward Exascale Resilience},
+  journal  = {International Journal of High Performance Computing Applications},
+  year     = {2009},
+  volume   = {23},
+  number   = {4},
+  pages    = {374-388},
+  doi      = {10.1177/1094342009347767},
+  eprint   = {http://hpc.sagepub.com/content/23/4/374.full.pdf+html},
+  url      = {http://hpc.sagepub.com/content/23/4/374.abstract},
+}
+

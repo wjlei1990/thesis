@@ -1,0 +1,409 @@
+@PREAMBLE{
+      "\def \agu{Am.~Geophys.~Un.} "
+    # "\def \aapgb{Am.~Assoc. Petroleum~Geol.~Bull.} "
+    # "\def \acha{Applied Comput. Harmonic Anal.} "
+    # "\def \amsci{Am.~Sci.} "
+    # "\def \angeo{Annals.~Geophy.} "
+    # "\def \apj{Astrophys.~J.} "
+    # "\def \areps{Annu.~Rev. Earth Planet.~Sci.} "
+    # "\def \aa{Astron.~Astophys.} "
+    # "\def \ag{Astron.~Geophys.} "
+    # "\def \aj{Astrophys.~J.} "
+    # "\def \araa{Annu.~Rev. Astron.~Astrophys.} "
+    # "\def \bssa{Bull.~Seismol.~Soc.~Am.} "
+    # "\def \beri{Bull.~Earthq. Re.~Inst.} "
+    # "\def \cse{Comp.~Sci.~Eng.} "
+    # "\def \dao{Dynamics~Atmos.~Oceans} "
+    # "\def \eps{Earth~Planets~Space} "
+    # "\def \esr{Earth-Sci.~Rev.} "
+    # "\def \epsl{Earth~Planet. Sci.~Lett.} "
+    # "\def \eos{EOS~Trans. Am.~Geophys.~Union} "
+    # "\def \geol{Geology} "
+    # "\def \gsa{Geol.~Soc.~Am.} "
+    # "\def \gsab{Geol.~Soc.~Am. Bull.} "
+    # "\def \geop{Geophysics} "
+    # "\def \ggg{Geochem.~Geophy.~Geosyst.} "
+    # "\def \gji{Geophys.~J.~Int.} "
+    # "\def \grl{Geophys.~Res.~Lett.} "
+    # "\def \gjras{Geophys.~J. R.~Astron.~Soc.} "
+    # "\def \gml{Geo-Marine~Lett.} "
+    # "\def \gms{Geophys.~Monogr.~Series} "
+    # "\def \gp{Geophys.~Prosp.} "
+    # "\def \ia{Island~Arc} "
+    # "\def \ieee{IEEE~Trans.~Vis.~Comp.~Graphics} "
+    # "\def \igr{International Geology Review} "
+    # "\def \jaes{J.~Asian Earth~Sci.} "
+    # "\def \jasa{J.~Acoust.~Soc.~Am.} "
+    # "\def \jastp{J.~Atmos. Solar-Terr.~Phys.} "
+    # "\def \jcp{J.~Comp.~Phys.} "
+    # "\def \jgr{J.~Geophys.~Res.} "
+    # "\def \jg{J.~Geodynam.} "
+    # "\def \jgeop{J.~Geophys.} "
+    # "\def \jmp{J.~Math.~Phys.} "
+    # "\def \jota{J.~Optim. Th.~App.} "
+    # "\def \jrssb{J.~R.~Statist.~Soc.~B} "
+    # "\def \mg{Marine~Geology} "
+    # "\def \mi{Math.~Intelligencer} "
+    # "\def \mnras{Mon.~Not. R.~Astron.~Soc.} "
+    # "\def \mwr{Monthly Weather Review} "
+    # "\def \nat{Nature} "
+    # "\def \nathaz{Natural~Hazards} "
+    # "\def \nzjgg{New.~Zealand J.~Geol.~Geophys.} "
+    # "\def \numa{Num.~Algor.} "
+    # "\def \pt{Phys.~Today} "
+    # "\def \pepi{Phys.~Earth Planet.~Inter.} "
+    # "\def \ptrsl{Phil.~Trans. R.~Soc.~Lond.} "
+    # "\def \ptrsA{Phil.~Trans. R.~Soc.~A.} "
+    # "\def \pag{Pure~App.~Geophys.} "
+    # "\def \qjrms{Q.~J.~R.~Meteorol.~Soc.} "
+    # "\def \rpp{Rep.~Prog.~Phys.} "
+    # "\def \rgsp{Rev.~Geophys.~Space.~Phys.} "
+    # "\def \rgp{Rev.~Geophys.} "
+    # "\def \rmp{Rev.~Mod.~Phys.} "
+    # "\def \sa{Sci.~Am.} "
+    # "\def \sci{Science} "
+    # "\def \scipro{Science~Progress} "
+    # "\def \srl{Seis.~Res.~Lett.} "
+    # "\def \sp{Sol.~Phys.} "
+    # "\def \sirev{SIAM~Rev.} "
+    # "\def \sjna{SIAM~J.~Num.~Anal.} "
+    # "\def \sjsc{SIAM~J.~Sci.~Comp.} "
+    # "\def \tec{Tectonics} "
+    # "\def \ternov{Terra~Nova} "
+    # "\def \tecphy{Tectonophysics} "
+    # "\def \usgs{U.S.~Geol.~Surv.} "
+}
+
+@String { bssa       = {Bull. Seism. Soc. Am.} }
+@String { cmame      = {Comput. Methods Appl. Mech. Eng.} }
+@String { cmes       = {Comput. Model. Eng. Sci.} }
+@String { eesd       = {Earthquake Eng. Struct. Dynam.} }
+@String { eos        = {Eos Trans. AGU} }
+@String { epsl       = {Earth Planet. Sci. Lett.} }
+@String { geophysics = {Geophysics} }
+@String { gji        = {Geophys. J. Int.} }
+@String { gjras      = {Geophys. J. Roy. Astron. Soc.} }
+@String { gp         = {Geophys. Prospect.} }
+@String { grl        = {Geophys. Res. Lett.} }
+@String { ieeetuffc  = {IEEE Transactions on Ultrasonics, Ferroelectrics, and Frequency Control} }
+@String { ijnme      = {Int. J. Numer. Methods Eng.} }
+@String { jap        = {J. Appl. Phys.} }
+@String { jasa       = {J. Acoust. Soc. Am.} }
+@String { jca        = {J. Comput. Acoust.} }
+@String { jcp        = {J. Comput. Phys.} }
+@String { jgr        = {J. Geophys. Res.} }
+@String { jpdc       = {Journal of Parallel and Distributed Computing} }
+@String { lncs       = {Lecture Notes in Computer Science} }
+@String { pageoph    = {Pure Appl. Geophys.} }
+@String { pepi       = {Phys. Earth Planet. Inter.} }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@article{Ritsema2011,
+author = {Ritsema, J. and Deuss, A. and van Heijst, H. J. and Woodhouse, J. H.},
+title = {{S40RTS: A degree-40 shear-velocity model for the mantle from new Rayleigh wave dispersion, teleseismic traveltime and normal-mode splitting function measurements}},
+journal = gji,
+volume = {184},
+number = {3},
+pages = {1223-1236},
+year = {2011},
+doi = {10.1111/j.1365-246X.2010.04884.x}
+}
+
+@article{Bozdag2016,
+    author = {Bozda\u{g}, Ebru and Peter, Daniel and Lefebvre, Matthieu and Komatitsch, Dimitri and Tromp, Jeroen and Hill, Judith and Podhorszki, Norbert and Pugmire, David},
+    title = {Global adjoint tomography: {F}irst-generation model},
+    journal = gji,
+    volume = {207},
+    number = {3},
+    pages = {1739-1766},
+    year = {2016},
+    doi = {10.1093/gji/ggw356}
+}
+
+@inproceedings{Shepard1968,
+ author = {Shepard, Donald},
+ title = {A Two-dimensional Interpolation Function for Irregularly-spaced Data},
+ booktitle = {Proceedings of the 1968 23rd ACM National Conference},
+ series = {ACM '68},
+ year = {1968},
+ pages = {517--524},
+ numpages = {8},
+ doi = {10.1145/800186.810616},
+ acmid = {810616},
+ publisher = {ACM},
+ address = {New York, NY, USA}
+} 
+
+@article{Li1995,
+  title={Comparison of global waveform inversions with and without considering cross-branch modal coupling},
+  author={Li, Xiang Dong and Romanowicz, Barbara},
+  journal=gjras,
+  volume={121},
+  number={3},
+  pages={695-709},
+  year={1995}
+}
+
+
+@article{Antolik2003,
+  title={{J362D28: A new joint model of compressional and shear velocity in the Earth's mantle}},
+  author={Antolik, Michael and Gu, Yu J. and Ekstr\"om, G\"oran and Dziewo\'{n}ski, Adam M.},
+  journal=gjras,
+  volume={153},
+  number={2},
+  pages={443-466},
+  year={2003}
+}
+
+@article{Simmons2010,
+  title={{GyPSuM: A joint tomographic model of mantle density and seismic wave speeds}},
+  author={Simmons, Nathan A. and Forte, Alessandro M. and Boschi, Lapo and Grand, Stephen P.},
+  journal=jgr,
+  volume={115},
+  number={B12},
+  pages={-},
+  year={2010}
+}
+
+@article{Li1996,
+author = {Li, Xiang-Dong and Romanowicz, Barbara},
+title = {Global mantle shear velocity model developed using nonlinear asymptotic coupling theory},
+journal = jgr,
+volume = {101},
+number = {B10},
+year={1996},
+pages = {22245-22272},
+doi = {10.1029/96JB01306}
+}
+
+@article {Masters1996,
+	author = {Guy Masters and Stuart Johnson and Gabi Laske and Harold Bolton and J. H. Davies},
+	title = {A shear-velocity model of the mantle},
+	volume = {354},
+	number = {1711},
+	pages = {1385--1411},
+	year = {1996},
+	doi = {10.1098/rsta.1996.0054},
+	publisher = {The Royal Society},
+	issn = {1364-503X},
+	journal = {Philosophical Transactions of the Royal Society of London A: Mathematical, Physical and Engineering Sciences}
+}
+
+@article{Moulik2016,
+author = {Moulik, P. and Ekstr\"{o}m, G.},
+title = {The relationships between large-scale variations in shear velocity, density, and compressional velocity in the {E}arth's mantle},
+journal = jgr,
+year = {2016},
+volume = {121},
+number = {4},
+pages = {2737-2771},
+keywords = {thermochemical inferences on mantle structure, global seismic tomography},
+doi = {10.1002/2015JB012679}
+}
+
+@article{Moulik2014,
+  title={An anisotropic shear velocity model of the {E}arth's mantle using normal modes, body waves, surface waves and long-period waveforms},
+  author={Moulik, P and Ekstr{\"o}m, G},
+  journal=gji,
+  volume={199},
+  number={3},
+  pages={1713--1738},
+  year={2014},
+  publisher={Oxford University Press}
+}
+
+@article{Kustowski2008,
+author = {Kustowski, B. and Ekstr\"{o}m, G. and Dziewo\'{n}ski, A. M.},
+title = {{Anisotropic shear-wave velocity structure of the Earth's mantle: A global model}},
+journal = jgr,
+volume = {113},
+number = {B06306},
+year = {2008},
+pages = {},
+keywords = {mantle, tomography, anisotrophy},
+doi = {10.1029/2007JB005169}
+}
+
+@article{Dziewonski1977,
+author = {Dziewo\'{n}ski, Adam M. and Hager, Bradford H. and O'Connell, Richard J.},
+title = {Large-scale heterogeneities in the lower mantle},
+journal = jgr,
+volume = {82},
+number = {2},
+year = {1977},
+pages = {239-255},
+doi = {10.1029/JB082i002p00239}
+}
+
+
+@article{Boschi1999,
+author = {Boschi, Lapo and Dziewo\'{n}ski, Adam M.},
+title = {{High- and low-resolution images of the Earth's mantle: Implications of different approaches to tomographic modeling}},
+journal = jgr,
+volume = {104},
+number = {B11},
+year={1999},
+pages = {25567-25594},
+doi = {10.1029/1999JB900166}
+}
+
+@article{Grand1994,
+author = {Grand, P. Stephen},
+title = {Mantle shear structure beneath the {A}mericas and surrounding oceans},
+journal = jgr,
+volume = {99},
+number = {B6},
+year={1994},
+pages = {11591-11621}
+}
+
+@article{Zhu2012,
+  title={Structure of the {E}uropean upper mantle revealed by adjoint tomography},
+  author={Zhu, Hejun and Bozda{\u{g}}, Ebru and Peter, Daniel and Tromp, Jeroen},
+  journal={Nature Geoscience},
+  volume={5},
+  number={7},
+  pages={493},
+  year={2012},
+  publisher={Nature Publishing Group}
+}
+
+@article{Zhu2015,
+  title={Seismic structure of the {E}uropean upper mantle based on adjoint tomography},
+  author={Zhu, Hejun and Bozda{\u{g}}, Ebru and Tromp, Jeroen},
+  journal=gji,
+  volume={201},
+  number={1},
+  pages={18--52},
+  year={2015},
+  publisher={Oxford University Press}
+}
+
+@article{Zhu2017,
+  title={Radial anisotropy of the {North American} upper mantle based on adjoint tomography with USArray},
+  author={Zhu, Hejun and Komatitsch, Dimitri and Tromp, Jeroen},
+  journal=gji,
+  volume={211},
+  number={1},
+  pages={349--377},
+  year={2017},
+  publisher={Oxford University Press}
+}
+
+@article{French2014,
+  title={Whole-mantle radially anisotropic shear velocity structure from spectral-element waveform tomography},
+  author={French, SW and Romanowicz, BA},
+  journal=gji,
+  volume={199},
+  number={3},
+  pages={1303--1327},
+  year={2014},
+  publisher={Oxford University Press}
+}
+
+@article{Fukao2013,
+  title={Subducted slabs stagnant above, penetrating through, and trapped below the 660 km discontinuity},
+  author={Fukao, Yoshio and Obayashi, Masayuki},
+  journal=jgr,
+  volume={118},
+  number={11},
+  pages={5920--5938},
+  year={2013},
+  publisher={Wiley Online Library}
+}
+
+@article{Simmons2012,
+  title={LLNL-G3Dv3: Global P wave tomography model for improved regional and teleseismic travel time prediction},
+  author={Simmons, Nathan A and Myers, Steve C and Johannesson, Gardar and Matzel, Eric},
+  journal=jgr,
+  volume={117},
+  number={B10},
+  year={2012},
+  publisher={Wiley Online Library}
+}
+
+@article{Du1999,
+  title={Centroidal Voronoi tessellations: Applications and algorithms},
+  author={Du, Qiang and Faber, Vance and Gunzburger, Max},
+  journal={SIAM review},
+  volume={41},
+  number={4},
+  pages={637--676},
+  year={1999},
+  publisher={SIAM}
+}
+
+@article{Schaeffer2013,
+author = {Schaeffer, A. J. and Lebedev, S.},
+title = {Global shear speed structure of the upper mantle and transition zone},
+journal = gji,
+volume = {194},
+number = {1},
+pages = {417-449},
+year = {2013},
+doi = {10.1093/gji/ggt095}
+}
+
+@article{Lei2018,
+    author = {Lei, Wenjie and Ruan, Youyi and Bozda\u{g}, Ebru and Peter, Daniel and Lefebvre, Matthieu and Komatitsch, Dimitri and Tromp, Jeroen and Hill, Judith and Podhorszki, Norbert and Pugmire, David},
+    title = {{Global adjoint tomography -- Model GLAD-M25}},
+    journal = gji,
+    volume = {submitted},
+    number = {},
+    pages = {},
+    year = {2019}
+}
+
+@article{Trampert2003,
+author = {Trampert, Jeannot and Woodhouse, John H.},
+title = {Global anisotropic phase velocity maps for fundamental mode surface waves between 40 and 150 s},
+journal = gji,
+volume = {154},
+number = {1},
+year = {2003},
+pages = {154-165},
+keywords = {azimuthal anisotropy, inverse theory, phase velocity, surface waves, tomography},
+doi = {10.1046/j.1365-246X.2003.01952.x}
+}
+
+@article{Modrak2016,
+author = {Modrak, Ryan and Tromp, Jeroen},
+title = {Seismic waveform inversion best practices: regional, global and exploration test cases},
+journal = gji,
+volume = {206},
+number = {3},
+pages = {1864-1889},
+year = {2016},
+doi = {10.1093/gji/ggw202}
+}
+
+@article{Yuan2016,
+author = {Yuan, Yanhua O. and Simons, Frederik J. and Tromp, Jeroen},
+title = {Double-difference adjoint seismic tomography},
+journal = gji,
+volume = {206},
+number = {3},
+pages = {1599-1618},
+year = {2016},
+doi = {10.1093/gji/ggw233}
+}
+
+@article{Modrak2018,
+title = {SeisFlows -- Flexible waveform inversion software},
+journal = {Computers \& Geosciences},
+volume = {115},
+pages = {88 - 95},
+year = {2018},
+issn = {0098-3004},
+doi = {10.1016/j.cageo.2018.02.004},
+author = {Ryan T. Modrak and Dmitry Borisov and Matthieu Lefebvre and Jeroen Tromp}
+}
+
+@article{Orsvuran2019,
+author = {\"{O}rsvuran,Ridvan and Bozda\u{g}, Ebru and Modrak, Ryan and Lei, Wenjie and Ruan, Youyi},
+title = {Towards Double-Difference Global Adjoint Tomography},
+journal = gji,
+note = {submitted},
+year = {2019}
+}

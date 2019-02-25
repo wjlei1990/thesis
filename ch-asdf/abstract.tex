@@ -1,0 +1,26 @@
+\section{Summary}
+
+We present ASDF, the Adaptable Seismic Data Format, a modern and practical data
+format for all branches of seismology and beyond.
+The growing volume of freely available data coupled with ever expanding
+computational power opens avenues to tackle larger and more complex problems.
+Current bottlenecks include inefficient resource usage and insufficient data
+organization. Properly scaling a problem requires the resolution of both these
+challenges, and existing data formats are no longer up to the task.
+ASDF stores any number of synthetic, processed, or unaltered waveforms in a
+single file. A key improvement compared to existing formats is the inclusion of
+comprehensive meta information, such as event or station information, in the
+same file.  Additionally, it is also usable for any non-waveform data, for
+example, cross correlations, adjoint sources, or receiver functions. Last but
+not least, full provenance information can be stored alongside each item of
+data, thereby enhancing reproducibility and accountability. Any dataset in our
+proposed format is self-describing and can be readily exchanged with others,
+facilitating collaboration.
+The utilization of the HDF5 container format grants efficient and parallel
+I/O operations, integrated compression algorithms, and check sums to guard
+against data corruption. To not reinvent the wheel and to build upon past
+developments, we use existing standards like QuakeML, StationXML, W3C PROV, and
+HDF5 wherever feasible.
+Usability and tool support is crucial for any new format to gain acceptance. We
+developed mature C/Fortran and Python based APIs coupling ASDF to the widely
+used SPECFEM3D\_GLOBE and ObsPy toolkits.

@@ -1,0 +1,178 @@
+\section{Introduction}
+
+\subsection{Motivation}
+
+Seismology is, to a large extent, a science driven by observing, modeling, and
+understanding data.  The process of making discoveries from data requires
+simple, robust, and fast processing and analysis tools, empowering
+seismologists to focus on actual science.  Modern seismological workflows
+assimilate data on an unprecedented scale, and the need for efficient
+processing tools is pressing.  In this context, the format in which data is
+stored and exchanged plays a central role.  For example, passive seismic data
+are commonly stored in such a way that each time series corresponds to a single
+file on the file system.  The amount of I/O required to process and assimilate
+data stored this way quickly becomes debilitating on modern HPC platforms.  As
+another example, simulated seismograms depend on a large number of input
+parameters, particular versions of modeling software, and specific run-time
+execution commands.  A modern data format should strive for complete
+reproducibility by keeping track of such data provenance.
+The majority of existing seismic data formats were created in a more primitive
+computing era, when no one could have foreseen the size, complexity, and
+challenges that seismological datasets must accommodate today.
+New seismological techniques, such as interferometry and adjoint tomography,
+require access to very large computers, where I/O poses a major bottleneck and
+data mining and feature extraction are challenging.
+
+In this article we introduce a new data format ---the Adaptable Seismic Data
+Format (ASDF)--- designed to meet these challenges.  We are fully
+aware of the fact that the introduction of yet another seismic data format
+should ideally be avoided.  However, we believe it to be justified because the
+current state of the art is just not good enough. We further believe that the
+advantages of the proposed format are significant enough to quickly outweigh
+the initial difficulties of switching to a new format.
+We identify five key issues that a new data format must resolve, namely:
+
+\begin{itemize}
+
+    \item \textbf{Efficiency:} Data storage is cheap, but data operations are
+        increasingly becoming the limiting factor in modern scientific
+        workflows. More efficient and better performing data processing and
+        analysis tools are badly needed.
+
+    \item \textbf{Data Organization:} Different types of data (waveforms,
+        source \& receiver information, derived data products such as adjoint
+        sources, receiver functions, and cross correlations) are needed to
+        perform a variety of tasks. This results in ad hoc data organization
+        and formats that are hard to maintain, integrate, reproduce, and
+        exchange.
+
+    \item \textbf{Data Exchange:} In order to exchange complex datasets, an
+        open, well-defined, and community driven data format must be developed.
+
+    \item \textbf{Reproducibility:} A critical aspect of science is the ability
+        to reproduce results. Modern data formats should facilitate and
+        encourage this.
+
+    \item \textbf{Mining, Visualization, and Understanding of data:} As data
+        volumes grow, more complex, new techniques to query and visualize large
+        datasets are needed.
+\end{itemize}
+
+The ultimate goal is to empower seismologists to focus on actual science. This
+is the time for the community to build an organized, high-performance, and
+reproducible seismic data format for seismological research.
+In order to facilitate integration of the new format into existing scientific
+workflows and to demonstrate that this is not just an academic exercise, we
+developed a Python library hooking ASDF into the ObsPy library~\cite{obspy2010},
+which, as a hugely beneficial side-effect, also takes
+%\cite{obspy2010}, which, as a hugely beneficial side-effect, also takes
+care of any data format conversion issues, be it to, or from ASDF.  A C-based
+ASDF library features an API for reading and writing ASDF files and includes
+examples in both C and Fortran.  Embedding this library in the widely used
+spectral-element waveform solver SPECFEM3D\_GLOBE
+~\cite{KoTr02a, KoTr02b} made it gain native support for
+ASDF-integrated workflows. To engage and educate the community, a wiki provides
+demonstrations of the format and includes technical and non-technical
+introductions for both users and developers.
+
+\subsection{Scope}
+
+The proposed Adaptable Seismic Data Format is designed to be an efficient,
+self-describing data format for storing, processing, and exchanging
+seismological data, including full provenance information.
+It is intended to be used by researchers and analysts working with data, after
+it has been recorded.
+In contrast, it is not aspiring to replace the time proven MiniSEED format for
+data archival, streaming, and low-latency applications. These use cases are
+contrary to a comprehensive and self-describing data format and both can
+probably not be achieved simultaneously.
+
+ASDF is applicable to a large number of areas in seismology and
+related sciences. Its use ranges from classical earthquake seismology to active
+source datasets, ambient seismic noise studies, and GPS time series.
+Furthermore, it is generic enough to accommodate any kind of derived or
+auxiliary data that might accrue in the course of a research project.
+
+\subsection{Benefits}
+
+A well-defined format with the previously listed attributes directly results in
+a number of advantages and applicable use cases. In this section we list a few
+of these, in no particular order.
+
+\begin{itemize}
+
+    \item Seismological datasets usually contain waveform data as well as
+        associated meta data, such as information about events and stations.
+        All this data needs to be integrated and accessed concurrently, which
+        requires a large amount of bookkeeping as datasets grow. Many tools are
+        one-off scripts that cannot be reused for subsequent
+        projects. Additionally, datasets become difficult to share with
+        research groups that do not employ the same internal structure and data
+        organization. Over the years, numerous groups have developed customized
+        seismological data formats to work around these limitations. In
+        contrast, ASDF is a well-defined format that can be used
+        to store and exchange full seismological datasets, including all
+        necessary meta information.
+
+    \item It is oftentimes convenient to locally build up a database of
+        preprocessed waveforms. A common example is storage of instrument
+        corrected and bandpass filtered data. If a project continues for some
+        years, it might ultimately no longer be known how exactly data were
+        processed. The make up of the team may have changed, or perhaps the
+        processing software had a bug that has been fixed in the meantime, and
+        this may or may not have affected the data.  \emph{Provenance}, that
+        is, the tracking and storing of the history of data, solves this
+        particular problem, and ASDF accommodates that. Existing data
+        formats do not (or only in a very limited manner) track the origin of
+        data and what operations were performed on it due to limited and
+        inflexible metadata allowances. ASDF is capable of storing the
+        full provenance graph that resulted in a particular piece of waveform
+        or other data.
+
+    \item For the first time, ASDF accommodates proper storage and
+        exchange of synthetic seismograms, including information about the
+        numerical solver, earthquake parameters, the Earth model, and all other
+        parameters influencing the final result. Waveform simulations at high
+        frequencies and in physically plausible Earth models are extremely
+        expensive computationally, so preserving and carefully documenting such
+        simulations is of tremendous value.
+
+    \item ASDF greatly reduces the number of files necessary for many
+        tasks, because a single ASDF file can replace tens to hundreds
+        of thousands of single waveform files. Beside raw performance and
+        organizational benefits, this also facilitates workflows that run into
+        hard file count quota limits on supercomputers. Note that
+        ASDF can store data from very many receivers as well as
+        arbitrarily long time series from only a single receiver and any
+        combination in between.
+
+    \item Importantly, ASDF offers efficient parallel I/O on modern
+        clusters with the required hardware. This facilitates fully parallel
+        data processing workflows that actually scale.
+
+    \item ASDF offers optional and automatic lossless data
+        compression, thereby reducing file size.
+
+    \item Seismograms are certainly not the only type of data used in
+        seismology. Other data types, including spectral estimations,
+        cross correlations, adjoint sources, receiver functions, and so on,
+        also benefit from organized and self-describing storage.
+
+\end{itemize}
+
+
+ASDF is intended as a container for all the various kinds of data
+materializing in seismological research, including all required meta
+information. Additionally, each piece of data should be able to describe itself
+and what led to it. Having an organized and standard data container will, in
+the long run, increase the speed and accuracy of seismic research, and provides
+a medium for effectively communicating research results.
+The rest of this chapter is structured as follows. We first provide an
+overview of the layout of the format and justify some choices that needed to be
+made. We then compare the ASDF format to existing data formats in use
+in seismology, thereby further justifying its development. Finally, we showcase
+a number of existing implementations, detail several use cases for the
+ASDF format, and discuss future possibilities. The article is
+intentionally light on technical details to focus on a high-level view. A
+technical definition of the ASDF format can be found on line and in the electronic
+supplements.

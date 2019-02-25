@@ -1,0 +1,47 @@
+\section{Conclusion}
+
+%Problem: increasing volume of data to assimilate. increasing resolution.
+
+We have outlined some of the difficulties arising in modern computational
+seismology. They stem from the need to simultaneously handle large data sets and
+increased Earth model resolution. This is even more true when performing large-scale
+inversions at leadership supercomputer centers. Even though the data
+volumes might not be comparable to what is commonly referred as ``big data'',
+data and workflow management are creating performance and filesystem issues on
+supercomputers.
+
+In order to be able to pursue our scientific goals on the next-generation
+supercomputers we have devised several strategies.
+For heavy computational I/O we now rely on ADIOS. The developers of ADIOS have
+either tight links with US computing centers or are part of them. We rely on the
+improvements they bring to the so-called transport method
+to continue getting a satisfying level of performance.
+To accommodate the attenuation snapshots required for anelastic simulations,
+several additional strategies might need to be
+developed as the specificities of next-generation machine are unveiled. We can think
+about overlapping I/O calls with computations, or using on-node non-volatile
+memory (NVMe) as a burst-buffer.
+
+Interestingly enough, the focus of seismic inversion is shifting from pure
+computations to a more balanced approach, where data is a first-class citizen, seen
+as equally important as computations. Using a modern file format, such as ASDF,
+including comprehensive metadata not only helps increase computational
+performance, but also ensures reproducibility, and in the long term brings a
+standard to seismic and computational data which will ultimately increase
+collaboration within the seismological community.
+
+The shear number of data and simulations is becoming increasing difficult to
+manage. Workflow management has been sparsely used within the
+seismological community and, to the best of our knowledge, not in production-scale
+inversions. This last sentence might be controversial, but, in our
+opinion, to be considered as managed, a workflow must provide the user with
+automation going beyond a simple dependency description.
+Workflow management is an exciting challenge, particularly with the present
+effort of infrastructure designers (both hardware and software) to bring
+\emph{HPC} and \emph{Big Data} systems closers.
+
+Many other challenges remain and keep arising during our journey to perform
+global adjoint tomography problems on exascale systems. Some of the more
+thrilling include exploring deep-learning methods to assimilate data in a more
+sensible fashion, as well as newer visualization techniques allowing scientists
+to discover features in global Earth models with unprecedented levels of detail.

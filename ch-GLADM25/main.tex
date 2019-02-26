@@ -118,7 +118,8 @@ In this study we also used three-component seismograms with a shortest period of
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/source_corrections.pdf}
-  \caption{\small{Source corrections for 1,040 out of 1,480 events used in the structural inversion. (a) Map view of depth changes. (b) Distribution of seismographic stations used for source inversions. (c) Depth change relative to the original global CMT Catalog depth. (d)--(f) Histograms of depth, origin time, and scalar moment changes relative to the CMT Catalog.
+  \caption[Source corrections for 1,040 events]
+  {\small{Source corrections for 1,040 out of 1,480 events used in the structural inversion. (a) Map view of depth changes. (b) Distribution of seismographic stations used for source inversions. (c) Depth change relative to the original global CMT Catalog depth. (d)--(f) Histograms of depth, origin time, and scalar moment changes relative to the CMT Catalog.
   }}
   \label{fig:source_correction}
 \end{figure}
@@ -225,7 +226,8 @@ Fig.~\ref{fig:event_1480} summarizes the characteristics of all 1,480 earthquake
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/events_1480.pdf}
-  \caption{\small{The 1,480~earthquakes used in this study. (a) Distribution of earthquakes. The color of each beach ball reflects its depth range, where blue designates events shallower than 50~km, green events between 50~km and 300~km, and red events deeper than 300~km. (b) \& (c) Histograms of earthquake moment magnitudes and depths.}}
+  \caption[The distribution of 1,480 earthquakes used in structural inversion]
+  {\small{The 1,480~earthquakes used in this study. (a) Distribution of earthquakes. The color of each beach ball reflects its depth range, where blue designates events shallower than 50~km, green events between 50~km and 300~km, and red events deeper than 300~km. (b) \& (c) Histograms of earthquake moment magnitudes and depths.}}
   \label{fig:event_1480}
 \end{figure}
 
@@ -248,7 +250,8 @@ of our database and greatly improve coverage in certain regions.
 
 \begin{figure}
   \includegraphics[width=0.8\textwidth]{ch-GLADM25/figures/station_map.pdf}
-  \caption{\small{Distribution of the 11,800~seismographic stations used in this study. Colors denote the number of events for which a given station contributes waveforms to the structural inversion. Stations with a number of event responses $<400$ are plotted in smaller size; these are usually temporary arrays deployed over a short period of time, frequently ocean bottom seismometers. The maximum number of event responses comes from ANMO, in Albuquerque, New Mexico, which contributed to 1,442 out of 1,480 earthquakes in the data set.}}
+  \caption[Distribution of the seismographic stations]
+  {\small{Distribution of the 11,800~seismographic stations used in this study. Colors denote the number of events for which a given station contributes waveforms to the structural inversion. Stations with a number of event responses $<400$ are plotted in smaller size; these are usually temporary arrays deployed over a short period of time, frequently ocean bottom seismometers. The maximum number of event responses comes from ANMO, in Albuquerque, New Mexico, which contributed to 1,442 out of 1,480 earthquakes in the data set.}}
   \label{fig:stations}
   \centering
 \end{figure}
@@ -398,7 +401,7 @@ In the following sections we highlight several important aspects of the workflow
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/adjoint_workflow_6.pdf}
-  \caption{\small{Adjoint tomography workflow.}}
+  \caption[Adjoint tomography workflow]{\small{Adjoint tomography workflow.}}
   \label{fig:adjoint_workflow}
 \end{figure}
 
@@ -432,7 +435,8 @@ it would be extremely difficult to carry out global adjoint tomography without t
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-GLADM25/figures/Preprocess_workflow.pdf}
-  \caption{\small{Sub-workflow workflow for preprocessing seismic data.}}
+  \caption[Sub-workflow workflow for preprocessing seismic data]
+  {\small{Sub-workflow workflow for preprocessing seismic data.}}
   \label{fig:preprocess_workflow}
 \end{figure}
 
@@ -456,7 +460,8 @@ balances before acceptance or rejection.
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/window_colorbar_linear_Z.pdf}
-  \caption{\small{Time-distance plot for vertical component 17--40~s body waves showing a measurement window density map.
+  \caption[Time-distance plot for vertical component 17--40~s body waves]
+  {\small{Time-distance plot for vertical component 17--40~s body waves showing a measurement window density map.
   A total of 4,363,719 time windows were discretized into 1~degree epicentral distance and 1~s time bins.
   The maximum window count is 9,931 in the 85--86$^\circ$ distance and 1,375--1,376~sec time bin.
   Major traveltime branches are labeled. Note that the plot contains data from events with a wide variety of depths, so the branches are for identification purposes only.
@@ -496,7 +501,8 @@ This is something we will reconsider in future applications, perhaps by introduc
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/window_colorbar_linear_R.pdf}
-  \caption{\small{Same as Fig.~\ref{fig:window_density_Z}, except for radial component 17--40~s body waves.
+  \caption[Time-distance plot for radial component 17--40~s body waves]
+  {\small{Same as Fig.~\ref{fig:window_density_Z}, except for radial component 17--40~s body waves.
    A total of 2,868,252 time windows were discretized into 1~degree epicentral distance and 1~s time bins.
   The maximum window count is 7,542 in the 86--87$^\circ$ distance and 1,378--1,379~s time bin.
    }}
@@ -506,7 +512,8 @@ This is something we will reconsider in future applications, perhaps by introduc
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/window_colorbar_linear_T.pdf}
-  \caption{\small{Same as Fig.~\ref{fig:window_density_Z}, except for transverse component 17--40~s body waves.
+  \caption[Time-distance plot for transverse component 17--40~s body waves]
+  {\small{Same as Fig.~\ref{fig:window_density_Z}, except for transverse component 17--40~s body waves.
    A total of 2,151,856 time windows were discretized into 1~degree epicentral distance and 1~s time bins.
    The maximum window count is 7,208 in the 89--90$^\circ$ distance and 1,398--1,399~s time bin.
    Only SH travetime branches are labeled.}}
@@ -574,7 +581,8 @@ in Fig.~\ref{fig:misfit}.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-GLADM25/figures/misfit.pdf}
-  \caption{\small{Evolution of the misfit function from GLAD-M15 to GLAD-M25.
+  \caption[Evolution of misfit function from GLAD-M15 to GLAD-M25]
+  {\small{Evolution of the misfit function from GLAD-M15 to GLAD-M25.
   Each color denotes different stages of the inversion, as discussed in Sections~\ref{sec:I}--\ref{sec:III}.
   (a) Evolution of the total misfit. (b)--(j) Misfit in
   each period band (rows) on three components (columns). (e)--(g) Since iteration 18,
@@ -725,7 +733,8 @@ so there are small tradeoffs between different measurement categories.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/dt_histogram.pdf}
-  \caption{\small{Histograms of phase measurements in all twelve measurement categories for S362ANI combined with CRUST2.0 (M00, Black), GLAD-M15 (M15, Green), and GLAD-M25 (M25, Red).
+  \caption[Histograms of phase measurements in all twelve measurement categories]
+  {\small{Histograms of phase measurements in all twelve measurement categories for S362ANI combined with CRUST2.0 (M00, Black), GLAD-M15 (M15, Green), and GLAD-M25 (M25, Red).
   Each column represents one component and each row corresponds to a period band.
   The numbers above the top right of each panel denote the number of measurements in the corresponding category.
   The total number of measurements is 18.2 million.
@@ -739,7 +748,8 @@ Both P and S waves exhibit consistent reductions in terms of both mean and varia
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/dt_histogram_phase.pdf}
-  \caption{\small{Histograms of 17--40~s traveltime anomalies of P (vertical and radial), and SH (Transverse) arrivals for models S362ANI combined with CRUST2.0 (M00, Black), GLAD-M15 (M15, Green), and GLAD-M25 (M25, Red).
+  \caption[Histograms of 17--40~s traveltime anomalies of P and SH arrivals]
+  {\small{Histograms of 17--40~s traveltime anomalies of P (vertical and radial), and SH (Transverse) arrivals for models S362ANI combined with CRUST2.0 (M00, Black), GLAD-M15 (M15, Green), and GLAD-M25 (M25, Red).
   }}
   \label{fig:PS_phase_hist}
 \end{figure}
@@ -756,7 +766,8 @@ In the next phase of our ongoing inversion we plan to begin assimilating amplitu
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/dlna_histogram.pdf}
-  \caption{\small{Same as Fig.~\ref{fig:phase_hist} except for amplitude measurements. These measurements are currently not used in the inversion.}}
+  \caption[Histograms of amplitude measurements in all twelve measurement categories]
+  {\small{Same as Fig.~\ref{fig:phase_hist} except for amplitude measurements. These measurements are currently not used in the inversion.}}
   \label{fig:amp_hist}
 \end{figure}
 
@@ -787,7 +798,8 @@ rather than improved PSF tests.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/events_360.pdf}
-  \caption{\small{Summary of the held-out database containing 360 earthquakes. Theses events were not used in the structural inversion. (a) Distribution of events color coded by depth range as in Fig.~\ref{fig:event_1480}. (b) \& (c) Histograms of moment magnitude and depth.}}
+  \caption[Distribution of 360 earthquakes used as held-out data]
+  {\small{Summary of the held-out database containing 360 earthquakes. Theses events were not used in the structural inversion. (a) Distribution of events color coded by depth range as in Fig.~\ref{fig:event_1480}. (b) \& (c) Histograms of moment magnitude and depth.}}
   \label{fig:events_360}
 \end{figure}
 
@@ -848,15 +860,16 @@ between the new model, GLAD-M25, and its starting model, GLAD-M15, and, in paren
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/dt_histogram_360.pdf}
-  \caption{\small{Same as Fig.~\ref{fig:phase_hist}, except for the held-out database.
-  }}
+  \caption[Histograms of amplitude measurements in all twelve measurement categories for held-out database]
+  {\small{Same as Fig.~\ref{fig:phase_hist}, except for the held-out database.}}
   \label{fig:phase_hist_360}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{ch-GLADM25/figures/dt_histogram_360_phase.pdf}
-  \caption{\small{Same as Fig.~\ref{fig:PS_phase_hist}, except for the held-out database.}}
+  \caption[Histograms of 17--40~s traveltime anomalies of P and SH arrivals for held-out database]
+  {\small{Same as Fig.~\ref{fig:PS_phase_hist}, except for the held-out database.}}
   \label{fig:phase_hist_360_P}
 \end{figure}
 
@@ -902,7 +915,8 @@ discussed in Appendix~\ref{chapter:shanalysis}.
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/depth_slice/globe_vs.pdf}
-  \caption{\small{Map views of global shear wavespeed perturbations at various depths for  model
+  \caption[Map views of global shear wavespeed perturbations at various depths]
+  {\small{Map views of global shear wavespeed perturbations at various depths for  model
   GLAD-M25~(left column), S362ANI$+$M(middle column)~\cite{moulik2014anisotropic},
   and S40RTS(right column)~\cite{ritsema2011s40rts}.
   At a given radius,
@@ -950,7 +964,8 @@ in particular the lowerparts of the Africa and Pacific superplumes, are very sim
 
 \begin{figure}
 \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/depth_slice/globe_vp_LLNL-GAP.pdf}
-  \caption{\small{Map views of global compressional wavespeed variations at various depths for model
+  \caption[Map views of global compressional wavespeed variations at various depths]
+  {\small{Map views of global compressional wavespeed variations at various depths for model
   GLAD-M25 (left column), LLNL-G3Dv3(middle column)\cite{simmons2012llnl}, and
   GAP-P4(right column)~\cite{fukao2013subducted}.
   For LLNL-G3Dv3, depth ranges are labeled in the bottom right
@@ -964,7 +979,8 @@ in particular the lowerparts of the Africa and Pacific superplumes, are very sim
 \begin{figure}
 \centering
 \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/depth_slice/america_vs.pdf}
-  \caption{\small{Map views of isotropic shear wavespeed variations beneath North America 
+  \caption[Map views of isotropic shear wavespeed variations beneath North America]
+  {\small{Map views of isotropic shear wavespeed variations beneath North America 
   for model GLAD-M25 (first column) and several global (S362ANI$+$M and S40RTS)
   and regional US22~\cite{zhu2017radial} and SL2013NA~\cite{schaeffer2014imaging}
   models. Green circles denote the locations of hotspots. For SL2013NA, we
@@ -1042,7 +1058,8 @@ we return to this feature in Section~\ref{section:slabs}.
 
 \begin{figure}[ht!]
 \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/depth_slice/europe_vs.pdf}
-  \caption{\small{Map views of isotropic shear wavespeed variations beneath Europe for model GLAD-M25 (first column), two global model (S362ANI$+$M and S40RTS), and
+  \caption[Map views of isotropic shear wavespeed variations beneath Europe]
+  {\small{Map views of isotropic shear wavespeed variations beneath Europe for model GLAD-M25 (first column), two global model (S362ANI$+$M and S40RTS), and
   one regional model EU60~\cite{zhu2015seismic}. For EU60, the range of the color
   bar is 4\% at all depths, as indicated in the bottom right bottom of the panels.}}
 \label{fig:europe-vs}
@@ -1105,7 +1122,8 @@ The Azores represent a much shallower hotspot, with a maximum depth of about 250
 
 \begin{figure}[ht!]
   \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/depth_slice/asia_vs.pdf}
-  \caption{\small{Map views of shear wavespeed variations beneath Asia for GLAD-M25~(first column),
+  \caption[Map views of shear wavespeed variations beneath Asia]
+  {\small{Map views of shear wavespeed variations beneath Asia for GLAD-M25~(first column),
   global models S362ANI$+$M (second column) and SL2013sv (third column), and regional model EARA2014(last column)~\cite{chen2015multiparameter}.}}
   \label{fig:asia-vs}
   \centering
@@ -1157,7 +1175,8 @@ beneath the Philippine plate, indicating ponding of ancient subducted plates.
 
 \begin{figure}[ht!] 
   \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/depth_slice/south_america_vp.pdf}
-  \caption{\small{Map views of compressional wavespeed variations beneath South America for GLAD-M25~(first column) and global models S362ANI$+$M~\cite{moulik2014anisotropic} (second column), LLNL-G3Dv3~\cite{simmons2012llnl} (third column), and GAP-P4~\cite{fukao2013subducted} (fourth column).}}
+  \caption[Map views of compressional wavespeed variations beneath South America]
+  {\small{Map views of compressional wavespeed variations beneath South America for GLAD-M25~(first column) and global models S362ANI$+$M~\cite{moulik2014anisotropic} (second column), LLNL-G3Dv3~\cite{simmons2012llnl} (third column), and GAP-P4~\cite{fukao2013subducted} (fourth column).}}
   \label{fig:southamerica-vp}
   \centering
 \end{figure}
@@ -1197,7 +1216,8 @@ Caribbean subduction is clearly discernible in model GLAD-M25 and the two $V_\te
     \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Iceland_Eifel.png}}\\[-1pt]
     \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Easter_Galapagos.png}}\\[-1pt]
     \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Marion3_Kerguelen.png}}\\
-    \caption{\small{Vertical cross sections for various plumes for models GLAD-M25 ($V_\textrm{S}$; left column), TX2015~\cite{TX2015} (center column), and SEMUCB-WM1~\cite{french2015broad} (right column).
+    \caption[Vertical cross sections of shear wavespeed perturbations for various plumes]
+    {\small{Vertical cross sections for various plumes for models GLAD-M25 ($V_\textrm{S}$; left column), TX2015~\cite{TX2015} (center column), and SEMUCB-WM1~\cite{french2015broad} (right column).
     The map in the top left corner of each row shows the cross section with color-coded red, green, and white dots for geographical reference;
     hotspots are denoted by red triangles.
     The dashed black semicircles in the cross sections denote depths of 410~km, 660~km, and 1000~km.
@@ -1263,7 +1283,8 @@ Recovering these plumes is challenging due to poor data coverage in the southern
     \sidesubfloat[]{\includegraphics[width=0.88\textwidth]{ch-GLADM25/figures/subductions/Wc.png}\label{fig:subd_e}}\\[-8pt]
     \sidesubfloat[]{\includegraphics[width=0.88\textwidth]{ch-GLADM25/figures/subductions/Ne.png}\label{fig:subd_d}}\\[-8pt]
     \sidesubfloat[]{\includegraphics[width=0.88\textwidth]{ch-GLADM25/figures/subductions/Su.png}\label{fig:subd_f}}\\[-8pt]
-    \caption{\small{Vertical cross sections of compressional wavespeed perturbations in various subduction zones
+    \captionp[Vertical cross sections of compressional wavespeed perturbations in various subduction zones]
+    {\small{Vertical cross sections of compressional wavespeed perturbations in various subduction zones
     for models GLAD-M25 ($V_\textrm{P}$; left column), GAP-P4~\cite{fukao2013subducted} (middle column) and UU-P07~\cite{van2018atlas} (right column).
     The map in the top left corner of each row shows the cross section with color-coded red, green, and white dots for geographical reference.
     The dashed black semicircles in the cross sections denote depths of 410~km, 660~km, and 1000~km.
@@ -1387,7 +1408,8 @@ We can observe this increase in resolution in GLAD-M25 in the normalized power p
 \begin{figure}
   \centering
   \includegraphics[width=0.95\textwidth]{ch-GLADM25/figures/power_radius.pdf}
-  \caption{\small{Normalized power per degree~$\ell$ as a function of radius, based on Eqn.~(\ref{eq:powerdegreeradius}), for models S362ANI (left), GLAD-M15 (middle), and GLAD-M25 (right).
+  \caption[Normalized power spectrum]
+  {\small{Normalized power per degree~$\ell$ as a function of radius, based on Eqn.~(\ref{eq:powerdegreeradius}), for models S362ANI (left), GLAD-M15 (middle), and GLAD-M25 (right).
   Shown are depths greater than 120~km.
   (Courtesy of Caio Ciardelli.)
   }}
@@ -1478,7 +1500,8 @@ is the absence of the 220~km discontinuity and a lower~$V_\text{P}/V_\text{S}$ r
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-GLADM25/figures/1d_profile.pdf}
-  \caption{\small{1D radial shear and compressional wavespeed profiles for GLAD-M25, STW105, and PREM.
+  \caption[1D radial shear and compressional wavespeed profiles for GLAD-M25, STW105, and PREM]
+  {\small{1D radial shear and compressional wavespeed profiles for GLAD-M25, STW105, and PREM.
   The reference frequency for physical dispersion is ~7.77~mHz.}}
   \label{fig:global-average}
 \end{figure}
@@ -1486,7 +1509,8 @@ is the absence of the 220~km discontinuity and a lower~$V_\text{P}/V_\text{S}$ r
 \begin{figure}
   \centering
   \includegraphics[width=0.9\textwidth]{ch-GLADM25/figures/1d_profile_ra.pdf}
-  \caption{\small{1D radial-anisotropic shear and compressional wavespeed profiles for GLAD-M25 and STW105. The reference frequency for physical dispersion is ~7.77~mHz.}}
+  \caption[1D radial-anisotropic shear and compressional wavespeed profiles for GLAD-M25 and STW105]
+  {\small{1D radial-anisotropic shear and compressional wavespeed profiles for GLAD-M25 and STW105. The reference frequency for physical dispersion is ~7.77~mHz.}}
   \label{fig:global-ra-average}
 \end{figure}
 
@@ -1631,7 +1655,7 @@ for the same set of models.
 \begin{figure}
   \centering
   \includegraphics[width=0.5\textwidth]{ch-GLADM25/figures/power.pdf}
-  \caption{\small{Normalized power per degree~$\ell$, based on Eqn.~(\ref{eq:powerdegree}), for models S362ANI (red), GLAD-M15 (green), and GLAD-M25 (blue).
+  \caption[Normalized power per degree~$\ell$,]{\small{Normalized power per degree~$\ell$, based on Eqn.~(\ref{eq:powerdegree}), for models S362ANI (red), GLAD-M15 (green), and GLAD-M25 (blue).
   The calculation includes depths greater than 120~km.
   Model S362ANI has no power beyond degree~18,
   and model S40RTS has no power beyond degree~40.

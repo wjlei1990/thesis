@@ -23,18 +23,19 @@ Since the most computationally expensive part of a tomographic inversion
 involves wavefield simulations, excellent performance of the solver is crucial,
 as discussed in Section~\ref{sec:solver}.
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[width=\columnwidth]{ch-workflow/figures/seismic_data_workflow.pdf}
-\caption{General adjoint tomography workflow. The focus is on the data
+\begin{figure}[htb]
+  \begin{center}
+  \includegraphics[width=\columnwidth]{ch-workflow/figures/seismic_data_workflow.pdf}
+  \caption[General adjoint tomography workflow]
+    {General adjoint tomography workflow. The focus is on the data
 involved in each step. Seismic data are depicted by red boxes and for each of
 the $N_{s}$ seismic events they are recorded by $N_{sr}$ receivers.
 Computational data are represented by green and blue boxes. The amount of
 elementary data varies depending on the workflow stage and can eventually be
 grouped into a smaller number of files.}
-\label{fig:seismic_data_workflow}
-\label{default}
-\end{center}
+  \label{fig:seismic_data_workflow}
+  \label{default}
+  \end{center}
 \end{figure}
 %
 

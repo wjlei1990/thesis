@@ -302,7 +302,8 @@ In the example in Figure~\ref{fig:weight_condnum}, we chose~$\Delta_0$ so that t
 \begin{figure}
     \centering 
  	\includegraphics[width=.95\textwidth]{ch-weighting/figures/source_weight_cond_num.pdf}
-\caption{\small{Condition number of the diagonal weighting matrix defined by eqn.~(\ref{eq:spatial_weights})
+  \caption[Condition number curve of the diagonal weighting matrix]
+  {\small{Condition number of the diagonal weighting matrix defined by eqn.~(\ref{eq:spatial_weights})
 as a function of the reference distance~$\Delta_0$\,.
 The chosen value, indicated by the green star, is about one third of the largest possible value.
 Since evaluation of eqn.~(\ref{eq:spatial_weights}) for different reference distances adds negligible computational expense, it is possible (and recommended) to repeat this type of analysis for each iteration.
@@ -320,7 +321,8 @@ USArray and European stations weights are brought down to about one-tenth of oce
   	\centering 
  	\includegraphics[width=.95\textwidth]{ch-weighting/figures/receiver-weights-40-100-Z.pdf}
 	\end{minipage}
-\caption{\small{Example of receiver weights for an event C201604131355A at 40--100~s period band and vertical component determined based upon eqn.~(\ref{eq:spatial_weights}),
+  \caption[Example of receiver weights]
+  {\small{Example of receiver weights for an event C201604131355A at 40--100~s period band and vertical component determined based upon eqn.~(\ref{eq:spatial_weights}),
 and normalized according to eqn.~(\ref{eq:recnorm}). The weights are in logarithmic scale.
 Note the difference between USArray stations 
 and ocean island stations. 
@@ -334,7 +336,8 @@ and ocean island stations.
   	\centering 
 	\includegraphics[width=.95\textwidth]{ch-weighting/figures/source-weights.pdf}
 	\end{minipage}
-\caption{\small{Example of source weights determined based upon eqn.~(\ref{eq:spatial_weights}),
+  \caption[Example of source weights]
+  {\small{Example of source weights determined based upon eqn.~(\ref{eq:spatial_weights}),
 and normalized according to eqn.~(\ref{eqn:src_norm}).
 Note the difference between dense subduction zone
 earthquakes and sparse transform fault earthquakes.  
@@ -429,7 +432,8 @@ data covariance matrix.
     \begin{minipage}[t]{.9\columnwidth}
     \includegraphics[width=.95\textwidth]{ch-weighting/figures/network.pdf}  %\\
     \end{minipage}
-\caption{\small{Source-receiver geometry used in synthetic inversions.  
+  \caption[source-receiver geometry used in synthetic inversions]
+  {\small{Source-receiver geometry used in synthetic inversions.  
 GSN stations are labeled by green triangles, USArray stations by blue trangles, and sources 
 by magenta asterisks.
 }}
@@ -447,7 +451,7 @@ conditions at the edges to approximate a spherical Earth.  Finally, we inverted 
     \begin{minipage}[t]{.9\columnwidth}
     \includegraphics[width=.9\textwidth]{ch-weighting/figures/2Dmodel.pdf}  %\\
     \end{minipage}
-\caption{\small{Target model used in the synthetic inversions. Wavespeeds are determined by the 40~s Rayleigh wave phase speed model of~\cite{Trampert2003}.
+  \caption[Target model used in the synthetic inversions for testing weighting strategies]{\small{Target model used in the synthetic inversions. Wavespeeds are determined by the 40~s Rayleigh wave phase speed model of~\cite{Trampert2003}.
 }}
 \label{fig:test-model}
 \end{figure}
@@ -463,7 +467,8 @@ strategy discussed in Section~(\ref{sec:simple}).
     \begin{minipage}[t]{.9\columnwidth}
     \includegraphics[width=.8\textwidth]{ch-weighting/figures/convergence_tests.pdf}  %\\
     \end{minipage}
-\caption{\small{With the category weighting defined in Section~\ref{sec:simple}, convergence is extremely slow.  
+  \caption[Convergence Test for different weighting strategies]
+  {\small{With the category weighting defined in Section~\ref{sec:simple}, convergence is extremely slow.  
 With the geographical weighting discussed in Section~\ref{sec:geographical_weights}, convergence is much faster.  
 Diagonal model-space preconditioning, it turns out, is not an effective alternative to weighting when dealing with extremely lopsided source-receivers distributions.
 }}
@@ -485,7 +490,8 @@ the saving could be significant. In addition to the performance improvement, the
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{ch-weighting/figures/category_wincount_contribution.pdf}
-\caption{\small{Percentage of data (window count) in each of the twelve categories (see Table~\ref{table:categories}).
+  \caption[Percentage of data in the twelve categories]
+  {\small{Percentage of data (window count) in each of the twelve categories (see Table~\ref{table:categories}).
 Period band and wave type are  labeled in the upper right corner of each panel.
 Note the dramatic differences between  
 body-wave (top) and surface-wave data (bottom). 
@@ -504,7 +510,8 @@ strategies..
 \begin{figure}
 \centering
 \includegraphics[width=0.8\textwidth]{ch-weighting/figures/category_misfit_contribution_color.pdf} 
-\caption{\small{Percentage of the misfit in each of the twelve categories (see Table~\ref{table:categories}) using the category-weighting strategy (orange),
+  \caption[Percentage of the misfit in twelve categories]
+  {\small{Percentage of the misfit in each of the twelve categories (see Table~\ref{table:categories}) using the category-weighting strategy (orange),
 and geographical-weighting 
 strategy (black). The percentage contribution in each category is labeled above the bars. Note that each category's contribution to the misfit barely changes with geographical weighting, because weight re-balancing only happens within each category.
 }}
@@ -536,7 +543,8 @@ using two weighting strategies: (1) Orange bars correspond to category-only weig
 \begin{figure}
 \centering
 \includegraphics[width=0.85\textwidth]{ch-weighting/figures/category_sta_misfit_contribution.pdf}
-\caption{\small{Percentage of the misfit of GSN stations (II, IU) and USArray stations (TA)
+  \caption[Percentage of the misfit of GSN stations and USArray stations]
+  {\small{Percentage of the misfit of GSN stations (II, IU) and USArray stations (TA)
 in each category using category-weighting (left wedges in each panel) and geographical-weighting
 strategies (right wedges in panel).
 Compared with the category-weighting strategy, the geographical-weighting 
@@ -572,7 +580,8 @@ of GSN stations is enhanced due to the re-balancing.
 \begin{figure}
 \centering
 \includegraphics[width=0.85\textwidth]{ch-weighting/figures/Figure-10-small.pdf}
-\caption{\small{Smoothed gradient contributions using data from 42 earthquakes without (Left Column) 
+  \caption[Smoothed gradient contributions w/ and w/o weightings applied]
+  {\small{Smoothed gradient contributions using data from 42 earthquakes without (Left Column) 
 and with source \& receiver weighting (Right Column) in three
 period bands: 17--40~s (Top Row), 40--100~s (Middle Row), and 90--250~s (Bottom Row). The top center map shows the cross section with red line for reference.   
 The isotropic smoothing length scale is 100~km.
@@ -605,7 +614,8 @@ with the unevenly distributed data.
 \begin{figure}
 \centering
 \includegraphics[width=0.85\textwidth]{ch-weighting/figures/Figure-11-small.pdf}
-\caption{\small{Example of a smoothed misfit gradient (weighted summation of the contributions of the three period bands shown in Fig.~\ref{fig:gradient_category}) 
+  \caption[Example of the summation of smoothed misfit gradients from three period bands]
+  {\small{Example of a smoothed misfit gradient (weighted summation of the contributions of the three period bands shown in Fig.~\ref{fig:gradient_category}) 
 using data from 42 earthquakes without (Left) and with source \& receiver weighting (Right). The isotropic smoothing length scale is 100~km.
 }}
 \label{fig:gradient_sum}

@@ -29,7 +29,8 @@ between MPI processes on each node will slightly slow down the computation.
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s480}
-	\caption{Strong scaling for the spherically symmetric PREM Earth model on Titan for a minimum seismic
+  \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 9\,s minimum period]
+  {Strong scaling for the spherically symmetric PREM Earth model on Titan for a minimum seismic
 	period of 9\,s. The mesh is comprised of \~\,25 million elements for this
 	resolution. Values are plotted against the number of MPI processes. }
    \label{fig:s480}
@@ -59,7 +60,8 @@ inner elements, but such small meshes are never used in practice.
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/weak}
-	\caption{Weak scaling for the PREM Earth model on Titan. Performance is measured
+  \caption[Weak scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 9\,s minimum period]
+  {Weak scaling for the PREM Earth model on Titan. Performance is measured
 	as the averaged mean time for each time step. The same work load is applied to
 	each MPI process in different cases.}
    \label{fig:weak}
@@ -159,7 +161,8 @@ full attenuation (9~s resolution).}
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s160unq}
-	\caption{Strong scaling for the PREM Earth model on Titan for a minimum seismic
+  \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 27\,s minimum period with full attenuation]
+	{Strong scaling for the PREM Earth model on Titan for a minimum seismic
 	period of 27\,s with full attenuation. Values are plotted
 	against the number of MPI processes. }
    \label{fig:s160unq}
@@ -169,7 +172,8 @@ full attenuation (9~s resolution).}
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s160nounq}
-	\caption{Strong scaling for the PREM model on Titan for a minimum seismic
+  \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 27\,s minimum period w/o ffull attenuation]
+	{Strong scaling for the PREM model on Titan for a minimum seismic
 	period of 27\,s in the case of without \emph{full attenuation}.
   Values are plotted against the number of MPI processes. }
    \label{fig:s160nounq}
@@ -179,7 +183,9 @@ full attenuation (9~s resolution).}
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s256unq}
-	\caption{Strong scaling for the PREM model on Titan for a minimum seismic
+  \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 17\,s minimum period with
+  full attenuation]
+	{Strong scaling for the PREM model on Titan for a minimum seismic
 	period of 17\,s in the case of with \emph{full attenuation}. Values are plotted
 	against the number of MPI processes. }
    \label{fig:s256unq}
@@ -189,7 +195,9 @@ full attenuation (9~s resolution).}
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s256nounq}
-	\caption{Strong scaling for the PREM model on Titan for a minimum seismic
+  \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 17\,s minimum period w/o
+  full attenuation]
+	{Strong scaling for the PREM model on Titan for a minimum seismic
 	period of 17\,s in the case of without \emph{full attenuation}.
   Values are plotted against the number of MPI processes. }
    \label{fig:s256nounq}
@@ -198,7 +206,9 @@ full attenuation (9~s resolution).}
 \begin{figure}[htb!]
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s480nounq}
-	\caption{Strong scaling for the PREM model on Titan for a minimum seismic
+  \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 9\,s minimum period w/o
+  full attenuation]
+	{Strong scaling for the PREM model on Titan for a minimum seismic
    period of 9\,s in the case of without \emph{full attenuation}.
    Values are plotted against the number of MPI processes. }
    \label{fig:s480nounq}

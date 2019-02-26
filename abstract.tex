@@ -1,22 +1,25 @@
-Using GLAD-M15 as our starting model, we conducted 10 quasi-Newton iterations to bring
+Using GLAD-M15 as our starting model, we conducted 10 quasi-Newton iterations to build
 the second generation model, GLAD-M25. It pushes the resolution of global model to 17s
-and the number of earthquakes to 1,480. To achieve such goals, we work from several
-aspects to overcome computational challenges. The Adaptable Seismic Data format,
+and increased the number of earthquakes to 1,480.
+To achieve such goals, we worked from several
+aspects to overcome various challenges. The Adaptable Seismic Data format, ASDF,
 was designed to store the seismic data, to meet the requirements and standards
 of modern data containers. GPU acceleration is introduced in the solver to facilitate
-the forward and adjoint simulations. Workflow management tools was used to help
+the forward and adjoint simulations. Workflow management tools was integrated to help
 us automate the inversion workflow, reducing human interference and speed up the
 iterations. To balance the uneven distribution of earthquakes and seismic stations,
-we introduced the geographical weightings to be applied to construction of misfit
-functions and facilitate the convergence rate. Our model was evaluated in various
-ways, including the misfit and histogram. We also used 360 earthquakes as held-out
-data, to assess the quality of our new model. All the above showed our model has
-significant improvements over the starting model. Our model is also demonstrated
-and compared with various global and region models. We observed notable features
-in our model, in Europe, Asia, North America and South America. The comparison
-shows our model reaches unprecedented resolution for models at global scale, reach
-similar resolution to regional and Continental ones at upper mantle. Our model also
-shows prominent features in plumes and subduction zones, resolving deep structure
-in great details. We believed such improvements in the interior of the Earth could 
+we introduced the geographical weightings and applied them when constructing of misfit
+functions, to facilitate the convergence rate.
+Our model, GLAD-M25, was evaluated in various
+ways, including the misfit and histogram comparisons.
+We also used 360 earthquakes, as held-out
+data, to assess the quality of the new model. All of the above showed our model has
+significant improvements over our starting model, GLAD-M00 and GLAD-M15.
+Our model is also show-cased with various global and region models.
+We observed notable features
+in our model, in Europe, Asia, North America and South America. Those comparisons
+shows our model has unprecedented details compared to other global-scale models, reaching similar resolution as regional and Continental ones at upper mantle.
+GLAD-M25 also shows prominent features in plumes and subduction zones, resolving deep structure in great details.
+We believed such improvements in the interior of the Earth could 
 provide us new insights in to the dynamics and evolution of the Earth.
 

@@ -30,7 +30,8 @@ I/O, as outlined in Figure~\ref{fig:undo_att_scheme}.
 \begin{figure}[ht]
   \begin{center}
     \input{ch-workflow/figures/undo_att_scheme.tex}
-    \caption{I/O pattern with full attenuation. The forward simulation (left bar) produces
+    \caption[I/O pattern with full attenuation]
+    {I/O pattern with full attenuation. The forward simulation (left bar) produces
 snapshots at regular intervals. During the kernel simulation (right bars) these
 snapshots are read in reverse order to piece-wise reconstruct the forward
 wavefield for a number of time steps. The interaction of this reconstructed

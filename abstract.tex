@@ -1,25 +1,28 @@
-Using GLAD-M15 as our starting model, we conducted 10 quasi-Newton iterations to build
-the second generation model, GLAD-M25. It pushes the resolution of global model to 17s
-and increased the number of earthquakes to 1,480.
-To achieve such goals, we worked from several
-aspects to overcome various challenges. The Adaptable Seismic Data format, ASDF,
-was designed to store the seismic data, to meet the requirements and standards
-of modern data containers. GPU acceleration is introduced in the solver to facilitate
-the forward and adjoint simulations. Workflow management tools was integrated to help
-us automate the inversion workflow, reducing human interference and speed up the
-iterations. To balance the uneven distribution of earthquakes and seismic stations,
-we introduced the geographical weightings and applied them when constructing of misfit
-functions, to facilitate the convergence rate.
-Our model, GLAD-M25, was evaluated in various
-ways, including the misfit and histogram comparisons.
-We also used 360 earthquakes, as held-out
-data, to assess the quality of the new model. All of the above showed our model has
-significant improvements over our starting model, GLAD-M00 and GLAD-M15.
-Our model is also show-cased with various global and region models.
-We observed notable features
-in our model, in Europe, Asia, North America and South America. Those comparisons
-shows our model has unprecedented details compared to other global-scale models, reaching similar resolution as regional and Continental ones at upper mantle.
-GLAD-M25 also shows prominent features in plumes and subduction zones, resolving deep structure in great details.
-We believed such improvements in the interior of the Earth could 
-provide us new insights in to the dynamics and evolution of the Earth.
-
+This dissertation details the construction of a tomographic model of the Earth's crust and mantle
+based on seismic full-waveform inversion (FWI).
+The new model involves a database of 1,480 earthquakes in the magnitude range $5.5\le M_w \le 7.2$ recorded by more than 11,000 global
+seismographic stations.
+The approach utilizes 3D simulations of global seismic wave propagation with a shortest period of 17~s accelerated by Graphics Processing Units (GPUs),
+requiring access to the world's largest and fastest supercomputers.
+These simulations accommodate effects due to 3D anelastic crust \& mantle structure, topography \& bathymetry, the ocean load, ellipticity, rotation, and self-gravitation.
+An adjoint-state method is used to calculate Fr\'echet derivatives in 3D anelastic Earth models
+facilitated by a parsimonious storage algorithm.
+The construction of the model,
+named GLAD-M25, posed numerous challenges.
+The Adaptable Seismic Data format (ASDF)
+was designed to meet the requirements and standards
+of modern data containers,
+accommodating fast parallel I/O and full data provenance.
+To manage the complex and fragile iterative global tomographic inversion,
+workflow management tools were introduced to automate and harden the process.
+To balance the uneven distribution of earthquakes and stations,
+a geographical weighting scheme was introduced, thereby speeding up convergence in the
+iterative quasi-Newton inversion algorithm.
+The new model was evaluated by assessing misfit reductions and traveltime \& amplitude anomaly histograms in four period bands on three seismographic components.
+Similar assessments were made for a held-out data set consisting of 360 earthquakes,
+with results comparable to the actual inversion.
+All of these evaluations show that model GLAD-M25 produces significant improvements in fit.
+GLAD-M25 is compared with numerous other global and regional models,
+and a wide variety of plumes and subduction zones are highlighted.
+These comparisons demonstrate that GLAD-M25 has unprecedented resolution compared to other global-scale models, approaching that of regional- and continental-scale models of the upper mantle.
+These improvements in resolution provide new insights into the dynamics and evolution of the Earth's interior.

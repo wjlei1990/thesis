@@ -1,41 +1,45 @@
 \chapter{Introduction\label{ch:intro}}
 
-Construction of global tomographic models of the Earth dates back to the late 1970s
-and early 1980s. However, due to the computational chanllenges, it took more
-than 20 years for the first adjoint-state models to be applied and shown successes
-to regional and continental scale studies. The first generation of global adjoint 
-model, GLAD-M15, was published in 2016 using 253 earthquakes.
-During last 6 years, we have been working on extending the database and carry out
-the second generation of the global model. The new model, GLAD-M25, used 1,480 earthquakes,
-almost 6 fold of data compared last generation and ten quasi-Newton iterations starting
-from GLAD-15. We believe the new model could provide researchers with new insights into
-the interior and dynamics of the Earth.
+The first construction of global tomographic models of the Earth dates back to the late 1970s
+and early 1980s.
+Around the same time,
+the theory of adjoint-state methods was first applied in exploration seismology with the goal of capturing the full physics of seismic wave propagation,
+a process referred to as seismic full-waveform inversion (FWI).
+Mainly due to computational challenges,
+it took until the late 2000s to see the first applications of adjoint-state methods in regional- and continental-scale earthquake seismology.
 
-To carry out iterations with such a large database and high demands for numerical
-computations, there are several technique challeges we solved to achieve our goals.
+The first generation global FWI
+model, GLAD-M15, was published in 2016 using a database of 253 earthquakes.
+Over the past 6 years, we have been working on extending this database to determine
+the second generation global model. The new model, GLAD-M25, used seismographic data from 1,480 earthquakes,
+an almost 6 fold increase compared to the first generation model, and required ten quasi-Newton iterations, starting from GLAD-M15.
+The new model will provide new insights into
+the physics and chemistry of the Earth's interior.
+
+To carry out tomographic iterations with such a large database and with such a high demand for numerical
+computations, several technical challenges needed to be overcome to achieve our goals.
 Chapter 2 presents the Adaptable Seismic Data Format(ASDF). We discuss the motivation
-to introduce a new modern data format, to host our seismic data. It was designed on
-the purpose to faciliate the efficiency, integrity, and reproducibity
-of seismic data that used in our inversion.
+for the introduction of a new modern data format to host our seismic data. It was designed to provide efficiency, integrity, and reproducibility
+of seismographic data.
 
-Chapter 3 gives a overview of the technique chanllenges we encounted in the workflow
-of adjoint tomography, and our solution to them.
-Our solver, SPECFEM3D GLOBE, takes the most expensive part of computation stages,
-forward and adjoint simulations. It is accellerated using MPI and GPU, showing the
-improvments by various benchmark tests. We also covered I/O problems, for both
-mesher data and seismic data, by introductin ADIOS and ASDF to store different data.
-The last part is workflow integration and automazition, using workflow management systems.
+Chapter 3 gives an overview of the technical challenges we encountered in the adjoint tomography workflow, and our solutions to these challenges.
+Our solver, SPECFEM3D GLOBE, is the most expensive part of the compute stages of the workflow,
+involving forward and adjoint simulations. It is accelerated using MPI and GPUs, as documented by various benchmarks. We also encountered I/O problems, for both
+mesh files and seismic data.
+These I/O problems were dealt with by using the ADIOS and ASDF libraries.
+The introduction of workflow management tools helped to integrate, stabilize, and automate the entire FWI workflow.
 
-Chapter 4 discussed the weightings we introduced in the tomography, to balance
-the uneven distribution of earthquakes and seicmic stations. We begun by demonstrating
-a few current used weighting methods and point them drawbacks. We future presented
-our simple-designed and robust weighting strategies. We conclude by conducting a 2D synthetic
-test, showing our weighting strategy can indeed improve the convergence rate of global-scale
-inversion.
+Chapter 4 discusses a geographical weighting scheme we introduced in the inversion to balance
+the uneven distribution of earthquakes and seismographic stations.
+Simple 2D tests demonstrate that this geographical weighting scheme speeds up convergence of inversions
+compared to traditional weighting schemes.
+Examples of 3D Fr\'echet derivatives utilizing the geographical weighting scheme show much improved sensitivity in the deep mantle and in the poorly covered southern hemisphere.
 
-
-Chapter 5 presented our second generation model, GLAD-M25. We went through the data and inverison
-strategy over iterations. The model was evaluated by
-various ways, including the misfit reduction and histogram change.
-360 earthquakes were used as held-out data to future assess the quality of our model.
-We conclude by showing case the GLAD-M25 model, along with many regional and global models. The details and improvment on resolutions is unseen in other global models and we belive such improvements could help researchers to get an better understanding of the earth at a global scale.
+Chapter 5 presents our second generation global tomographic model, GLAD-M25.
+The model was evaluated in
+various ways, including an assessment of misfit reductions in twelve measurement categories and
+a statistical analysis of traveltime and amplitude anomalies.
+A held-out database of 360 earthquakes was used to further interrogate the quality of our model,
+showing similar misfit reductions and traveltime and amplitude anomalies as the actual inversion.
+We conclude by showcasing GLAD-M25 together with many other global and regional models.
+These comparisons illustrate that GLAD-M25 has unprecedented resolution, approaching that of regional models.

@@ -23,7 +23,8 @@ upon quality criteria before being added to the common code base.
 In practice, we have implemented this workflow using the tools provided by the
 GitHub platform, and the automatic testing frameworks Buildbot, Jenkins and Travis CI.
 
-As illustrated in Figure \ref{fig:ReposBranches_all}, our collaborative
+%As illustrated in Figure \ref{fig:ReposBranches_all}, our collaborative
+Our collaborative
 software development practice
 is organized around three Git repositories.
 \begin{description}
@@ -41,7 +42,7 @@ developers desktop or laptop.
 
 %\begin{figure}[tbh!]
 %\centering
-%\resizebox{5in}{!}{\input{figures/ReposBranches_all.pdf_t}}
+%\resizebox{5in}{!}{\input{ch-workflow/figures/ReposBranches_all.pdf_t}}
 %\caption{There are three types of Git repositories: the central repository on
 %  GitHub, the developer's fork on GitHub, and the developer's clone on their own
 %  machine. The only way for developers to commit their changes to the central
@@ -51,7 +52,6 @@ developers desktop or laptop.
 %  developments are transferred from the \texttt{devel} to the \texttt{master}
 %  branches of the central repository. \label{fig:ReposBranches_all}}
 %\end{figure}
-
 
 An essential part of our workflow is the differentiation between production and
 development code: the production code is in a Git branch called
@@ -86,8 +86,8 @@ own source code changes.
 
 Assuming that a developer already has a clone of the central repository on
 his/her local machine, a typical workflow for committing new code developments
-to the central repository is as follows (see Figure
-\ref{fig:ReposBranches_all}).
+%to the central repository is as follows (see Figure \ref{fig:ReposBranches_all}).
+to the central repository is as follows.
 \begin{enumerate}
 \item The developer pushes his/her changes to his/her fork on GitHub.
 \item He/she opens a pull-request.

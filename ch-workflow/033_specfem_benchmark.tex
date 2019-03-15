@@ -26,7 +26,7 @@ admitted that as the number of MPI tasks used in the simulation increases
 each GPU node will be slightly decreased. This is because communications
 between MPI processes on each node will slightly slow down the computation.
 
-\begin{figure}[htb!]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s480}
   \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 9\,s minimum period]
@@ -57,7 +57,7 @@ scaling results indicate that asynchronous message passing is nearly perfect in
 hiding network latency on Titan. Note that this becomes more of a challenge for
 smaller mesh sizes, where the percentage of outer elements increases compared to
 inner elements, but such small meshes are never used in practice.
-\begin{figure}[htb!]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/weak}
   \caption[Weak scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 9\,s minimum period]
@@ -121,8 +121,9 @@ causes slightly lower efficiency.
 
 \begin{table}[]
 \centering
-\tabletitle{Comparison of processing time per time step with and without full 
-attenuation (27~s resolution).}
+  \caption[Processing time with and without full attenuation at 27~s resolution]
+  {\small{Comparison of processing time per time step with and without full 
+    attenuation (27~s resolution).}}
 \label{tbl:comp160}
     \begin{tabular}{lccccc}
 	  \tch{No.\ of MPI processes} & 24 & 96 & 150 & 600   &  2400			       		 \\
@@ -134,8 +135,9 @@ attenuation (27~s resolution).}
 
 \begin{table}[]
 \centering
-\tabletitle{Comparison of processing time per time step with and without
-full attenuation (17~s resolution).}
+  \caption[Processing time with and without full attenutation at 17~s resolution]
+    {\small{Comparison of processing time per time step with and without
+      full attenuation (17~s resolution).}}
 \label{tbl:comp256}
     \begin{tabular}{lccccc}
 	  \tch{No.\ of MPI processes} & 96 & 384 & 1536 & 6144 		       		 \\
@@ -147,8 +149,9 @@ full attenuation (17~s resolution).}
 
  \begin{table}[]
 \centering
-\tabletitle{Comparison of processing time per time step with and without
-full attenuation (9~s resolution).}
+   \caption[Processing time with and without full attenuation at 9~s resolution]
+   {\small{Comparison of processing time per time step with and without
+      full attenuation (9~s resolution).}}
 \label{tbl:comp480}
      \begin{tabular}{lcccc}
 	  \tch{No.\ of MPI processes} & 600 & 1350 & 2400 & 5400 		       		 \\
@@ -158,7 +161,7 @@ full attenuation (9~s resolution).}
     \end{tabular}
  \end{table}
 
-\begin{figure}[htb!]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s160unq}
   \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 27\,s minimum period with full attenuation]
@@ -169,7 +172,7 @@ full attenuation (9~s resolution).}
 \end{figure}
 
 
-\begin{figure}[htb!]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s160nounq}
   \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 27\,s minimum period w/o ffull attenuation]
@@ -180,7 +183,7 @@ full attenuation (9~s resolution).}
 \end{figure}
 
 
-\begin{figure}[htb!]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s256unq}
   \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 17\,s minimum period with
@@ -192,7 +195,7 @@ full attenuation (9~s resolution).}
 \end{figure}
 
 
-\begin{figure}[htb!]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s256nounq}
   \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 17\,s minimum period w/o
@@ -203,7 +206,7 @@ full attenuation (9~s resolution).}
    \label{fig:s256nounq}
 \end{figure}
 
-\begin{figure}[htb!]
+\begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{ch-workflow/figures/s480nounq}
   \caption[Strong scaling of SPECFEM3D GLOBE for the PREM Earth model on Titan for 9\,s minimum period w/o

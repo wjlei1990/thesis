@@ -27,7 +27,7 @@ It avoids instabilities that occur when time-reversing dissipative wave
 propagation simulations. In practice, this leads to a dramatic increase for
 I/O, as outlined in Figure~\ref{fig:undo_att_scheme}.
 
-\begin{figure}[ht]
+\begin{figure}
   \begin{center}
     \input{ch-workflow/figures/undo_att_scheme.tex}
     \caption[I/O pattern with full attenuation]
@@ -219,11 +219,12 @@ large data volumes on a high number of nodes.
 
 \begin{table}%1
 %\noautomaticrules
-\tabletitle{Bandwidth for \texttt{SPECFEM3D\_GLOBE} output using the ADIOS
-\texttt{MPI\_AGGREGATE} transport method for mesh using 24,576 MPI tasks.
-Results are presented both for the old (Spider) and new (Atlas) OLCF
-filesystems. Numbers for different regions outline that large files benefit the
-most from use of the ADIOS library.}
+  \caption[Benchmarks of I/O Bandwidth for ADIOS]
+  {\small{Bandwidth for \texttt{SPECFEM3D\_GLOBE} output using the ADIOS
+    \texttt{MPI\_AGGREGATE} transport method for mesh using 24,576 MPI tasks.
+    Results are presented both for the old (Spider) and new (Atlas) OLCF
+    filesystems. Numbers for different regions outline that large files benefit the
+    most from use of the ADIOS library.}}
 \begin{tabular}{@{}lccc@{}}
 \tch{Mesh Region}    &\tch{Ouput Size (GB)} &\tch{Spider (GB/s)} &\tch{Atlas (GB/s)}\\[-2pt]
 \midrule

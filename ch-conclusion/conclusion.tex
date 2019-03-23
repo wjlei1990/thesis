@@ -3,8 +3,8 @@
 \label{ch:conclusion}
 
 In this thesis, we went through all the improvements we made for the GLAD-M25.
-To overcome the I/O bottlenect, we introduced the ADIOS and ASDF, for storing 
-model data and seismic data. To make the computation more effeicent and performant,
+To overcome the I/O bottleneck, we introduced the ADIOS and ASDF, for storing 
+model data and seismic data. To make the computation more efficient and preferment,
 we rebuilt our tools using python and added new features into those software.
 Workflow management tools help us to automate the inversion, reducing possible
 human-introduced errors. The new weighting schema we proposed help to
@@ -19,19 +19,19 @@ not only for upper mantle structures, but also shows clear images at depth.
 
 \section{Future Work}
 
-There are defintely lots of works could be done in the future. The lower hanging
+There are definitely lots of works could be done in the future. The lower hanging
 fruit would be a deeper investigation in our model structures.
-There are defintely lots of interesting geoglocial structures emerging in the
+There are definitely lots of interesting geological structures emerging in the
 GLAD-M25 model that should be investigated. Vp/Vs ratio on plumes is one of
 the topics. We also see interesting subduction structures at South America,
-Farallon sblas and Tibet. Our new model could provide us new insights into the
+Farallon slabs and Tibet. Our new model could provide us new insights into the
 dynamics of the Earth.
 
 There are also a few directions we would like to go for the third-gen of GLAD
-models. First, there are still more earthquakes avaiable. Our current earthquake
+models. First, there are still more earthquakes available. Our current earthquake
 dataset covers most of the deep events from 1995 -- 2016 in the Global CMT Project. However,
 there are still thousands of inter-mediate and shallow earthquakes no being
-assimalated. We haven't added any events from 2017 and 2018 yet. We are planning
+assimilated. We haven't added any events from 2017 and 2018 yet. We are planning
 to push our dataset to 4,000 earthquakes in the near future. Our efforts 
 in data format, software and tools would enable us to handle a even larger dataset
 without any issue.
@@ -40,20 +40,20 @@ We could also add more parameters into our model inversion. Anelastic inversion
 could be one of them. Anelastic attenuation is an important factor that affects
 the amplitude of waveforms. From our amplitude histograms, it is obvious that 
 there are quite a lot of space for the attenuation to be improved. Anisotropy
-is another important factor for wave propogation. It will also provide new insights
-into those higly heterogeneous regions, such as plumes and subduction regions.
+is another important factor for wave propagation. It will also provide new insights
+into those highly heterogeneous regions, such as plumes and subduction regions.
 
 We also want to push the model resolution from 17sec to 9sec. That will requires us
 to have better source modelings. At global scale,
-to ensure good singal-to-noise ratio, we usually picked events whose moment
+to ensure good signal-to-noise ratio, we usually picked events whose moment
 magnitudes are between 5.5 to 7.2, and the duration of source would reaches ~17secs.
 However, when the simulation reaches such short period, source time function
-would really critial for the waveform fitting. Thus, to really use all the events,
-we need to have a better esimation of the source time function, rather than using
-simple gaussian type function.
+would really critical for the waveform fitting. Thus, to really use all the events,
+we need to have a better estimation of the source time function, rather than using
+simple Gaussian type function.
 
 Source encoding could potentially bring new revolution into our inversion workflow. With such
-technique, kernels could be calcuated with one run(no gaps between forward and adjoint
+technique, kernels could be calculated with one run(no gaps between forward and adjoint
 simulation), so there is no need saved wavefield files, which still stressed the file system
 a lot and remains our major challenges on HPC system.
 challenges we faced now.

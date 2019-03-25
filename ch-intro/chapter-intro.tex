@@ -10,103 +10,155 @@ Mainly due to computational challenges, it took until the late
 2000s to see the first applications of adjoint-state methods
 in regional- and continental-scale earthquake seismology.
 
-The first generation global FWI model, GLAD-M15\cite{} was published in 2016
-using 253 earthquakes and 15 conjugate-gradient iterations.
+Recent years has witness the success of adjoint tomography being
+applied to region and continental studies~\cite{tape2009adjoint, zhu2012structure,
+chen2015multiparameter}. However, due to the high demand for computational
+resource,
+It was untils 2016 that first generation global FWI model,
+GLAD-M15~\cite{bozdaug2016global} was published.
+GLAD-M15, used 253 earthquakes and
+15 conjugate-gradient iterations performed
+on the Titan supercomputer located in Oak Ridge National Lab.
+Over the past few years, we have been working on various aspects to improve
+the model and publish the second-gen model, GLAD-M25.
 
-Over the past 6 years, we have been working on various aspects to improve
-the model quality and publish the second-gen model, GLAD-M25.
-
-The first thing is we did is increasing the dataset. We carefully picked
-earthquakes from Global CMT project\cite{} and applied source inversion on those
-earthquakes in 3D earth model. We carefully monitored how the mechanism changed
-after source inversion and pick source with high quality data.
-Our dataset covered most of the deep and inter-mediate depth
-events in Global CMT categories. Even though they are usually small portion of
-the overall earthquake dataset,  those deep events provide very clean deep phases
+The first thing is expanding the dataset. We carefully picked
+earthquakes from Global CMT project\cite{ekstrom2012global}. Source inversion
+are conducted in GLAD-M15 before getting into the structure inversion stage,
+and the inversion would provide us better source mechanism in the 3D earth model.
+We carefully monitored how the mechanism changed
+after source inversion and pick source with high quality mearsurments.
+The dataset covered most of the deep earthquakes in Global CMT categories.
+Even though they are relatively very small portion of
+the overall earthquakes, those deep events provide very clean body-wave phases
 that sample the lower mantle structures.
-The number of earthquakes was first pumped to 1,040, then increased to 1,480,
-from GLAD-M15 to GLAD-M25.
-It is almost a 6-fold of data increased and the dramatically increased dataset did brought
-us lot of challenges.
+The number of earthquakes was first increased to 1,040, then increased to 1,480 at
+the twenty-first iteration.
+It is almost a six fold of data increased compared to GLAD-M15. As the data
+hs increased dramatically, it did brought us lot of challenges.
 
-It is very crucial to handle the I/Os with such a large dataset in a proper manner. 
-SPECFEM3D GLOBE is a spectral finite element solver, whose performance is very
-sensitive to the I/Os efficiency. With the 120min simulation at 17 sec resolution and 
-undo-attenuation, the solver will generate 80GB of model files and 1TB of wavefield files.
-Given the current size of 1,480 earthquakes, the total file size would reach 1.6 petabytes.
-What is more critical is at the current performance of supercomputer Titan at Oak Ridge
-National Lab, the 1.6 petabytes of files would be generated and saved to disk during
-total of 6~hrs simulation. SPECFEM package used to use binary files to save model files and each
-MPI task will operate on its own files, with each file can only save one single parameter.
-Given the simulation usually runs on ~15,000 nodes, it can easily generate millions of I/Os
-jam the I/O bus, bring the file system in its knees and slow down the simulations. Through
-our collaboration with Oak Ridge National Lab, we integrate ADIOS in our solver and post-processing
-tools. It greatly improved the I/O performance of our solver and enhance the stability of the
+With such a large dataset, It is very crucial to handle the
+I/Os in a proper manner. 
+SPECFEM3D GLOBE is a spectral finite element solver that handles forward
+and adjoint simulation, and its performance is very
+sensitive to the I/Os efficiency of model files.
+With the 120min global simulation at 17 sec resolution and
+undo-attenuation operation, the solver will generate 80GB of model files
+and 1TB of wavefield files in each run.
+Given the current size of 1,480 earthquakes, the total file size would be 1.6 petabytes
+ and all those files would be generated in about ~6 hours simulation peformed on the
+ Titan.
+SPECFEM package used to save model in binary files with each
+MPI task operate on its own files.
+Given forward and adjoint simulation usually runs on ~15,000 nodes,
+it can easily generate millions of files that
+jam the I/O bus and slow down the simulations.
+Through our collaboration with Oak Ridge National Lab,
+we integrate ADIOS in our solver and post-processing tools.
+It greatly improved the I/O performance of the solver and enhance the stability of the
 simulation. More details about ADIOS could be found in Appendix.~\ref{subsection:ADIOS}.
 
-Another I/O challenge comes from the increase of seismic data. Unlike model and mesh data,
-seismic data in general contains more components, including the earthquake source,
-station information and time series data. With thousands of earthquakes, we have millions
-of traces and station files. It is extremely
-difficult to maintain the relationship and integrity given such a large number files. We used to manage
-those files in directory based method, which is fragile and error-prone since directory
-can be easily moved, copied or deleted. Another issue is the efficiency of data processing.
-In our first-gen model, we used SAC to store waveform data and RESP files to store the instrument
-response information. The shortcoming of such data formats are that they usually can only store 
-data from one component from one station. To solve such issues, we developed the Adaptable
-Seismic Data Format(ASDF) to store seismic data. One typical ASDF file will contain one
+Another challenging part of I/O comes from the increase of seismic data.
+Unlike model data which stores arrays with fixed dimension,
+seismic data is very heterogenous. It including the earthquake source,
+station information and time series data.
+With thousands of earthquakes in our dataset, we have millions
+of time serie traces and station files.
+In our first-gen model, SAC is used to store waveform data and RESP files to store the instrument
+response information. The shortcoming of such data formats that they usually can only store 
+data from one component from one station, which will lead to millions of small-size files on
+the file system.
+Our data processing based on SAC also suffers from performance issues, since it is
+not designed for processing massive data and is lack of parallel
+or multiprocessing support.
+Despite of the large data volume,
+it is difficult to maintain the relationship and integrity between
+different components. Managing files in directory-style method is fragile and
+error-prone since directory
+can be easily moved, renamed or deleted.
+Where files gets transferred or shared with others, there is no way to keep the
+data relationship other than keeping the same directory structure.
+
+To solve such issues, we developed the Adaptable
+Seismic Data Format(ASDF) to store seismic data. 
+In order to solve the I/O and data integrity issue, we associated
+waveform data with its meta data information and put them into the same file.
+One typical ASDF file will contain one
 source(QuakeML) file, and all waveform and station(StationXML) associated with that event.
-It also has the capability to store adjoint sources. ASDF will also provide APIs that takes
-the user-defined data processing functions and dispatch computational task in parallel.
+reducing the number of total seismic data files from millions to thousands.
+It can also store adjoint sources, and other types of auxiliary data due to its
+flexible inner structure.
+Reproducibility is also promoted in ASDF by keeping the provenance information
+associated with the data and procesing procedures.
+In the future, researchers could trace the source of data, and get easy access
+to operations applied on the data, so data would be reproduced.
+To boost the performance of data processing, ASDF also provide APIs that takes
+user-defined data processing functions and dispatch computational task in parallel.
 More details about ASDF could be found in Appendix.~\ref{chapter:asdf}.
 
-It does take us a while to think about whether to re-write the data processing tools
-into python. But it turns out that it is worth our time and efforts even though it does
-take us some time to design and implement new python tools. First, re-writing in python
-makes it possible to integrate with ASDF libraries, especially the parallel dispatch APIs.
-When design data processing tools, we only need to focus on lower level, such as
-operations on trace or stream level, without thinking about the parallel. Those logic is 
-embedded in ASDF and thus parallel is much easier. Python also makes the code development
-faster, relying on the community and open-source support, such as Numpy, Scipy and obspy.
-Also, software management and deployment is much faster and easier, with the very powerful
-python package management tools. More details for software practice could be found in 
+To adapt the data format into our workflow, new processing tools was developed using python.
+Even though it did take us a while to prepare all the processing software
+into production, it is totally worth our time and efforts.
+First, re-writing in python
+makes it so easy to integrate with ASDF libraries, especially the parallel dispatch APIs
+in python ASDF library.
+When implementin data processing software, we only need to focus on lower-level
+operations on trace or stream level, without thinking about the parallelism.
+since the parallelism logic would handled in ASDF.
+The modular design makes our software more testable and thus developed in a much fasterpace.
+Python also provide us with great open-source and community support.
+So we can use public libraries, such as Numpy, Scipy and obspy, and avoid
+implementing a lot basic-level functions.
+Last but not the least, softwared management, such as versioning and dependency,
+and softward deployment is much faster and easier,
+with the very powerful python package management tools and git.
+More details for software practice could be found in 
 section.~\ref{section:data_processing} and Appendix.~\ref{sec:software_practices}.
 
-With so mange great components to be added in, it becomes very natural to introduce
-workflow management tools to manage single components and connect them together. The data processing
-workflow is used as an example to demonstrate the complex nature of the inversion workflow
-in section.~\ref{section:workflow_management}. The workflow management tools can help us
-to automate the inversion process, reducing time gaps between stages and also eliminate
-human-introduced errors. It also increase the robustness of the system, by introducing
-the job validation process after job exit from queue. It first checks the return code
-of job status in queue, making sure there is no alarming errors. Then it will validate the
-output file using the user-defined rules. If failure detected, it will resubmit the failed 
-jobs in batch. It becomes very handy given that
+Our thinking and efforts on developing workflow mangement tools is also worth mentioning here.
+The workflow of adjoint tomography is complex, invovling many sub-steps and operating
+on thousands of model files and millions of seismic traces.
+The workflow management tools wll help us connect different components into one solid
+piece.
+The data processing workflow is used as an example to demonstrate the complex
+nature of the inversion workflow
+in section.~\ref{section:workflow_management}. The workflow management tools we developed
+has helped us to automate the inversion process, reducing time gaps between stages and
+also eliminate human-introduced errors.
+It also increase the robustness of the system, by introducing
+the job validation process after job exit from queue.
+If failure detected, it will resubmit the failed  jobs in batch.
+It becomes very handy given that
 hardware and file system failures are inevitable when processing such a large dataset.
-To summarize, workflow management tools helped to integrate, stabilize, and automate
-the entire FWI workflow.
+To summarize, workflow management tools helped to integrate, automate, and stabilize
+the FWI workflow.
 
-Due to the uneven distribution of earthquakes and Seismic stations, the summation of
-kernels will also be quite imbalanced in space. The problem becomes more severe with
-the assimilation of regional seismic networks, such as US array. The dense regional
-networks will have a strong, directional footprint on the gradients and model updates.
-In GLAD-M15, we compensate such effect using multi-scale smoothing. But it didn't resolve
-the unbalanced distribution. The geographical weighting was introduced, with a very simple
-but robust algorithm to determine the weightings for sources and stations. With such 
-weightings schemes, stations in dense regions will be assigned with smaller weighting values.
-and to lower their contribution in the overall misfit function.
-Simple 2D tests demonstrate that this geographical weighting scheme speeds up convergence of inversions
-compared to traditional weighting schemes.
-Examples of 3D Fr\'echet derivatives utilizing the geographical weighting scheme show much improved sensitivity in the deep mantle and in the poorly covered southern hemisphere.
+Due to the uneven distribution of earthquakes and Seismic stations, the summation
+kernel from each earthquake will also be quite imbalanced in space.
+The problem becomes more severe when data from regional seismic networks, such as US array,
+got assimilated into the dataset.
+The dense regional networks will have a strong, directional footprint on the gradients and
+model updates.
+In our first-gen model, GLAD-M15, we compensate such effect using multi-scale smoothing.
+To better resolve the issue of imbalanced distribution, we propsed the geographical weighting.
+It is a very simple and robust algorithm to determine the weightings for sources and stations.
+With such weightings schemes, stations and sources
+in dense regions will be assigned with smaller weighting
+values based on the nearby density, makeing their contribution in the overall misfit function
+lower.
+Simple 2D tests demonstrate that this geographical weighting scheme speeds up
+convergence rate of inversion compared to other methods.
+Examples of 3D Fr\'echet derivatives utilizing the geographical weighting scheme show
+much improved sensitivity in the deep mantle and in the poorly covered southern hemisphere.
 Chapter.~\ref{ch:weighting} will discuss our weighting strategy in details.
 
 Chapter.~\ref{ch:GLAD-M25} presents our second generation global tomographic model, GLAD-M25.
-We presented our earthquakes dataset and seismic data selections. Source inversion
-results are also presented and they are consistent with preceding researches.
+We presented our earthquakes dataset and seismic dataset.
 Window selections for 1,480 earthquakes was also plotted, to give people a better
 view about how good we are assimilating the different seismic phases.
-We discuss the weighting schema and inversion strategy in the following sections.
-Then, the GLAD-M25 model was evaluated in various ways, including an assessment of misfit reductions
+We discussed the weighting schema, model parametrization inversion strategy.
+Then, the GLAD-M25 model was evaluated in various ways,
+including an assessment of misfit reductions
 in twelve measurement categories and
 a statistical analysis of traveltime and amplitude anomalies.
 A held-out database of 360 earthquakes was used to further interrogate the quality of our model,
@@ -114,19 +166,19 @@ showing similar misfit reductions and traveltime and amplitude anomalies as the 
 We conclude by showcasing GLAD-M25 together with many other global and regional models.
 Regional upper-mantle horizontal slices are shown in the Europe, Asia, North and South America.
 These comparisons illustrate that GLAD-M25 has unprecedented resolution, approaching that of regional models
-in the upper mantle. We also showed vertical cross-sections comparisons in plumes and subduction regions.
-In plumes regions, GLAD-M25 shows very consistent structures with other S wave models. In subduction
-areas, GLAD-M25 has very similar structures as to other P-wave models but also shows clear slabs 
-in the lower mantle.
+in the upper mantle. We also exhibited some vertical cross-sections, in comparisons with other
+P and S wave tomographic models in plumes and subduction regions.
 
 In summary, Chapter \ref{ch:tools} gives an overview of the technical challenges we encountered
-in the adjoint tomography workflow, covering data format, workflow components and management tools.
+in the adjoint tomography workflow, covering data format, process software and workflow
+management tools.
 Chapter \ref{ch:weighting} discusses a geographical weighting scheme we introduced
 in the inversion to balance the uneven distribution of earthquakes and seismographic stations.
-Chapter \ref{ch:GLAD-M25} show-cased our new model, GLAD-M25, in great detail, covering input data,
+Chapter \ref{ch:GLAD-M25} presented our new model, GLAD-M25, in great detail, covering input data,
 inversion strategy and final results.
-Appendix \ref{chapter:1Dmodel} and \ref{chapter:shanalysis} is supplement material for GLAD-M25,
-providing spherical analysis to future evaluate the model. Appendix \ref{chapter:asdf} and
-\ref{ch:exascale_tomography} is supplement material for chapter \ref{ch:tools}, as more details
-for ASDF, ADIOS and workflow tools will be reveals in them. Appendix \ref{ch:software_resource}
-provide links and DOI information to software we developed for the Global adjoint tomography project.
+
+Appendix \ref{chapter:1Dmodel} and \ref{chapter:shanalysis} are supplement materials for GLAD-M25,
+providing spherical analysis for GLAD-M25. Appendix \ref{chapter:asdf} and
+\ref{ch:exascale_tomography} are supplement materials for chapter \ref{ch:tools}, as more details
+for ASDF, ADIOS and workflow tools will be discussed. Appendix \ref{ch:software_resource}
+provides links and DOI information to software we developed for the Global adjoint tomography project.

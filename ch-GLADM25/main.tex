@@ -3,7 +3,7 @@
 \textbf{Note}\\
 This chapter has been submitted as a paper entitled ``Global Adjoint Tomography -- Model GLAD-M25'' by Lei, W., Ruan, Y., Bozda\u{g}, E., Peter, D., Lefebvre, M., Komatitsch, D., Tromp, J., Hill, J.,  Podhorszki, N., and Pugmire, D.\ to the \textit{Geophysical Journal International}.
 
-\section{Summary}
+\section*{Summary}
 Building on our first-generation global adjoint tomography model,
 GLAD-M15~\cite{bozdaug2016global}, we present our second-generation transversely isotropic global model,
 named GLAD-M25, which is the result of ten quasi-Newton tomographic iterations with an
@@ -477,7 +477,7 @@ includes the following phases.
     filtered, and the horizontal components are rotated to obtain the radial and transverse components of motion.
   \item Window selection on a pair of
     observed and synthetic seismograms. Pyflex (a Python version
-    of FLEXWIN by \citet{krischer2015}) is
+    of FLEXWIN by \cite{krischer2015}) is
     used to automatically generate windows where observed and
     synthetic data are sufficiently close to make measurements based on user defined
     criteria.
@@ -1213,23 +1213,27 @@ Caribbean subduction is clearly discernible in model GLAD-M25 and the two $V_\te
 \label{section:plumes}
 
 \begin{figure}[ht!]
-    \centering
-    \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Afar.png}}\\[-1pt]
-    \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Bermuda_Canary.png}}\\[-1pt]
-    \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/CapeVerde_Hoggar.png}}\\[-1pt]
-    \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Iceland_Eifel.png}}\\[-1pt]
-    \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Easter_Galapagos.png}}\\[-1pt]
-    \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Marion3_Kerguelen.png}}\\
-    \caption[Vertical cross sections of shear wavespeed perturbations for various plumes]
-    {\small{Vertical cross sections for various plumes for models GLAD-M25 ($V_\textrm{S}$; left column), TX2015~\cite{TX2015} (center column), and SEMUCB-WM1~\cite{french2015broad} (right column).
-    The map in the top left corner of each row shows the cross section with color-coded red, green, and white dots for geographical reference;
+  \centering
+  \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Afar.png}}\\[-1pt]
+  \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Bermuda_Canary.png}}\\[-1pt]
+  \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/CapeVerde_Hoggar.png}}\\[-1pt]
+  \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Iceland_Eifel.png}}\\[-1pt]
+  \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Easter_Galapagos.png}}\\[-1pt]
+  \sidesubfloat[]{\includegraphics[width=0.98\textwidth]{ch-GLADM25/figures/plumes/Marion3_Kerguelen.png}}\\
+  \caption[Vertical cross sections of shear wavespeed perturbations for various plumes]
+    {\small{Vertical cross sections for various plumes for models GLAD-M25 ($V_\textrm{S}$; left column),
+    TX2015~\cite{TX2015} (center column), and SEMUCB-WM1~\cite{french2015broad} (right column).
+    The map in the top left corner of each row shows the cross section with color-coded red, green,
+    and white dots for geographical reference;
     hotspots are denoted by red triangles.
     The dashed black semicircles in the cross sections denote depths of 410~km, 660~km, and 1000~km.
-    (a) Afar; (b) Bermuda (left) and Canary (middle); (c) Cape Verde (middle) and Hoggar (right); (d) Iceland (middle) and Eifel (right); (e) Easter (left) and Galapagos (right); (f) Marion (middle), and Kerguelen (right). }}
-    \label{fig:plumes}
+    (a) Afar; (b) Bermuda (left) and Canary (middle); (c) Cape Verde (middle) and Hoggar (right);
+    (d) Iceland (middle) and Eifel (right); (e) Easter (left) and Galapagos (right); (f) Marion (middle),
+    and Kerguelen (right). }}
+  \label{fig:plumes_combo}
 \end{figure}
 
-In this section we highlight various plume systems on Earth. Fig.~\ref{fig:plumes}
+In this section we highlight various plume systems on Earth. Fig.~\ref{fig:plumes_combo}
 shows cross sections of several plumes, comparing models GLAD-M25 ($V_\textrm{P}$),
 TX2015~\cite{TX2015}, and SEMUCB-WM1~\cite{french2015broad}.
 All three models have common plume features,
@@ -1242,26 +1246,26 @@ with profoundly different implications for mantle
 convection.
 
 \begin{itemize}
-\item[]{\it Afar} In Fig.~\ref{fig:plumes}(a),
+\item[]{\it Afar} In Fig.~\ref{fig:plumes_combo}(a),
 we see that the Afar plume in model GLAD-M25 originates from the CMB, narrows its diameter
 in the mid mantle, and broadens again above the 660~km discontinuity.
 It exhibits
 very similar behavior in TX2015 but differs significantly in SEMUCB-WM1.  
-\item[]{\it Bermuda and Canary} In Fig.~\ref{fig:plumes}(b), from left to right, we see in model GLAD-M25 (i) the Farallon
+\item[]{\it Bermuda and Canary} In Fig.~\ref{fig:plumes_combo}(b), from left to right, we see in model GLAD-M25 (i) the Farallon
 slab; (ii) the Bermuda hotspot above the 660~km discontinuity; (iii) the Canary hotspot originating from the CMT and
 rising all the way up the Earth's surface; (iv) the Afar hotspot from another angle.
-\item[]{\it Cape Verde and Hoggar} Fig.~\ref{fig:plumes}(c) features (i) South America subduction; (ii) the Cape Verde hotspot extending from the CMB all the way to the surface; (iii) the Hoggar hotspot from 660~km to the surface. 
-\item[]{\it Iceland and Eifel} Fig.~\ref{fig:plumes}(d) shows a plume which rises from the CMB right below Iceland, reaches 660~km, amplifies,
+\item[]{\it Cape Verde and Hoggar} Fig.~\ref{fig:plumes_combo}(c) features (i) South America subduction; (ii) the Cape Verde hotspot extending from the CMB all the way to the surface; (iii) the Hoggar hotspot from 660~km to the surface. 
+\item[]{\it Iceland and Eifel} Fig.~\ref{fig:plumes_combo}(d) shows a plume which rises from the CMB right below Iceland, reaches 660~km, amplifies,
 and ascends to the surface.
 The intensification above 660~km may be an indication of partial melting.
-\item[]{\it Easter and Galapagos} Fig.~\ref{fig:plumes}(e) contains (i) the Easter hotspot; (ii) the Galapagos
+\item[]{\it Easter and Galapagos} Fig.~\ref{fig:plumes_combo}(e) contains (i) the Easter hotspot; (ii) the Galapagos
 hotspot; (iii) the Central America slab.
 In models GLAD-M25 and TX2015,
 the Easter and Galapagos hotspots appear to originate from the same underlying plume in the deep mantle,
 which is the eastern arm of the Pacific superplume.
 \item[]{\it Marion and Kerguelen}
 Finally,
-in Fig.~\ref{fig:plumes}(f) we see the Marion and Kerguelen hotspots, which might be connected to Afar in the lower mantle.
+in Fig.~\ref{fig:plumes_combo}(f) we see the Marion and Kerguelen hotspots, which might be connected to Afar in the lower mantle.
 Recovering these plumes is challenging due to poor data coverage in the southern hemisphere.
 \end{itemize}
 
@@ -1287,29 +1291,29 @@ Recovering these plumes is challenging due to poor data coverage in the southern
     \sidesubfloat[]{\includegraphics[width=0.88\textwidth]{ch-GLADM25/figures/subductions/Wc.png}\label{fig:subd_e}}\\[-8pt]
     \sidesubfloat[]{\includegraphics[width=0.88\textwidth]{ch-GLADM25/figures/subductions/Ne.png}\label{fig:subd_d}}\\[-8pt]
     \sidesubfloat[]{\includegraphics[width=0.88\textwidth]{ch-GLADM25/figures/subductions/Su.png}\label{fig:subd_f}}\\[-8pt]
-    \captionp[Vertical cross sections of compressional wavespeed perturbations in various subduction zones]
+    \caption[Vertical cross sections of compressional wavespeed perturbations in various subduction zones]
     {\small{Vertical cross sections of compressional wavespeed perturbations in various subduction zones
     for models GLAD-M25 ($V_\textrm{P}$; left column), GAP-P4~\cite{fukao2013subducted} (middle column) and UU-P07~\cite{van2018atlas} (right column).
     The map in the top left corner of each row shows the cross section with color-coded red, green, and white dots for geographical reference.
     The dashed black semicircles in the cross sections denote depths of 410~km, 660~km, and 1000~km.
     (a) Aegean; (b) South America; (c) Hatteras; (d) Wichita. (e) Nepal; (f) Sunda. }}
-    \label{fig:subd}
+    \label{fig:subd_combo}
 \end{figure}
 
 In this section we highlight various subduction systems on Earth.
-In Fig.~\ref{fig:subd} we compare GLAD-M25~($V_\textrm{P}$) with two compressional wavespeed models,
+In Fig.~\ref{fig:subd_combo} we compare GLAD-M25~($V_\textrm{P}$) with two compressional wavespeed models,
 namely, GAP-P4~\cite{fukao2013subducted} and UU-P07~\cite{van2018atlas}.
-Fig.~\ref{fig:subd}(a) features the Aegean subduction zone. All models show a slab penetrating into the lower mantle beyond a depth of 1,000~km.
-Fig.~\ref{fig:subd}(b) shows the South American slab, which, in this cross section, ponds in the shallow lower mantle in all three models, before sinking all the way to the CMB.
-Figs.~\ref{fig:subd}(c) and~(d) show cuts across the ancient Farallon slab, which penetrates deeply into the lower mantle,
-as spectacularly documented by, for instance, \citet{grand1994,hilst1997,grand1997high}.
+Fig.~\ref{fig:subd_combo}(a) features the Aegean subduction zone. All models show a slab penetrating into the lower mantle beyond a depth of 1,000~km.
+Fig.~\ref{fig:subd_combo}(b) shows the South American slab, which, in this cross section, ponds in the shallow lower mantle in all three models, before sinking all the way to the CMB.
+Figs.~\ref{fig:subd_combo}(c) and~(d) show cuts across the ancient Farallon slab, which penetrates deeply into the lower mantle,
+as spectacularly documented by, for instance, \cite{grand1994,hilst1997,grand1997high}.
 At depths greater than 1,000~km, 
 we see a very strong expression of the slab in model GLAD-M25, which is much weaker in the two P models.
 The difference may be attributed to increased data coverage thanks to USArray, as well as the use of finite-frequency Fr\'echet derivatives.
-Fig.~\ref{fig:subd}(e) shows subduction beneath the Himalayas.
+Fig.~\ref{fig:subd_combo}(e) shows subduction beneath the Himalayas.
 All three models show two distinct fast anomalies below 660~km,
 one above 1,000~km and the other, further to the southwest, below 1,000~km.
-Finally, Fig.~\ref{fig:subd}(f) shows subduction beneath the Java portion of the Sunda Arc.
+Finally, Fig.~\ref{fig:subd_combo}(f) shows subduction beneath the Java portion of the Sunda Arc.
 At this location the slab pernetrates into the lower mantle, at which point its spreads out laterally,
 in agreement with models GAP-P4 and UU-P07.
 \cite{fukao1992} explained this flattening using a model of~\cite{ringwood1988},
@@ -1438,7 +1442,7 @@ Other future directions of research involve inversions for azimuthal anisotropy
 and attenuation.
 The feasibility of such inversions on a regional scale has already been demonstrated in studies focused on Europe by~\cite{ZhuTromp2013} and \cite{Zhuetal2013}.
 
-\begin{acknowledgments}
+\section{Acknowledgments}
 This research used resources of the Oak Ridge Leadership Computing Facility,
 which is a DOE Office of Science User Facility supported under contract DE-AC05-00OR22725.
 Additional computational resources were provided by the Princeton Institute
@@ -1452,4 +1456,3 @@ the seismic measurement software package FLEXWIN used for this article are
  freely available via the Computational Infrastructure for Geodynamics
  (CIG; {\tt geodynamics.org}).
  This research was supported by NSF grant~1644826.
-\end{acknowledgments}

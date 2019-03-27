@@ -2,64 +2,67 @@
 \chapter{Conclusion}
 \label{ch:conclusion}
 
-In this work, we went through the improvements made for the GLAD-M25.
-To overcome the I/O bottleneck, we introduced the ADIOS and ASDF, for storing 
-model data and seismic data. To make the computation more efficient and
-preformant, we rebuilt our tools using python and added new features into
-those software.
-Workflow management tools help us to automate the inversion and reduce possible
-human-introduced errors. We proposed a new weighting schema to
-mitigate the uneven distribution of seismic source and stations.
-Our new model is generated using all the improvements we mentioned,
-using 1,480 earthquakes and 10 conjugate gradient and L-BFGS iterations.
+This thesis summarizes work that culminated in the construction of a global tomographic model,
+called GLAD-M25, based on seismic Full Waveform Inversion (FWI).
+The main phases of work conducted over the course of my graduate studies may be summarized as follows.
+1) To overcome crippling I/O bottlenecks, we introduced a scalable I/O library (ADIOS) for reading and writing model data,
+and an adaptable seismic data format (ASDF) for reading and writing seismographic data.
+2) To make the computations more efficient and manageable,
+we developed new Python toolkits to manage data assimilation and iterative model updates.
+3) Workflow management tools were introduced to automate the inversion process and reduce possible
+human-introduced errors.
+4) We proposed a new weighting strategy to
+mitigate the uneven distribution of seismic sources and stations.
 
-We presented our model together with many global and regional models. Through
-those comparisons, we demonstrated that our model has superior resolution
-not only for upper mantle structures, but also structures in lower mantle.
+Collectively, this work enabled the construction of global Earth model GLAD-M25,
+using seismographic data from 1,480 earthquakes.
+The new model was compared extensively with many existing global and regional models.
+Based on these comparisons, we conclude that our model has superior resolution
+not only in the shallow mantle, but also in the lower mantle.
 
 \section{Future Work}
 
-There are definitely lots of works could be done in the near future.
-The lower hanging fruit would be a deeper investigation in th model structures.
-There are definitely lots of interesting geological structures emerging in the
-GLAD-M25 model that would take us more time to look in. Vp/Vs ratio at
-plumes regions is among one of them.
-We also observed interesting subduction structures at South America,
-Farallon slabs and Tibet.
+There are lots of opportunities for further research.
+A deeper investigation of the new model is probably the lowest hanging fruit.
+For example, the Vp/Vs ratio appears to be an excellent diagnostic for plumes.
+Plumes are hotter and possibly wetter than surrounding mantle, which tends to lead to relatively high Vp/Vs ratios.
+Since our model jointly constraints shear and compressional wavespeeds in the same frequency band,
+we can reliably determine this ratio.
+Our new model is fairly unique in this regard,
+because very few other global studies can make a similar claim.
+We also observe interesting subduction zone anomalies underneath South America,
+possibly related to the subduction of the Fernandez and Nazca Ridges and the Inca Plateau.
 
-There are also a few directions we would like to push for the third-gen GLAD
-models. First, there are still more earthquakes out there. Our current earthquake
-dataset covers most of the deep events from 1995 -- 2016 in the Global CMT Project.
-However, there are still thousands of inter-mediate and shallow earthquakes no being
-assimilated. We haven't added any events from 2017 and 2018 yet. We are planning
-to push our dataset to 4,000 earthquakes in the near future, and new simulation
-requires even more computing resource. We expect those simulations would be
-performed Summit, the successor of Titan, at Oak Ridge National Lab. Our efforts 
-in data format, software and workflow tools would enable us to handle a
-even larger dataset without any issue.
+For the third-generation model,
+there is the opportunity to further increase the number of earthquakes to more than 4,000,
+for example by adding events from 2017--2018.
+These simulations will be performed on Titan's successor, a machine named `Summit' located at ORNL.
+This is where our efforts to build scalable tools will really pay off.
+Summit also enables us to reduce the shortest period of simulation from 17~s to 8.5~s,
+which should help to further increase the resolution of our models.
+However, this will require a more detailed representation of the seismic source than the current
+centroid moment tensor point source solutions.
+We are using earthquakes in the magnitude range 5.5--7.2, and the larger events have durations that approach the shortest period of simulation.
+A first step would be the introduction of more complex source time functions,
+perhaps with an element of directivity.
 
-We could also add more parameters into our model inversion.
-Anelastic attenuation is an important factor that affects
-the amplitude of waveforms, and it is also a very important
-indicator of the water or chemical content in the mantle.
-From our amplitude histograms, it is obvious that 
-there are quite a lot of space for the current attenuation model to be improved.
-Azimuth anisotropy is another important factor which has been taken
-into account in GLAD-M25. It will also provide new insights
-into those highly heterogeneous regions, such as plumes and subduction regions.
+We should also add more model parameters to our inversion.
+For example,
+anelastic attenuation is an important factor that affects
+the amplitude of waveforms~\cite{Zhuetal2013}.
+It is considered to be an important
+indicator of water content in the mantle.
+From our amplitude anomaly histograms, it is obvious that 
+there is quite a lot of room for improvement in the current 1D attenuation model.
+Azimuthal anisotropy represents another important set of model parameters which has not been taken
+into account in the construction of GLAD-M25.
+Surface waves are known to be sensitive to azimuthal anisotropy in the upper mantle,
+and such effects have been successfully accommodated in regional FWI~\cite{ZhuTromp2013}.
 
-We also want to push the model resolution from 17 sec to a even lower period band,
-9 sec. That will requires us
-to have better source modelings. At global scale,
-to ensure good signal-to-noise ratio, we usually picked events whose moment
-magnitudes are between 5.5 to 7.2, and the largeest duration of source
-time function would reaches ~17 sec.
-When the simulation reaches such short period, source time function
-becomes critical for the waveform fitting. Thus, to use all large earthquakes,
-we need to have a better estimation rather than using
-simple Gaussian type function.
-
-At last, Source encoding could potentially bring new revolution into our inversion workflow.
-With such technique, kernels could be calculated with one run(no gaps between forward and adjoint
-simulation), so there is no need to save wavefield files, a procedure that stressed the file system
-a lot and be our major challenges on HPC system push to higher resolution or larger dataset.
+Finally,
+new inversion strategies, such as source encoding,
+could potentially revolutionize our inversion workflow.
+With such techniques, kernels could be calculated in one single `super' simulation,
+independent of the number of sources and receivers.
+This not only saves computational cycles,
+it also removes a huge amount of I/O and therefore pressure on the file system.

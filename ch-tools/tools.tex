@@ -1,36 +1,41 @@
-\chapter{Data format and Workflow software}
+\chapter{Data format and Adjoint Tomography Workflow}
 \label{ch:tools}
 
 \section{Introduction}
 
-Seismology is a scientific subject driven by data. It usually involves the process
-of observing, modeling and understanding seismic data. In our first generation
-model, we incorporate 253 earthquakes in out database. In our second-gen
-model, which is mainly presented in this thesis, the dataset was gradually
-increased to 1,480 earthquakes and great improvements in model started to
-emerge in our new model. Meanwhile, we have overcome various technical
-challenges. We will cover those technique challenges and also solutions
-in this chapter. It is easy to see that those efforts not only facility
-our research progress, but also becomes a necessity when data reaches
-petabytes level.
+Seismology is a scientific discipline driven by data.
+Seismological research usually involves the process
+of observing, modeling, and understanding seismographic data.
+In our first-generation
+global tomographic FWI model, we used a database of 253 earthquakes. In our second-generation
+model, which is the main topic of this thesis, the dataset was gradually
+increased to 1,480 earthquakes, and great improvements started to
+emerge in our model.
+In the process of constructing the new model, we have overcome various technical
+challenges which we cover in this chapter.
+It will become obvious that these efforts not only enabled research progress,
+but are an absolute necessity for further upscaling the tomographic inversions.
 
-Global adjoint tomography, is now not only relying advanced
-numerical theory and top-tier computing hardware, but also subject to 
-the development of the software infrastructure.
-
-This chapter will mainly cover three aspects. We will first introduced
-our efforts in the data format, which facility calculation efficiency
-and data integrity. Then we will discuss building more efficient
-and robust software. We will use the data processing workflow as an
-example. At last, we will discuss how to integrate each components
-into a whole part, using workflow management systems.
+Global adjoint tomography not only relies on advanced
+numerical methods and top-tier computer hardware, but is also subject to 
+rapid developments in the software infrastructure.
+This chapter covers three such challenges.
+We first discuss our efforts to develop a new seismic data format,
+which facilitates calculation efficiency
+and data integrity.
+We then discuss building more efficient
+and robust software, using the data processing workflow as an
+example.
+Finally, we discuss how to integrate each component of the modeling and inversion process
+into a complete workflow management system.
 
 
 \section{Data format}
 
-With the increase of our earthquake dataset, the pressure comes from two aspects.
+With the growth of our earthquake database, challenges comes from two directions.
 First, SPECFEM3D GLOBE is a spectral finite element solver that heavily
-relies on the mesh of the input model. The mesh file not only stores
+relies on the mesh of the input model.
+The mesh file not only stores
 the position and physical properties of the GLL points, it also stores
 the kernel and gradient information on associated points. Given our current
 resolution at 17~second, each forward simulation will generate ~60GB mesh

@@ -1,7 +1,7 @@
 \chapter{Balancing Unevenly Distributed Data in Seismic Tomography: {A} Global Adjoint Tomography Example\label{ch:weighting}}
 
 \textbf{Note}\\
-This chapter has been submitted as a paper entitled ``Balancing Unevenly Distributed Data in Seismic Tomography: {A} Global Adjoint Tomography Example'' by Ruan, Y., Lei, w., Modrak, R., \"{O}rsvuran, R., Bozda\u{g}, E., and Tromp, J.\ to the \textit{Geophysical Journal International}.
+This chapter has been submitted as a paper entitled ``Balancing Unevenly Distributed Data in Seismic Tomography: {A} Global Adjoint Tomography Example'' by Ruan, Y., Lei, W., Modrak, R., \"{O}rsvuran, R., Bozda\u{g}, E., and Tromp, J.\ to the \textit{Geophysical Journal International}.
 
 
 \section*{Summary}
@@ -355,7 +355,7 @@ In geometrical ray-based tomography, specific phases are identified and windowed
 on different parts of Earth's interior, and some phases may be assigned more weight than others 
 depending on the aims of the researcher.
 In waveform inversion, any part of the wave train can 
-be selected and phase identification is no longer required. We thus assign a uniform weight to all windows in a  seismogram,
+be selected and phase identification is no longer required. We thus assign a uniform weight to all windows in a seismogram,
 \begin{equation}
 \label{eq:I_omega_scrw}
 \omega_{scrw} = 1
@@ -434,7 +434,7 @@ data covariance matrix.
     \end{minipage}
   \caption[source-receiver geometry used in synthetic inversions]
   {\small{Source-receiver geometry used in synthetic inversions.  
-GSN stations are labeled by green triangles, USArray stations by blue trangles, and sources 
+GSN stations are labeled by green triangles, USArray stations by blue triangles, and sources 
 by magenta asterisks.
 }}
 \label{fig:test-src-sta}
@@ -538,7 +538,7 @@ We define the weighted misfit for each category as
 \Phi_{c} = \sum_{s=1}^{S} \sum_{r=1}^{R_{sc}} \sum_{w=1}^{N_{scr}} \omega_s\, \omega_{c} \,\omega_{scr}\, \omega_{scrw}\, \chi_{scr}
 \end{equation}
 In Fig.~\ref{fig:weights_histogram}, we calculate the percentage of the summed misfit for each category 
-using two weighting strategies: (1) Orange bars correspond to category-only weighting, and (2) black bars correspond to the full category- and geographical-weighting strategy.
+using two weighting strategies: (1)~orange bars correspond to category-only weighting, and (2)~black bars correspond to the full category- and geographical-weighting strategy.
 
 \begin{figure}
 \centering
@@ -622,7 +622,7 @@ using data from 42 earthquakes without (Left) and with source \& receiver weight
 \end{figure}
 
 % \subsection{Weighting double-difference Measurements}
-% The geographical-weighting strategy introduced above can be adapted to other scenarious with uneven 
+% The geographical-weighting strategy introduced above can be adapted to other scenarios with uneven 
 % data coverage. For instance, in the double difference inversion~\citep[e.g.,][]{Yuan2016} where the difference between 
 % station are used as the misfit, a dense regional array will have many more station pairs than individual stations, 
 % the inversion can suffer from even greater lopsidedness than conventional ones.  The station weights introduced in Section~\ref{sec:geographical_weights} (Top in Fig.~\ref{fig:dd_weights} for reference) can be adapted 

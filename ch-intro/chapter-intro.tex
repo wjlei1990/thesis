@@ -22,7 +22,7 @@ I have been working on the construction of the second-generation global model, n
 
 The first objective of my Ph.D.\ research was expanding the earthquake database.
 With this initial goal in mind,
-we selected several thousand earthquakes from Global Centroid Moment Tensor (CMT) catalog~\cite{ekstrom2012global} for analysis.
+we selected several thousand earthquakes from the Global Centroid Moment Tensor (CMT) catalog~\cite{ekstrom2012global} for analysis.
 To improve the source mechanisms of these earthquakes,
 we performed 3D source inversions in model GLAD-M15,
 before initiating the structural inversion.
@@ -34,15 +34,15 @@ Even though these deep events constitute a relatively small portion of
 the overall CMT database, they produce very clean body-wave phases
 that sample lower mantle structures.
 
-This six fold increase in the number of earthquakes compared to the first-generation model
+This six-fold increase in the number of earthquakes compared to the first-generation model
 posed numerous challenges.
 For example, with this volume of data I/O becomes a limiting factor.
 Our 3D global seismic wave propagation solver, SPECFEM3D\_GLOBE,
 performs the forward and adjoint simulations required as part of the tomographic inversion.
-We calculated 120~minutes long seismograms with a shortest period of 17~s,
+We calculated 120~minute-long seismograms with a shortest period of 17~s,
 and each of these simulations generates 80~GB of model files and 1~TB of wavefield snapshots,
 which are needed for the gradient calculation.
-For the current database of 1,480 earthquakes, this requires 1.6~PB of storage over a simulation time span of $\sim6$~hours.
+For the current database of 1,480 earthquakes, this requires 1.6~PB of storage over a simulation time span of $\sim$6~hours.
 Reading and writing such an enormous volume of data, involving millions of files, can easily cripple the file system.
 As part of our ongoing collaboration with ORNL,
 we integrated the I/O library named `ADIOS' into our solver and post-processing tools.
@@ -59,7 +59,7 @@ To construct the first-generation model,
 the classical seismic analysis software `SAC' was used to store waveform data and
 response information.
 The shortcoming of this data format,
-developed in the 1960s, is that it can only store 
+developed from the 1970s on, is that it can only store 
 data from one component of one station, which leads to millions of relatively small files on
 the file system.
 Data processing based on SAC also suffers from performance issues, since it is
@@ -77,7 +77,7 @@ data relationships other than keeping the exact same directory structure.
 To solve these particular I/O issues, we developed the Adaptable
 Seismic Data Format (ASDF) to store seismic data. 
 In order to solve the I/O and data integrity challenges, we associate
-waveform data with its meta data information, and place them together into the same container.
+waveform data with its metadata information, and place them together into the same container.
 A typical ASDF file will contain one
 earthquake source file (in QuakeML format) and all seismograms and station files (in StationXML format) associated with that event,
 thereby reducing the total number of seismic data files from millions to thousands (namely, one per event).
@@ -95,8 +95,8 @@ More details about ASDF may be found in Appendix~\ref{chapter:asdf}.
 
 To integrate the new data format into our workflow,
 extensive new Python processing tools were developed.
-Even though preparing all the processing software involved a significant of work,
-it was totally worth the effort.
+Even though preparing all the processing software involved a significant of my work,
+it was  worth the effort.
 First, rewriting the tools in Python made integration with the ASDF library easy,
 especially the parallel dispatch APIs.
 Second,
@@ -105,7 +105,7 @@ operations at the trace or stream level, without worrying about parallelism,
 since the parallelism logic is handled by ASDF.
 Its modular design makes our software more testable, thereby facilitating development at a much faster pace.
 Python also provides great open-source and community support,
-empowering us to use public libraries such as Numpy, Scipy, and obspy,
+empowering us to use public libraries such as NumPy, SciPy, and ObsPy,
 thereby avoiding the implementation of lots of basic-level functions.
 Last but not least, software management, such as versioning and dependencies tracking,
 and software deployment is much faster and easier with the very powerful Python package management tools and
@@ -140,8 +140,8 @@ we compensated for such effects by using a multi-scale smoothing of the gradient
 To better resolve the issue of imbalanced source and receiver distributions,
 we introduced a new geographical weighting scheme.
 This approach results in a very simple and robust weighting algorithm,
-assigning smaller weights to clusters of earthquakes or stations that are part of a dense array and bigger weights to more isolated events or stations.
-Simple 2D tests demonstrate that this geographical weighting scheme significanly speeds up the
+assigning smaller weights to clusters of earthquakes or stations that are part of a dense array, and larger weights to more isolated events or stations.
+Simple 2D tests demonstrate that this geographical weighting scheme significantly speeds up the
 convergence rate of inversions compared to other methods.
 Examples of 3D Fr\'echet derivatives utilizing the geographical weighting scheme show
 much improved sensitivity in the deep mantle and in the poorly covered southern hemisphere.

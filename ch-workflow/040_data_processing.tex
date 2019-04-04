@@ -128,7 +128,7 @@ An ASDF file is roughly arranged in four sections, as follows.
 Existing and established data formats and conventions are utilized wherever
 possible. This keeps large parts of ASDF conceptually simple, and delegates
 pieces of the development burden to existing efforts. The ASDF structure is
-summarized in Figure~\ref{fig:asdf_container}. With such a layout, every
+summarized in Figure~\ref{fig:asdf_container1}. With such a layout, every
 seismograms of a given earthquake can be naturally grouped into one ASDF file.
 Also, event information and station information are incorporated so no extra
 files have to be retrieved during processing.
@@ -155,7 +155,7 @@ More details about ASDF may be found in \cite{krischer2016adaptable}.
   event information, waveforms and station meta information, auxiliary data and
   provenance. In such layout, different types of data are grouped into
   one file and ready for later retrieval.}
-  \label{fig:asdf_container}
+  \label{fig:asdf_container1}
 \end{figure}
 
 \subsection{Data Processing}
@@ -176,7 +176,7 @@ processing steps like detrending, tapering, filtering, interpolating,
 deconvolving the instrument response, and others. Subsequently, time windows in
 which observed and simulated waveforms are sufficiently similar are selected and adjoint sources
 are constructed from the data within these windows, see
-Figure~\ref{fig:adjoint_workflow} for a graphical overview.
+Figure~\ref{fig:adjoint_workflow1} for a graphical overview.
 
 \begin{figure}
   \centering
@@ -189,7 +189,7 @@ Figure~\ref{fig:adjoint_workflow} for a graphical overview.
   measurement are made. Finally, adjoint sources are generated as the
   final pre-processing output. ASDF speeds up these tasks by using parallel processing (MPI).
   For each step, processing information is added to the provenance.}
-  \label{fig:adjoint_workflow}
+  \label{fig:adjoint_workflow1}
 \end{figure}
 
 The following is an account of our experiences and compares a legacy workflow

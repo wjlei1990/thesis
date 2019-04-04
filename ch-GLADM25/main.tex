@@ -189,12 +189,12 @@ we assign receiver weights~$\omega_{cr}$ based on the expression
 \begin{equation}
 \omega_{cr}^{-1} = N_c\,\sum_{r'=1}^{R_c} \exp\left[\mbox{}-\left(\frac{\Delta_{rr'}}{\Delta_c}\right)^2\right]
 \quad ,
-\label{eq:spatial_weights}
+\label{eq:spatial_weights1}
 \end{equation}
 where~$N_c$ is a normalization factor for category~$c$,
 and where~$\Delta_{rr'}$ denotes the angular distance between receivers~$r$ and~$r'$\,.
 The reference angular distance~$\Delta_c$ for each category~$c$ needs to be chosen such that the condition 
-number of the diagonal weighting matrix defined by Eqn.~(\ref{eq:spatial_weights}) is not too large.
+number of the diagonal weighting matrix defined by Eqn.~(\ref{eq:spatial_weights1}) is not too large.
 The calculation of the weights may be abstracted as: given a distribution of
 points on the unit sphere, determine a spatial weighting associated with each point.
 
@@ -309,7 +309,7 @@ in this section we present a brief synopsis.
 With these considerations in mind,
 the overall misfit, $\Phi$, is defined as follows:
 \begin{equation}
-\label{eq:misfit}
+\label{eq:misfit1}
 \Phi = \sum_{s}^{S} \omega_s \sum_{c}^{C} \omega_{c} \sum_{r}^{R_{sc}} \omega_{scr} \sum_{w}^{W_{scr}} \omega_{scrw}\, \chi_{scrw}
 \quad ,
 \end{equation}
@@ -374,7 +374,7 @@ Since density is difficult to constrain with seismic data,
 density perturbations are scaled to isotropic (Voigt averaged) shear wavespeed perturbations based on the relationship~$\delta\ln\rho = 0.33\,\delta\ln\beta$~\cite{montagner1989petrological}.
 
 Based on this parametrization,
-the variation in the misfit function~(\ref{eq:misfit}) may be expressed as~\cite{zhu2015seismic,bozdaug2016global}
+the variation in the misfit function~(\ref{eq:misfit1}) may be expressed as~\cite{zhu2015seismic,bozdaug2016global}
 \begin{equation}
     \delta \Phi = \int_V
       (\delta \ln c\,K_c + \delta \ln\beta_v\,K_{\beta_v} + \delta \ln\beta_h\,K_{\beta_h} +
@@ -574,7 +574,7 @@ failure detection and relaunching greatly shortens the overall time to solution.
 \label{section:misfit_evolution}
 
 The inversion went through ten iterations in a number of stages, as documented
-in this section. The evolution of the overall misfit function~(\ref{eq:misfit})
+in this section. The evolution of the overall misfit function~(\ref{eq:misfit1})
 as well as its behavior in the various measurement categories is summarized
 in Fig.~\ref{fig:misfit}.
 

@@ -47,7 +47,7 @@ In order to calculate kernels with attenuation,
 the solver saves snapshots of the forward wavefield,
 which are used to reconstruct the forward wavefield for convolution with the adjoint wavefield during the gradient calculation.
 Given our current resolution,
-this `parsimonious storage algorithm' developed by~\cite{KoXiBoPeSaLiTr16} generates \sim$1~TB of wavefield files during the forward simulation, and those
+this `parsimonious storage algorithm' developed by~\cite{KoXiBoPeSaLiTr16} generates $\sim$1~TB of wavefield files during the forward simulation, and those
 files needed to be saved to disk for subsequent use in the adjoint simulations.
 Thus, given the current database,
 1,480 earthquakes create $\sim$1.5~PB of storage during roughly 6~h of simulations.

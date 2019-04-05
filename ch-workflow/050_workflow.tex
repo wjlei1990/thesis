@@ -116,15 +116,15 @@ wasted. Large compute centers have requirements on the size of jobs that are
 allowed to run; as they are primarily designed to accommodate computations that
 would not fit any other place. While elementary computations of a seismic
 inversion do not fulfill this condition, the large number of simulations involved
-does. This means that in order to match the queueing requirements, smaller-scale
+does. This means that in order to match the queuing requirements, smaller-scale
 jobs have to be bundled in batches. Ideally, the workflow management
 system should be in charge of such accounting matters. This is, for instance,
 one of the features offered by the Pilot approach.
 
 A second condition is the ability to execute in a relatively heterogeneous
-environment. Here, the concept of heterogenous environment is understood
+environment. Here, the concept of heterogeneous environment is understood
 differently than for its more traditional grid computing definition. Each
-elementary part of the workflow is run on an homogenous machine, while different
+elementary part of the workflow is run on an homogeneous machine, while different
 parts are not. For instance, for our current global inversions, Titan is used
 to run simulations while Rhea, an Intel-based commodity cluster, is used to
 process data. Appropriate resources are also used for visualizing data and
@@ -138,8 +138,8 @@ that are on the edge of what is technically feasible. Job failures due to
 hardware and software errors as well has corrupted data do happen. Hand-tracking
 causes of such failures when dealing with large data sets and numerous simulations
 is time consuming and error prone. The ability for a workflow to account for
-this failures and eventually relaunch jobs is become even more critical as we
-are the number of earthquake we assimilate data from raise.
+such failures and eventually relaunch jobs is becoming even more critical as 
+the number of earthquakes we assimilate increases.
 
 It is equally important to keep the user in mind and to follow the science
 problem logic. The typical user is a domain scientist with experience running
@@ -278,7 +278,7 @@ Figure~\ref{fig:workflow_management}.
 \begin{figure} %  figure placement: here, top, bottom, or page
    \centering
    \includegraphics[width=5in]{ch-workflow/figures/WorkflowManagement.pdf}
-   \caption[Steering process of the workfow management system]
+   \caption[Steering process of the workflow management system]
    {Steering process of the workflow management system. Two objects (DB
    manager and Job Manager) serve as an interface between the database and the
    workflow engine. The job manager requests data from the DB manager~(1), which

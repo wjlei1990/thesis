@@ -156,7 +156,7 @@ During the construction of our first-generation model,
 SAC was used for signal processing,
 FLEXWIN~\cite{maggi2009automated} was used for time window selection,
 and Measure\_Adj was to generate adjoint sources.
-FLEXWIN and Measure\_Adj were originally written in Fortran.
+FLEXWIN and Measure\_Adj were originally written in FORTRAN.
 To fully harness the new data format,
 we needed to rebuild all processing software in Python,
 adopting ObsPy~\cite{obspy2010} for time series analysis,
@@ -194,17 +194,17 @@ to read and write HDF5 files in a serial or parallel manner.
 Importantly, it is very easy to develop processing tools in a modular style in Python.
 Integration of open-source Python packages,
 such as NumPy, SciPy, and ObsPy, takes much
-less effort than writing in Fortran or C, thanks to Python's dynamic language features.
+less effort than writing in FORTRAN or C, thanks to Python's dynamic language features.
 Python also provides and encourages use of very powerful software management systems,
 such as pip and Anaconda,
 and these tools come with version control capabilities.
 All of these attributes make it much simpler to develop tools in Python than in
-Fortran, C, or C++.
+FORTRAN, C, or C++.
 
 There are some disadvantages to using Python.
 A common complaint is lack of efficiency due to its dynamic nature.
 Python will likely never match the performance of static compiled languages,
-such as Fortran or C.
+such as FORTRAN or C.
 However,
 frequently there are other factors that are more critical than speed,
 such as fast development, easy deployment, and a user-friendly development environment.
@@ -231,7 +231,7 @@ ObsPy sits at the lowest level of the processing chain.
 It provides APIs for operations on time series data. It is also used for
 parsing QuakeML and StationXML files, rotating horizontal seismometer components, calculating arrival times and source and receiver azimuths, etc.
 On top of ObsPy we developed PyCMT3D, PyFLEX, PyAdjoint, and Spaceweight.
-PyFLEX, the Python version of the Fortran window selection tool FLEXWIN, is used to select time windows on a pair of observed
+PyFLEX, the Python version of the FORTRAN window selection tool FLEXWIN, is used to select time windows on a pair of observed
 and synthetic traces.
 A new feature we added to PyFLEX is seismic
 phase detection.
@@ -244,7 +244,7 @@ Spaceweight is a new software package to determine geographical source and stati
 which are attached to the adjoint sources and incorporated in the misfit function.
 The package is mainly used for
 balancing the uneven distribution of sources and stations (see Chapter~\ref{ch:weighting}).
-PyCMT3D is a Python port of the Fortran package CMT3D used for seismic source inversions
+PyCMT3D is a Python port of the FORTRAN package CMT3D used for seismic source inversions
 In addition
 to waveform misfits, an option for using envelope misfits has been built into the package,
 and geographical weights based on Spaceweight can also be assigned as part of the source inversion.
@@ -313,7 +313,7 @@ After exploring several existing workflow management tools,
 we selected the Ensemble ToolKit (EnTK)~\cite{EnTK2017} developed by the RADICAL
 group from Rutgers University.
 In this environment,
-the SimPy (Seismic Inversion Management PYthon) toolkit was developed using RADICAL-SAGA, PyPaw, and SQLite3.
+the SimPy (Seismic Inversion Management Python) toolkit was developed using RADICAL-SAGA, PyPaw, and SQLite3.
 RADICAL-SAGA works as the 
 job management component responsible for communicating with the queue of the HPC system,
 PyPaw provides user-defined processing components,
